@@ -4,19 +4,31 @@
 
 { config, pkgs, ... }:
 
+let
+  hackertools = import ../../2configs/hackertools.nix { inherit pkgs; };
+in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../default.nix
-      ../../2configs/hackertools.nix
+      #../../2configs/hackertools.nix
       ../../2configs/nvidia-headless.nix
     ];
+
+  home-manager.users.simon = { ... }: {
+    home.stateVersion = "21.05";
+    home.packages = with pkgs; [
+      hello
+    ] ++ hackertools.infosec;
+  };
+
   boot.tmpOnTmpfs = true;
   nix.package = pkgs.nixFlakes;
   nix.extraOptions = ''
-  	experimental-features = nix-command flakes
-	'';
+    experimental-features = nix-command flakes
+  '';
   nixpkgs.config.allowUnfree = true;
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -43,8 +55,8 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "de_DE.UTF-8";
   console = {
-     font = "Lat2-Terminus16";
-     keyMap = "de";
+    font = "Lat2-Terminus16";
+    keyMap = "de";
   };
 
   # Enable the X11 windowing system.
@@ -54,7 +66,7 @@
   # Enable the Plasma 5 Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
-  
+
 
   # Configure keymap in X11
   services.xserver.layout = "de";
@@ -72,32 +84,32 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.simon = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     wget
-     firefox
-     (vivaldi.override {
-	proprietaryCodecs = true;
-	enableWidevine = true;
-	})
-     rsync
-     nmap
-     tree
-     nixpkgs-fmt
-     keepassxc
-     signal-desktop
-     tdesktop
-     redshift
-     flameshot
-     git
-     jetbrains.idea-community
-     libsForQt5.ark
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget
+    firefox
+    (vivaldi.override {
+      proprietaryCodecs = true;
+      enableWidevine = true;
+    })
+    rsync
+    nmap
+    tree
+    nixpkgs-fmt
+    keepassxc
+    signal-desktop
+    tdesktop
+    redshift
+    flameshot
+    git
+    jetbrains.idea-community
+    libsForQt5.ark
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

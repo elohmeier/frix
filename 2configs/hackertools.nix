@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs }:
 
 let
   py3env = pkgs.python3.withPackages (
@@ -41,7 +41,9 @@ let
   py2env = py2.withPackages (pythonPackages: with pythonPackages; [ impacket pycrypto requests ]);
 in
 {
-  environment.systemPackages = with pkgs; [
+  hallo = "welt";
+
+  infosec = with pkgs; [
     proxychains
     sshuttle
     ghidra-bin
@@ -75,4 +77,6 @@ in
         flakeIgnore = [ "E501" "W503" ]; # line length (black)
       } ../4scripts/kirbi2hashcat.py)
   ];
+
 }
+

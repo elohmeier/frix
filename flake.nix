@@ -27,6 +27,7 @@
         failbowl = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = defaultModules ++ [
+            home-manager.nixosModule
             ./1systems/failbowl/configuration.nix
             "${nixos-hardware}/dell/xps/15-7590/default.nix"
           ];
