@@ -30,6 +30,8 @@
         modules = [
           #"${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-plasma5.nix"
+          ./.
+          ./2configs/hackertools.nix
           {
             console.keyMap = "de-latin1";
             services.xserver.layout = "de";
