@@ -20,6 +20,9 @@ let
       pytest
       mypy
       isort
+      freerdp
+      freeftp
+      cifs-utils
     ]
   );
 
