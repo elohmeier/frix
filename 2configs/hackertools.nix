@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  py3env = pkgs.frixPy3.withPackages (
+  py3env = pkgs.python3.withPackages (
     pythonPackages: with pythonPackages; [
       authlib
       black
@@ -61,7 +61,11 @@ in
     pwndbg
     # TODO: add wordlists from https://github.com/NixOS/nixpkgs/pull/104712
     nikto
+    ripgrep-all
+    ripgrep
+    openvpn
     py2env
+    py3env
     (writers.writePython2Bin "kirbi2hashcat"
       {
         libraries = [ python2Packages.pyasn1 ];

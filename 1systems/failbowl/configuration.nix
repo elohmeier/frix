@@ -10,7 +10,9 @@
       ./hardware-configuration.nix
       ../../default.nix
       ../../2configs/hackertools.nix
+      ../../2configs/nvidia-headless.nix
     ];
+  boot.tmpOnTmpfs = true;
   nix.package = pkgs.nixFlakes;
   nix.extraOptions = ''
   	experimental-features = nix-command flakes
@@ -95,6 +97,7 @@
      flameshot
      git
      jetbrains.idea-community
+     libsForQt5.ark
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
