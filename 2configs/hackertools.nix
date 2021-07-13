@@ -20,9 +20,6 @@ let
       pytest
       mypy
       isort
-      freerdp
-      freeftp
-      cifs-utils
     ]
   );
 
@@ -67,6 +64,9 @@ in
     ripgrep-all
     ripgrep
     openvpn
+    freerdp
+    lftp
+    cifsutils
     py2env
     py3env
     (writers.writePython2Bin "kirbi2hashcat"
