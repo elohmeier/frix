@@ -9,7 +9,7 @@
     flake-utils.url = github:numtide/flake-utils;
   };
 
-  outputs = { self, nixpkgs, ... }: {
+  outputs = { self, nixpkgs, nixos-hardware, ... }: {
 
 
 
@@ -20,6 +20,7 @@
         system = "x86_64-linux";
         modules = [
           ./1systems/failbowl/configuration.nix
+          "${nixos-hardware}/dell/xps/15-7590/default.nix"
         ];
       };
 
