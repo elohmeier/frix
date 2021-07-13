@@ -66,7 +66,7 @@ in
     openvpn
     freerdp
     lftp
-    cifsutils
+    cifs-utils
     py2env
     py3env
     (writers.writePython2Bin "kirbi2hashcat"
