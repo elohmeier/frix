@@ -20,6 +20,7 @@ let
       pytest
       mypy
       isort
+      termcolor
     ]
   );
 
