@@ -45,6 +45,7 @@ in
   hallo = "welt";
 
   infosec = with pkgs; [
+    httpserve
     proxychains
     sshuttle
     ghidra-bin
