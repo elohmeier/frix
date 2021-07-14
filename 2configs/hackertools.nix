@@ -70,6 +70,7 @@ in
     freerdp
     lftp
     cifs-utils
+    dig
     py2env
     py3env
     (writers.writePython2Bin "kirbi2hashcat"

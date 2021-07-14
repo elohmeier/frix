@@ -110,6 +110,7 @@ in
     git
     jetbrains.idea-community
     libsForQt5.ark
+    tor
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
