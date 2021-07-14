@@ -74,12 +74,10 @@ in
     dig
     py2env
     py3env
-    (writers.writePython2Bin "kirbi2hashcat"
-      {
-        libraries = [ python2Packages.pyasn1 ];
-        flakeIgnore = [ "E501" "W503" ]; # line length (black)
-      } ../4scripts/kirbi2hashcat.py)
+    kirbi2hashcat
   ];
+
+
 
 }
 

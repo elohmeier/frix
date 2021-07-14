@@ -5,4 +5,10 @@ self: super: {
     {
       flakeIgnore = [ "E501" ]; # line length (black)
     } ../4scripts/httpserve.py);
+  kirbi2hashcat =
+    (self.writers.writePython2Bin "kirbi2hashcat"
+      {
+        libraries = [ python2Packages.pyasn1 ];
+        flakeIgnore = [ "E501" "W503" ]; # line length (black)
+      } ../4scripts/kirbi2hashcat.py);
 }
