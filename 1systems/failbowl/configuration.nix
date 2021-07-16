@@ -111,6 +111,7 @@ in
     jetbrains.idea-community
     libsForQt5.ark
     tor
+    teams
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
