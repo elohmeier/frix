@@ -1,3 +1,5 @@
+# https://www.youtube.com/watch?v=WiMwVlpD-GU
+
 { pkgs }:
 
 let
@@ -40,6 +42,14 @@ let
   };
 
   py2env = py2.withPackages (pythonPackages: with pythonPackages; [ impacket pycrypto requests ]);
+
+  # exploitdb not yet in 21.05, take from master/2021-07-14
+  exploitdb_master = with import
+    (fetchTarball {
+      url = https://github.com/NixOS/nixpkgs/archive/c255408808e7bb2091b3f1954ae63519d6b427ef.tar.gz;
+      sha256 = "sha256:0i82mw38c029fgw520wzf5v5akswc2r67rxmkgw8c8lx2di7il80";
+    })
+    { system = pkgs.system; }; exploitdb;
 in
 {
   hallo = "welt";
@@ -75,7 +85,7 @@ in
     dig
     py2env
     py3env
-    kirbi2hashcat
+    exploitdb_master
   ];
 
 
