@@ -1,0 +1,15 @@
+default:
+  tags:
+  - docker-images
+
+image: nixpkgs/nix-flakes:latest
+
+build burpsuite-pro:
+  stage: build
+  script:
+  - nix build .#burpsuite-pro -o burpsuite-pro
+
+check failbowl:
+  stage: build
+  script:
+  - nix eval .#nixosConfigurations.failbowl.config.system.build.toplevel.drvPath
