@@ -45,6 +45,7 @@ in
   hallo = "welt";
 
   infosec = with pkgs; [
+    davtest
     httpserve
     proxychains
     sshuttle

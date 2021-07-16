@@ -1,5 +1,6 @@
 self: super: {
   burpsuite-pro = self.callPackage ./burpsuite-pro { };
+  davtest = self.callPackage ./davtest { };
   hash-identifier = self.callPackage ./hash-identifier { };
   httpserve = (self.writers.writePython3Bin "httpserve"
     {
