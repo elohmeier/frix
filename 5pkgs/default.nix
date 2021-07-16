@@ -1,3 +1,5 @@
+# build a package using `nix build .#pkgname` e.g. `nix build .#burpsuite-pro`
+
 self: super: {
   burpsuite-pro = self.callPackage ./burpsuite-pro { };
   davtest = self.callPackage ./davtest { };
@@ -9,7 +11,7 @@ self: super: {
   kirbi2hashcat =
     (self.writers.writePython2Bin "kirbi2hashcat"
       {
-        libraries = [ python2Packages.pyasn1 ];
+        libraries = [ self.python2Packages.pyasn1 ];
         flakeIgnore = [ "E501" "W503" ]; # line length (black)
       } ../4scripts/kirbi2hashcat.py);
 }

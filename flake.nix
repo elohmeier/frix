@@ -9,7 +9,7 @@
     flake-utils.url = github:numtide/flake-utils;
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, ... }: {
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, flake-utils, ... }: {
 
     nixosConfigurations =
       let
@@ -77,9 +77,10 @@
           ];
         };
       };
-
-
-
-
-  };
+  } //
+  flake-utils.lib.eachDefaultSystem
+    (system:
+      let packages = import nixpkgs {
+        config.allowUnfree = true; inherit system; config.packageOverrides = import ./5pkgs packages;
+      }; in { inherit packages; });
 }
