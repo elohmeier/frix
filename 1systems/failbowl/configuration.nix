@@ -110,8 +110,11 @@ in
     git
     jetbrains.idea-community
     libsForQt5.ark
-    tor
+    #already fixed
+    #tor-browser-bundle-bin
     teams
+    discord
+    tree
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
