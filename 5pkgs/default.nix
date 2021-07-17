@@ -1,3 +1,5 @@
+# build a package using `nix build .#pkgname` e.g. `nix build .#burpsuite-pro`
+
 self: super: {
   burpsuite-pro = self.callPackage ./burpsuite-pro { };
   davtest = self.callPackage ./davtest { };
