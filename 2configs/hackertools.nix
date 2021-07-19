@@ -86,6 +86,8 @@ in
     py2env
     py3env
     exploitdb_master
+    thc-hydra
+    sqsh
   ];
 
 
