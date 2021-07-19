@@ -55,6 +55,7 @@ in
   hallo = "welt";
 
   infosec = with pkgs; [
+    cewl
     davtest
     httpserve
     proxychains
