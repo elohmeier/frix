@@ -21,6 +21,7 @@ stdenv.mkDerivation rec {
   installPhase = ''
     mkdir -p $out/bin
     cp *.rb $out/bin/
+    mv $out/bin/cewl.rb $out/bin/cewl
   '';
 
   meta = with lib; {
