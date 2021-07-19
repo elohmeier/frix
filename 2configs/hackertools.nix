@@ -6,23 +6,23 @@ let
   py3env = pkgs.python3.withPackages (
     pythonPackages: with pythonPackages; [
       authlib
+      beautifulsoup4
       black
+      isort
       jupyterlab
-      lxml
       keyring
+      lxml
+      mypy
       nbconvert
       pandas
       pdfminer
       pillow
+      pytest
       requests
       selenium
       tabulate
-      weasyprint
-      beautifulsoup4
-      pytest
-      mypy
-      isort
       termcolor
+      weasyprint
     ]
   );
 
@@ -41,7 +41,11 @@ let
     };
   };
 
-  py2env = py2.withPackages (pythonPackages: with pythonPackages; [ impacket pycrypto requests ]);
+  py2env = py2.withPackages (pythonPackages: with pythonPackages; [
+    impacket
+    pycrypto
+    requests
+  ]);
 
   # exploitdb not yet in 21.05, take from master/2021-07-14
   exploitdb_master = with import
@@ -52,46 +56,41 @@ let
     { system = pkgs.system; }; exploitdb;
 in
 {
-  hallo = "welt";
-
+  # TODO: add wordlists from https://github.com/NixOS/nixpkgs/pull/104712
   infosec = with pkgs; [
-    cewl
-    davtest
-    httpserve
-    proxychains
-    sshuttle
-    ghidra-bin
-    rlwrap
-    hash-identifier
-    net-snmp
-    metasploit
-    postgresql # for msfdb
-    wpscan
-    john
-    gobuster
     burpsuite-pro
-    hashcat
-    sqlmap
-    nbtscanner
-    wireshark-qt
-    pwndbg
-    # TODO: add wordlists from https://github.com/NixOS/nixpkgs/pull/104712
-    nikto
-    ripgrep-all
-    ripgrep
-    openvpn
-    freerdp
-    lftp
+    cewl
     cifs-utils
+    davtest
     dig
+    exploitdb_master
+    freerdp
+    ghidra-bin
+    gobuster
+    hash-identifier
+    hashcat
+    httpserve
+    john
+    lftp
+    metasploit
+    nbtscanner
+    net-snmp
+    nikto
+    openvpn
+    postgresql # for msfdb
+    proxychains
+    pwndbg
     py2env
     py3env
-    exploitdb_master
-    thc-hydra
+    ripgrep
+    ripgrep-all
+    rlwrap
+    snmpcheck
+    sqlmap
     sqsh
+    sshuttle
+    thc-hydra
+    wireshark-qt
+    wpscan
   ];
-
-
-
 }
-
