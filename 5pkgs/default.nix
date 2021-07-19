@@ -3,6 +3,12 @@
 self: super: {
   burpsuite-pro = self.callPackage ./burpsuite-pro { };
   cewl = self.callPackage ./cewl { };
+  cf-passthehash =
+    (self.writers.writePython2Bin "cf-passthehash"
+      {
+        libraries = with self.python2Packages; [ requests click ];
+        flakeIgnore = [ "E501" "W503" ]; # line length (black)
+      } ../4scripts/cf-passthehash.py);
   davtest = self.callPackage ./davtest { };
   hash-identifier = self.callPackage ./hash-identifier { };
   httpserve = (self.writers.writePython3Bin "httpserve"
@@ -15,10 +21,5 @@ self: super: {
         libraries = [ self.python2Packages.pyasn1 ];
         flakeIgnore = [ "E501" "W503" ]; # line length (black)
       } ../4scripts/kirbi2hashcat.py);
-  cf-passthehash =
-    (self.writers.writePython2Bin "cf-passthehash"
-      {
-        libraries = with self.python2Packages; [ requests click ];
-        flakeIgnore = [ "E501" "W503" ]; # line length (black)
-      } ../4scripts/cf-passthehash.py);
+  snmpcheck = self.callPackage ./snmpcheck { };
 }
