@@ -115,6 +115,14 @@ in
     teams
     discord
     tree
+    ffmpeg
+    youtube-dl
+    vlc
+    kdenlive
+    freetts
+    jetbrains.datagrip
+    sqsh
+    thc-hydra
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
