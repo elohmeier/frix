@@ -13,6 +13,7 @@ let
       keyring
       lxml
       mypy
+      mysql-connector
       nbconvert
       pandas
       pdfminer
@@ -20,6 +21,7 @@ let
       pytest
       requests
       selenium
+      sshtunnel
       tabulate
       termcolor
       weasyprint
@@ -55,9 +57,9 @@ let
     })
     { system = pkgs.system; }; exploitdb;
 in
-{
+rec {
   # TODO: add wordlists from https://github.com/NixOS/nixpkgs/pull/104712
-  infosec = with pkgs; [
+  infosec_no_pyenv = with pkgs; [
     burpsuite-pro
     cewl
     cifs-utils
@@ -80,8 +82,6 @@ in
     postgresql # for msfdb
     proxychains
     pwndbg
-    py2env
-    py3env
     exploitdb_master
     samba
     ripgrep
@@ -94,5 +94,10 @@ in
     thc-hydra
     wireshark-qt
     wpscan
+  ];
+
+  infosec = infosec_no_pyenv ++ [
+    py2env
+    py3env
   ];
 }
