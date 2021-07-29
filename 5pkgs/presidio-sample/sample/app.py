@@ -3,7 +3,7 @@ import logging
 import os
 from typing import Tuple
 
-from flask import Flask, Response, jsonify, request
+from flask import Flask, Response, jsonify, request, redirect
 from presidio_analyzer.analyzer_engine import AnalyzerEngine
 from presidio_analyzer.analyzer_request import AnalyzerRequest
 from presidio_analyzer.nlp_engine import SpacyNlpEngine
@@ -32,6 +32,10 @@ class Server:
         self.anonymizer = AnonymizerEngine()
         self.deanonymize = DeanonymizeEngine()
         self.logger.info("presidio starting up")
+
+        @self.app.route("/")
+        def index():
+            return redirect("/index.html", code=302)
 
         @self.app.route("/analyze", methods=["POST"])
         def analyze() -> Tuple[str, int]:
