@@ -1,8 +1,6 @@
 import json
 import logging
 import os
-from logging.config import fileConfig
-from pathlib import Path
 from typing import Tuple
 
 from flask import Flask, Response, jsonify, request
@@ -12,8 +10,7 @@ from presidio_analyzer.nlp_engine import SpacyNlpEngine
 from presidio_anonymizer import AnonymizerEngine
 from presidio_anonymizer.deanonymize_engine import DeanonymizeEngine
 from presidio_anonymizer.entities import InvalidParamException
-from presidio_anonymizer.services.app_entities_convertor import \
-    AppEntitiesConvertor
+from presidio_anonymizer.services.app_entities_convertor import AppEntitiesConvertor
 from werkzeug.exceptions import HTTPException
 from whitenoise import WhiteNoise
 

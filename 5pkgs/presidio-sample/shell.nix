@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> { config.packageOverrides = import ../. pkgs; } }:
 
 let
-  pyEnv = pkgs.ptsdPy3.withPackages (pyPkgs: with pyPkgs; [
+  pyEnv = pkgs.frixPython3.withPackages (pyPkgs: with pyPkgs; [
     presidio-analyzer
     presidio-anonymizer
     flask
@@ -13,6 +13,5 @@ in
 pkgs.mkShell {
   buildInputs = [
     pyEnv
-
   ];
 }

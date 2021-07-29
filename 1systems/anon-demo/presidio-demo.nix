@@ -1,12 +1,26 @@
 { config, lib, pkgs, ... }:
 
+let
+  internalPort = 12345;
+in
 {
   networking.firewall.interfaces.ens3.allowedTCPPorts = [ 80 443 ];
 
-  # TODO
-  #systemd.services.presidio-demo = {
-  #
-  #  };
+  systemd.services.presidio-demo = {
+    description = "Presidio demo";
+    wants = [ "network.target" ];
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.frixPython3.pkgs.presidio-sample}/bin/presidio-sample";
+      DynamicUser = true;
+    };
+
+    environment = {
+      PORT = toString internalPort;
+    };
+  };
 
   services.traefik = {
     enable = true;
@@ -78,7 +92,7 @@
             loadBalancer = {
               passHostHeader = true;
               servers = [
-                { url = "http://localhost:8000"; }
+                { url = "http://localhost:${toString internalPort}"; }
               ];
             };
           };
