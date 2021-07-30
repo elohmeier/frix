@@ -123,6 +123,7 @@ in
     jetbrains.datagrip
     sqsh
     thc-hydra
+    vokoscreen
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
