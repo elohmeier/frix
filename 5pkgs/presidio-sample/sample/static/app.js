@@ -81,6 +81,7 @@ Andernfalls wäre die staatliche Regulierung zulässiger Stickoxidausstoßgrenze
 wenn auch nur unter Laborbedingungen - Makulatur( u.a. OLG Hamm , LG Aachen , LG Münster , LG Oldenburg , LG München II , LG Dortmund , LG Hagen , LG Paderborn .`,
     result: '',
     entities: [],
+    awaitingAnonymize: false,
   },
 
   methods: {
@@ -106,5 +107,21 @@ wenn auch nur unter Laborbedingungen - Makulatur( u.a. OLG Hamm , LG Aachen , LG
             .then(response => this.result = response.data.text);
         });
     },
+  },
+
+  mounted: function () {
+    this.anonymize();
+  },
+
+  watch: {
+    original: function (val) {
+      if (!this.awaitingAnonymize) {
+        setTimeout(() => {
+          this.anonymize();
+          this.awaitingAnonymize = false;
+        }, 250);
+      }
+      this.awaitingAnonymize = true;
+    }
   },
 });
