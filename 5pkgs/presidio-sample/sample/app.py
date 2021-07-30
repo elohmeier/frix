@@ -25,7 +25,7 @@ from presidio_anonymizer.entities import InvalidParamException
 from presidio_anonymizer.services.app_entities_convertor import AppEntitiesConvertor
 from werkzeug.exceptions import HTTPException
 from whitenoise import WhiteNoise
-from sample.recognizers import VINRecognizer
+from sample.recognizers import VINRecognizer, PLZRecognizer
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -36,7 +36,9 @@ class Server:
         self.logger.setLevel(logging.DEBUG)
         self.app = Flask(__name__)
         self.app.debug = os.environ.get("DEBUG") == "1"
-        self.app.wsgi_app = WhiteNoise(self.app.wsgi_app, root="static/", autorefresh=self.app.debug)
+        self.app.wsgi_app = WhiteNoise(
+            self.app.wsgi_app, root="static/", autorefresh=self.app.debug
+        )
         registry = RecognizerRegistry(
             recognizers=[
                 CreditCardRecognizer(supported_language="de"),
@@ -49,6 +51,7 @@ class Server:
                 MedicalLicenseRecognizer(supported_language="de"),
                 SpacyRecognizer(supported_language="de"),
                 VINRecognizer(supported_language="de"),
+                PLZRecognizer(supported_language="de"),
             ]
         )
         self.engine = AnalyzerEngine(
