@@ -2,226 +2,80 @@
 <html lang="de">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Anonymisierung</title>
-    <link rel="icon" href="https://www.fraam.de/wp-content/uploads/2019/05/cropped-fraam_icon-192x192.png"
-        sizes="192x192" />
-    <link rel="apple-touch-icon"
-        href="https://www.fraam.de/wp-content/uploads/2019/05/cropped-fraam_icon-180x180.png" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
-    <style>
-        :root {
-            --links: #173557;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo Anonymisierung</title>
+  <link rel="icon" href="https://www.fraam.de/wp-content/uploads/2019/05/cropped-fraam_icon-192x192.png"
+    sizes="192x192" />
+  <link rel="apple-touch-icon" href="https://www.fraam.de/wp-content/uploads/2019/05/cropped-fraam_icon-180x180.png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
+  <style>
+    :root {
+      --links: #173557;
+    }
 
-        h3 {
-            padding-top: 2rem;
-        }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    h3 {
+      padding-top: 2rem;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
-    <div id="vueapp">
-
-    <img style="height: 4rem; float: right;" src="fraam.svg">
+  <div id="vueapp">
+    <img style="height: 4rem; float: right" src="fraam.svg" />
     <h1>Textanonymisierung</h1>
 
-    <p>Dieses Beispiel dient dazu, die Anonymisierung im Rahmen der Urteilsveröffentlichungen zu demonstrieren.</p>
-
+    <p>
+      Dieses Beispiel dient dazu, die Anonymisierung im Rahmen der
+      Urteilsveröffentlichungen zu demonstrieren.
+    </p>
 
     <h3>Zu anonymisierender Text</h3>
-    <p>
-        Geben Sie hier den zu anonymisierenden Text ein.
-    </p>
+    <p>Geben Sie hier den zu anonymisierenden Text ein.</p>
     <form>
-        <textarea id="story" v-model="story" placeholder="Text eingeben..."></textarea>
+      <textarea v-model="original" placeholder="Text eingeben..."></textarea>
     </form>
 
-    <button v-on:click="xhr">Check your data</button><button v-on:click="xhr1">Anonymize</button>
+    <button v-on:click="anonymize">Anonymisiere</button>
 
     <h3>Ausgabe</h3>
-    <p>
-        Hier erscheint die Ausgabe der Anonymisierung.
-    </p>
+    <p>Hier erscheint die Ausgabe der Anonymisierung.</p>
     <form>
-        <textarea v-model="analyze.text" id="analyze" name="text" placeholder="Ausgabe..."></textarea>
+      <textarea v-model="result" placeholder="Ausgabe..."></textarea>
     </form>
 
     <h3>Gefundene Textbausteine</h3>
-    <p>Hier erscheint eine Liste der in dem Text gefundenen persönlichen Merkmale.</p>
+    <p>
+      Hier erscheint eine Liste der in dem Text gefundenen persönlichen
+      Merkmale.
+    </p>
 
     <table>
-        <thead>
-            <tr>
-                <th>Entity Type</th>
-                <th>Score</th>
-                <th>Text</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            <tr v-for="item in items">
-                <td>{{ item.entity_type }}</td>
-                <td>{{ item.score }}</td>
-                <td>{{ story.slice(item.start,item.end) }}</td>
-            </tr>
-
-
-        </tbody>
+      <thead>
+        <tr>
+          <th>Entity Type</th>
+          <th>Score</th>
+          <th>Text</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="e in entities">
+          <td>{{ e.entity_type }}</td>
+          <td>{{ e.score }}</td>
+          <td>{{ original.slice(e.start,e.end) }}</td>
+        </tr>
+      </tbody>
     </table>
-    </div>
-    <script src="https://unpkg.com/vue@2.2.4/dist/vue.js"></script>
+  </div>
 
-    <script type="text/javascript">
-          //         'use strict';
-          //var input = document.getElementById("story").value;
-          //console.log(input)
-          new Vue({
-
-            el: '#vueapp',
-            data: {
-              url: "/anonymize",
-              url1: "/analyze",
-              info: "",
-              analyze: "",
-              text: "",
-              story: `Beglaubigte Abschrift
-Verkündet am 12.05.2017
-Fischer, Justizsekretärin (b) als Urkundsbeamtin der Geschäftsstelle
-
-Landgericht Arnsberg
-IM NAMEN DES VOLKES
-Urteil
-In dem Rechtsstreit
-Frau Christina Stamm, Eisenbahnstraße 12, 20523 Bad-Salzufflen
-
-Prozessbevollmächtigte:
-Rechtsanwälte Rogert & Ulbrich, Kö Bogen 2 b, 40212 Düsseldorf,
-gegen
-die WW AG, die VOLKSWAGEN AG, vertreten durch den Vorstand, dieser vertr. d. M. Muller, H. Diess,
-Karlheinz Blessing, Francisco J. Garcia Sanz, Jochem Heizmann, Christine Hohmann-Dennhardt,
-A. Renschler, R. Stadler, Fr. Witter, Berliner Ring 2. 38440 Wolfsburg
-Beklagte,
-Prozessbevollmächtigte:
-Rechtsanwälte Waschke Kuba Zimmermann, Porschestraße 89, 38440 Wolfsburg,
-hat das Landgericht - 2. Zivilkammer - Arnsberg
-aufgrund mündlicher Verhandlung vom 07.04.2017 durch den Vizepräsidenten des Landgerichts Maus, den Richter am Landgericht Dr. Kamp und die Richterin Stümer für Recht erkannt:
-Die Beklagte wird verurteilt, an die Klägerin Christina Stamm 37.007,31 € nebst Zinsen in Höhe von fünf Prozentpunkten über dem jeweiligen Basiszinssatz seit dem 26.04.2016 Zug-um-Zug gegen Übergabe und Übereignung des Fahrzeugs VW Passat Variant 2.0l TDI mit der Fahrgestellnummer WVWZZZ3CZDE072999 abzüglich einer Nutzungsentschädigung in Höhe von
-EUR 14.221,60 zu zahlen;
-
-es wird festgestellt, dass sich die Beklagte spätestens seit dem 26.04.2016 mit
-der Rücknahme des im Klageantrag zu 1. bezeichneten Gegenstandes in
-Annahmeverzug befindet;
-
-die Beklagte wird verurteilt, an die Klägerin Christina Stamm die vorgerichtlich entstandenen
-Rechtsanwaltskosten in Höhe von 1.229,27 EUR nebst Zinsen in Höhe von 5
-Prozentpunkten Ober dem jeweiligen Basiszinssatz seit dem 26.04.2016 zu
-zahlen
-
-im Übrigen wird die Klage abgewiesen.
-
-Die Kosten des Rechtsstreits werden der Beklagten auferlegt
-Das Urteil ist gegen Sicherheitsleistung in Höhe von 110 % des jeweils zu
-vollstreckenden Betrages vorläufig vollstreckbar.
-
-Tatbestand:
-Die Klägerin Christina Stamm begehrt primär die Rückabwicklung eines mit der Beklagten
-geschlossenen Neuwagenkaufvertrages.
-
-Im August 2012 kaufte die Klägerin Christina Stamm bei der Beklagten den aus dem Tenor
-ersichtlichen VW Passat zu einem Kaufpreis von 37.007,31 €.
-
-Das Fahrzeug wurde der Klagerin übergeben und sie zahlte den Kaufpreis.
-
-In dem streitgegenständlichen Fahrzeug ist der Dieselmotor des Motortyps EA 189
-mit 2.0 Liter Hubraum verbaut, der im Zusammenhang mit der sog. VW-
-Abgasproblematik steht. In dem Fahrzeug ist eine Software installiert, die erkannt,
-wann sich das Fahrzeug im Prüfstand zur Ermittlung der Emissionswerte befindet. In
-diesem synthetischen Fahrzyklus (NEFZ) werden dann, anders als im realen Fahrbetrieb, Prozesse aktiv, die zu einer erhöhten Abgasrückführung führen und
-dadurch weniger Stickoxide (NOx) ausgestoßen werden.
-
-Die Klägerin Christina Stamm beantragt,
-
-1. die Beklagte zu verurteilen, an die Klägerin Christina Stamm EUR 37.007.31 6 nebst Zinsen in
-Höhe von fünf Prozentpunkten über dem Basiszinssatz seit dem 26.04.2016 Zug-
-um-Zug gegen Übergabe des Fahrzeugs VW Passat Variant 2.01 TDI mit der
-Fahrgestellnummer WVWZZZ3CZDE072999 abzüglich einer Nutzungsentschädigung in Höhe von EUR 9.128,47 zu zahlen.
-2. Festzustellen, dass sich die Beklagte spätestens seit dem 26.04.2016 mit der Rücknahme des im Klageantrag zu 1. bezeichneten Gegenstandes in
-Annahmeverzug befindet.
-3. Der Beklagten die Kosten der außergerichtlichen Rechtsverfolgung in Höhe
-von 1.229.27 EUR nebst Zinsen in Höhe von 5 Prozentpunkten über dem
-Basiszinssatz seit dem 26.04.2016 aufzuerlegen.
-
-Das Fahrzeug entspricht diesen objektiv berechtigten Erwartungen nicht. Die
-eingebaute Software erkennt, wenn sich das Fahrzeug im Testzyklus befindet, und
-aktiviert während dieser Testphase einen Abgasrückführungsprozess, der zu einem
-geringeren Stickoxidausstoß führt. Das streitgegenständliche Fahrzeug tauscht
-mithin im Prüfstand einen niedrigeren Stickoxidausstoß vor, als er im Fahrbetrieb
-entsteht. Ein Durchschnittskäufer darf erwarten, dass die in der Testphase laufenden
-stickoxidverringernden Prozesse auch im realen Fahrbetrieb aktiv bleiben und nicht
-
-durch den Einsatz einer Software deaktiviert bzw. nur im Testzyklus aktiviert werden.
-Andernfalls wäre die staatliche Regulierung zulässiger Stickoxidausstoßgrenzen -
-wenn auch nur unter Laborbedingungen - Makulatur( u.a. OLG Hamm , LG Aachen , LG Münster , LG Oldenburg , LG München II , LG Dortmund , LG Hagen , LG Paderborn .`,
-              items: [],
-            },
-
-            methods: {
-              xhr1: function(){
-                var rq = new XMLHttpRequest();
-                rq.onreadystatechange = function(vm) {
-                  if (this.readyState === XMLHttpRequest.DONE) {
-                    if (this.status === 200) {
-                      vm.analyze = JSON.parse(this.responseText);
-                    } else {
-                      vm.info = "Request Failed";
-                    }
-                  }
-                }.bind(rq, this);
-
-                rq.open("POST", this.url);
-                rq.setRequestHeader("Content-Type", "application/json");
-                rq.send(JSON.stringify({"text":this.story,"analyzer_results":JSON.parse(this.usethis),"anonymizers":{"DEFAULT": {"type":"replace","new_value":"ANONYMIZED" },"PHONE_NUMBER": {"type": "mask", "masking_char": "*", "chars_to_mask":4, "from_end": true}}}));
-
-              },
-              xhr: function() {
-
-                console.log(this.story[0-23]);
-
-                this.info = "Requesting ...";
-                var req = new XMLHttpRequest();
-                req.onreadystatechange = function(vm) {
-                  if (this.readyState === XMLHttpRequest.DONE) {
-                    if (this.status === 200) {
-                      vm.info1 = this.responseText;
-                      vm.items = JSON.parse(this.responseText);
-                      vm.usethis = this.responseText;
-                      console.log(responseText);
-                    } else {
-                      //rq.send(JSON.stringify){
-                      vm.info = "Request Failed";
-                    }
-                  }
-                }.bind(req, this);
-
-                req.open("POST", this.url1);
-                req.setRequestHeader("Content-Type", "application/json");
-                req.send(JSON.stringify({"text":this.story, "language":"de"}));
-
-              }
-            }
-          });
-
-        </script>
-
-
-    <footer>&copy; 2021 <a href="https://www.fraam.de">fraam.de</a>
-        <img style="height: 1rem; float:right;"
-            src="https://www.fraam.de/wp-content/uploads/2019/05/cropped-fraam_icon-192x192.png">
-    </footer>
-
+  <script src="app.js"></script>
+  <footer>
+    &copy; 2021 <a href="https://www.fraam.de">fraam.de</a>
+    <img style="height: 1rem; float: right"
+      src="https://www.fraam.de/wp-content/uploads/2019/05/cropped-fraam_icon-192x192.png" />
+  </footer>
 </body>
 
 </html>

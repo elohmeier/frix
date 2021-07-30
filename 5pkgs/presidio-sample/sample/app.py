@@ -35,7 +35,8 @@ class Server:
         self.logger = logging.getLogger("presidio")
         self.logger.setLevel(logging.DEBUG)
         self.app = Flask(__name__)
-        self.app.wsgi_app = WhiteNoise(self.app.wsgi_app, root="static/")
+        self.app.debug = os.environ.get("DEBUG") == "1"
+        self.app.wsgi_app = WhiteNoise(self.app.wsgi_app, root="static/", autorefresh=self.app.debug)
         registry = RecognizerRegistry(
             recognizers=[
                 CreditCardRecognizer(supported_language="de"),
