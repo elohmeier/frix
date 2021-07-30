@@ -22,4 +22,12 @@ self: super: {
         flakeIgnore = [ "E501" "W503" ]; # line length (black)
       } ../4scripts/kirbi2hashcat.py);
   snmpcheck = self.callPackage ./snmpcheck { };
+
+  frixPython3 = self.python3.override {
+    packageOverrides = self: super: {
+      presidio-analyzer = self.callPackage ../5pkgs/presidio/analyzer.nix { };
+      presidio-anonymizer = self.callPackage ../5pkgs/presidio/anonymizer.nix { };
+      presidio-sample = self.callPackage ../5pkgs/presidio-sample { };
+    };
+  };
 }
