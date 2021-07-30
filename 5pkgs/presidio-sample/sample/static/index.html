@@ -1,81 +1,125 @@
 <!DOCTYPE html>
 <html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo Anonymisierung</title>
+    <link
+      rel="icon"
+      href="https://www.fraam.de/wp-content/uploads/2019/05/cropped-fraam_icon-192x192.png"
+      sizes="192x192"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://www.fraam.de/wp-content/uploads/2019/05/cropped-fraam_icon-180x180.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"
+    />
+    <style>
+      body {
+        max-width: 1200px;
+      }
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Demo Anonymisierung</title>
-  <link rel="icon" href="https://www.fraam.de/wp-content/uploads/2019/05/cropped-fraam_icon-192x192.png"
-    sizes="192x192" />
-  <link rel="apple-touch-icon" href="https://www.fraam.de/wp-content/uploads/2019/05/cropped-fraam_icon-180x180.png" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
-  <style>
-    :root {
-      --links: #173557;
-    }
+      :root {
+        --links: #173557;
+      }
 
-    h3 {
-      padding-top: 2rem;
-    }
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
+      h3 {
+        padding-top: 2rem;
+      }
 
-<body>
-  <div id="vueapp">
-    <img style="height: 4rem; float: right" src="fraam.svg" />
-    <h1>Textanonymisierung</h1>
+      @media only screen and (min-width: 800px) {
+        .container {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+        }
 
-    <p>
-      Dieses Beispiel dient dazu, die Anonymisierung im Rahmen der
-      Urteilsveröffentlichungen zu demonstrieren.
-    </p>
+        .container p {
+          height: 40px;
+        }
 
-    <h3>Zu anonymisierender Text</h3>
-    <p>Geben Sie hier den zu anonymisierenden Text ein.</p>
-    <form>
-      <textarea v-model="original" placeholder="Text eingeben..."></textarea>
-    </form>
+        .txt {
+          height: 30rem !important;
+        }
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
 
-    <!--<button v-on:click="anonymize">Anonymisiere</button>-->
+  <body>
+    <div id="vueapp">
+      <a style="float: right" href="https://www.fraam.de"
+        ><img style="height: 4rem; padding-left: 20px" src="fraam.svg"
+      /></a>
+      <h1>Text&shy;ano&shy;ny&shy;mi&shy;sie&shy;rung</h1>
 
-    <h3>Ausgabe</h3>
-    <p>Hier erscheint die Ausgabe der Anonymisierung.</p>
-    <form>
-      <textarea v-model="result" placeholder="Ausgabe..."></textarea>
-    </form>
+      <p>
+        Dieses Beispiel dient dazu, die Anonymisierung im Rahmen der
+        Urteilsveröffentlichungen zu demonstrieren.
+      </p>
 
-    <h3>Gefundene Textbausteine</h3>
-    <p>
-      Hier erscheint eine Liste der in dem Text gefundenen persönlichen
-      Merkmale.
-    </p>
+      <div class="container">
+        <div>
+          <h3>Zu anonymisierender Text</h3>
+          <p>Geben Sie hier den zu anonymisierenden Text ein.</p>
+          <form>
+            <textarea
+              class="txt"
+              v-model="original"
+              placeholder="Text eingeben..."
+            ></textarea>
+          </form>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Entity Type</th>
-          <th>Score</th>
-          <th>Text</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="e in entities">
-          <td>{{ e.entity_type }}</td>
-          <td>{{ e.score }}</td>
-          <td>{{ original.slice(e.start,e.end) }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+          <!--<button v-on:click="anonymize">Anonymisiere</button>-->
+        </div>
+        <div>
+          <h3>Ausgabe</h3>
+          <p>Hier erscheint die Ausgabe der Anonymisierung.</p>
+          <form>
+            <textarea
+              class="txt"
+              v-model="result"
+              placeholder="Ausgabe..."
+            ></textarea>
+          </form>
+        </div>
+      </div>
 
-  <script src="app.js"></script>
-  <footer>
-    &copy; 2021 <a href="https://www.fraam.de">fraam.de</a>
-    <img style="height: 1rem; float: right"
-      src="https://www.fraam.de/wp-content/uploads/2019/05/cropped-fraam_icon-192x192.png" />
-  </footer>
-</body>
+      <h3>Gefundene Textbausteine</h3>
+      <p>
+        Hier erscheint eine Liste der in dem Text gefundenen personenbezogenen
+        Merkmale.
+      </p>
 
+      <table>
+        <thead>
+          <tr>
+            <th>Entity Type</th>
+            <th>Score</th>
+            <th>Text</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="e in entities">
+            <td>{{ e.entity_type }}</td>
+            <td>{{ e.score }}</td>
+            <td>{{ original.slice(e.start,e.end) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="app.js"></script>
+    <footer>
+      &copy; 2021 <a href="https://www.fraam.de">fraam.de</a>
+      <img
+        style="height: 1rem; float: right"
+        src="https://www.fraam.de/wp-content/uploads/2019/05/cropped-fraam_icon-192x192.png"
+      />
+    </footer>
+  </body>
 </html>
