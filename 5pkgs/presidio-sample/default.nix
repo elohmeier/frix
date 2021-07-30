@@ -20,7 +20,7 @@ buildPythonPackage {
     presidio-analyzer
     presidio-anonymizer
     flask
-    spacy_models.en_core_web_lg
+    #spacy_models.en_core_web_lg
     spacy_models.de_core_news_md
     whitenoise
   ];
