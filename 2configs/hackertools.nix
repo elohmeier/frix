@@ -3,7 +3,15 @@
 { pkgs }:
 
 let
-  py3env = pkgs.python3.withPackages (
+  # exploitdb & python-lsp-server not yet in 21.05, take from master/2021-07-14
+  nixpkgs_master = import
+    (fetchTarball {
+      url = https://github.com/NixOS/nixpkgs/archive/c255408808e7bb2091b3f1954ae63519d6b427ef.tar.gz;
+      sha256 = "sha256:0i82mw38c029fgw520wzf5v5akswc2r67rxmkgw8c8lx2di7il80";
+    })
+    { system = pkgs.system; };
+
+  py3env = nixpkgs_master.python3.withPackages (
     pythonPackages: with pythonPackages; [
       authlib
       beautifulsoup4
@@ -25,6 +33,11 @@ let
       tabulate
       termcolor
       weasyprint
+      pylint
+      python-lsp-server
+      google-auth
+      google-auth-oauthlib
+      google-api-python-client
     ]
   );
 
@@ -48,14 +61,6 @@ let
     pycrypto
     requests
   ]);
-
-  # exploitdb not yet in 21.05, take from master/2021-07-14
-  exploitdb_master = with import
-    (fetchTarball {
-      url = https://github.com/NixOS/nixpkgs/archive/c255408808e7bb2091b3f1954ae63519d6b427ef.tar.gz;
-      sha256 = "sha256:0i82mw38c029fgw520wzf5v5akswc2r67rxmkgw8c8lx2di7il80";
-    })
-    { system = pkgs.system; }; exploitdb;
 in
 rec {
   # TODO: add wordlists from https://github.com/NixOS/nixpkgs/pull/104712
@@ -65,7 +70,7 @@ rec {
     cifs-utils
     davtest
     dig
-    exploitdb_master
+    nixpkgs_master.exploitdb
     freerdp
     ghidra-bin
     gobuster
@@ -82,7 +87,6 @@ rec {
     postgresql # for msfdb
     proxychains
     pwndbg
-    exploitdb_master
     samba
     ripgrep
     ripgrep-all
