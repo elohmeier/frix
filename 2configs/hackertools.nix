@@ -78,6 +78,7 @@ rec {
     hash-identifier
     hashcat
     httpserve
+    kirbi2hashcat
     john
     lftp
     metasploit
@@ -85,6 +86,7 @@ rec {
     net-snmp
     nikto
     openvpn
+    polenum
     postgresql # for msfdb
     proxychains
     pwndbg

@@ -21,6 +21,12 @@ self: super: {
         libraries = [ self.python2Packages.pyasn1 ];
         flakeIgnore = [ "E501" "W503" ]; # line length (black)
       } ../4scripts/kirbi2hashcat.py);
+  polenum =
+    (self.writers.writePython3Bin "polenum.py"
+      {
+        libraries = [ self.python3Packages.impacket ];
+        flakeIgnore = [ "E501" "W503" ]; # line length (black)
+      } ../4scripts/polenum.py);
   snmpcheck = self.callPackage ./snmpcheck { };
 
   frixPython3 = self.python3.override {
