@@ -1,5 +1,5 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -i python3 -p python3Packages.impacket
+# !/usr/bin/env nix-shell
+# !nix-shell -i python3 -p python3Packages.impacket
 
 """
 Uses Core's Impacket Library to get the password policy from a windows machine
@@ -60,7 +60,7 @@ def convert(low, high, lockout=False):
         minutes = int(strftime("%M", gmtime(tmp)))
         hours = int(strftime("%H", gmtime(tmp)))
         days = int(strftime("%j", gmtime(tmp))) - 1
-    except ValueError as e:
+    except ValueError:
         return "[-] Invalid TIME"
 
     if days > 1:
