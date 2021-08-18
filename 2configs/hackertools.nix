@@ -70,6 +70,7 @@ rec {
     cifs-utils
     davtest
     dig
+    enum4linux
     nixpkgs_master.exploitdb
     freerdp
     ghidra-bin
