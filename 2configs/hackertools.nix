@@ -101,6 +101,7 @@ rec {
     thc-hydra
     wireshark-qt
     wpscan
+    zig
   ];
 
   infosec = infosec_no_pyenv ++ [
