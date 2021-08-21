@@ -68,6 +68,7 @@ rec {
     burpsuite-pro
     cewl
     cifs-utils
+    crowbar
     davtest
     dig
     enum4linux
