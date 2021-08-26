@@ -50,4 +50,35 @@
   swapDevices = [{ device = "/dev/sysVG/swap"; }];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+
+  hardware = {
+    bluetooth = {
+      enable = true;
+      hsphfpd.enable = true;
+      package = pkgs.bluezFull;
+    };
+
+    firmware = with pkgs; [
+      firmwareLinuxNonfree
+    ];
+
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        rocm-opencl-icd
+        rocm-opencl-runtime
+        amdvlk
+      ];
+      extraPackages32 = with pkgs; [
+        driversi686Linux.amdvlk
+      ];
+    };
+
+  };
+
+  boot.tmpOnTmpfs = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 }
