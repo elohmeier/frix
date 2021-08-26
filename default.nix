@@ -1,6 +1,6 @@
-{ pkgs, ... }: {
-  nixpkgs = {
-    config.allowUnfree = true;
-    config.packageOverrides = import ./5pkgs pkgs;
-  };
+{ ... }: {
+  imports = [
+    ./2configs
+    # ./3modules
+  ];
 }

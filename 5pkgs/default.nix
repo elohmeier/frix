@@ -1,6 +1,6 @@
 # build a package using `nix build .#pkgname` e.g. `nix build .#burpsuite-pro`
 
-self: super: {
+self: pkgs_master: super: {
   burpsuite-pro = self.callPackage ./burpsuite-pro { };
   cewl = self.callPackage ./cewl { };
   cf-passthehash =
@@ -36,4 +36,60 @@ self: super: {
       presidio-sample = self.callPackage ../5pkgs/presidio-sample { };
     };
   };
+
+  frixPython2 = self.python2.override {
+    packageOverrides = pyself: pysuper: rec {
+      certifi = pysuper.buildPythonPackage rec {
+        pname = "certifi";
+        version = "2020.04.05.1"; # last version with python2 support
+        src = self.fetchFromGitHub {
+          owner = pname;
+          repo = "python-certifi";
+          rev = version;
+          sha256 = "sha256-scdb86Bg5tTUDwm5OZ8HXar7VCNlbPMtt4ZzGu/2O4w=";
+        };
+      };
+    };
+  };
+
+  frixPython3Env = pkgs_master.python3.withPackages (
+    pythonPackages: with pythonPackages; [
+      authlib
+      beautifulsoup4
+      black
+      isort
+      jupyterlab
+      keyring
+      lxml
+      mypy
+      mysql-connector
+      nbconvert
+      pandas
+      pdfminer
+      pillow
+      pytest
+      requests
+      selenium
+      sshtunnel
+      tabulate
+      termcolor
+      weasyprint
+      pylint
+      python-lsp-server
+      google-auth
+      google-auth-oauthlib
+      google-api-python-client
+    ]
+  );
+
+
+  frixPython2Env = self.frixPython2.withPackages (pythonPackages: with pythonPackages; [
+    impacket
+    pycrypto
+    requests
+  ]);
+
+  # pull in recent versions from >21.05
+  exploitdb = pkgs_master.exploitdb;
+  foot = pkgs_master.foot;
 }
