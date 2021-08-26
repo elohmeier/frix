@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   services.openssh = {
@@ -14,4 +14,6 @@
       };
     };
   };
+
+  environment.systemPackages = with pkgs;[ foot.terminfo ];
 }
