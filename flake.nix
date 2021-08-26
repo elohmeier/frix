@@ -45,10 +45,21 @@
           ];
         };
 
+        # switch remote host to configuration using `nixos-rebuild --flake .#anon-demo --target-host root@anon-demo.fraam.de --build-host localhost switch`
         anon-demo = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = defaultModules ++ [
             ./1systems/anon-demo/configuration.nix
+          ];
+        };
+
+        # check config using `nix eval .#nixosConfigurations.metrics.config.system.build.toplevel.drvPath`
+        # build using `nix build .#nixosConfigurations.metrics.config.system.build.toplevel`
+        # switch remote host to configuration using `nixos-rebuild --flake .#metrics --target-host root@metrics.fraam.de --build-host localhost switch`
+        metrics = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = defaultModules ++ [
+            ./1systems/metrics/configuration.nix
           ];
         };
 
