@@ -28,7 +28,14 @@ in
     staticConfigOptions = {
       accessLog = {
         bufferingSize = 100;
-        filePath = "/var/lib/traefik/access.log";
+        filePath = "/var/lib/traefik/access.log.json";
+        format = "json";
+        fields = {
+          defaultMode = "keep";
+          headers = {
+            defaultMode = "keep";
+          };
+        };
       };
 
       entryPoints = {
