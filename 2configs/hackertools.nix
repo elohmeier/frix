@@ -85,6 +85,7 @@ rec {
     metasploit
     nbtscanner
     net-snmp
+    nfs-utils
     nikto
     openvpn
     polenum
