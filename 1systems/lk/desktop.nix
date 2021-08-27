@@ -1,14 +1,18 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "amdgpu" ];
-  services.xserver.layout = "de";
-
-  # Enable the Plasma 5 Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+    extraPackages = with pkgs; [
+      swaylock
+      swayidle
+      wl-clipboard
+      mako # notification daemon
+      alacritty # Alacritty is the default terminal in the config
+      dmenu # Dmenu is the default in the config but i recommend wofi since its wayland native
+    ];
+  };
 
   # Enable sound.
   sound.enable = true;
@@ -23,6 +27,30 @@
     };
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  home-manager.users.user = { ... }: {
+
+    programs.mako = {
+      enable = true;
+    };
+
+    home = {
+      keyboard = {
+        layout = "de";
+        variant = "nodeadkeys";
+      };
+    };
+
+    wayland.windowManager.sway = {
+      enable = true;
+      config = {
+        input = {
+          "*" = {
+            natural_scroll = "enabled";
+            xkb_layout = "de";
+            xkb_numlock = "enabled";
+          };
+        };
+      };
+    };
+  };
 }

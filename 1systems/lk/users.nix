@@ -15,14 +15,14 @@ in
     extraGroups = [ "libvirtd" "docker" "wheel" "networkmanager" "video" ];
   };
 
-  # home-manager.users.user = { ... }: {
-  #   home.stateVersion = "21.05";
-  #   home.packages = hackertools.infosec;
+  home-manager.users.user = { ... }: {
+    home.stateVersion = "21.05";
+    home.packages = hackertools.infosec;
 
-  #   programs.git = {
-  #     enable = true;
-  #     userEmail = "liam.koehn@fraam.de";
-  #     userName = "Liam Köhn";
-  #   };
-  # };
+    programs.git = {
+      enable = true;
+      userEmail = "liam.koehn@fraam.de";
+      userName = "Liam Köhn";
+    };
+  };
 }
