@@ -52,7 +52,6 @@
     libreoffice-fresh
     inkscape
     gimp
-    zoom-us
     aspell
     aspellDicts.de
     aspellDicts.en
@@ -63,6 +62,7 @@
     hunspellDicts.en-us-large
     tdesktop
     quota
+    foot
   ];
 
   system.fsPackages = [ pkgs.ntfs3g ];

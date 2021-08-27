@@ -52,7 +52,6 @@
     libreoffice-fresh
     inkscape
     gimp
-    zoom-us
     aspell
     aspellDicts.de
     aspellDicts.en
