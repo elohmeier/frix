@@ -12,6 +12,14 @@
         hostNames = [ "git.fraam.de" ];
         publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqi/Ley5IzAX4+x7446j/mEKFekN4pdfYSxesxO48LP";
       };
+      "metrics" = {
+        hostNames = [ "metrics.fraam.de" ];
+        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIVCuMb35umJyD/Co9EY6P7s0pelnrTodn0yO6dJhV70";
+      };
+      "anon-demo" = {
+        hostNames = [ "anon-demo.fraam.de" ];
+        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPN1rMMgRREOD1uww7k6WKYy+F0x8sAj9xYq60M+8LHj";
+      };
     };
   };
 
