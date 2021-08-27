@@ -52,6 +52,18 @@
             ];
           };
 
+          # check config using `nix eval .#nixosConfigurations.lk.config.system.build.toplevel.drvPath`
+          # build using `nix build .#nixosConfigurations.lk.config.system.build.toplevel`
+          # switch to config using `nixos-rebuild --flake .#lk switch`
+          # fresh install using `nixos-install --flake git+https://git.fraam.de/fraam/frix#lk`
+          lk = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = defaultModules ++ [
+              home-manager.nixosModule
+              ./1systems/lk/configuration.nix
+            ];
+          };
+
           # check config using `nix eval .#nixosConfigurations.og.config.system.build.toplevel.drvPath`
           # build using `nix build .#nixosConfigurations.og.config.system.build.toplevel`
           # switch to config using `nixos-rebuild --flake .#og switch`
@@ -86,11 +98,10 @@
           # test build using `nix build .#nixosConfigurations.iso.config.system.build.toplevel`
           iso = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            modules = [
+            modules = defaultModules ++ [
               #"${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
               "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-plasma5.nix"
               ./.
-              ./2configs/hackertools.nix
               {
                 console.keyMap = "de-latin1";
                 services.xserver.layout = "de";
