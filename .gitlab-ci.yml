@@ -4,6 +4,11 @@ default:
 
 image: nixpkgs/nix-flakes:latest
 
+check syntax:
+  stage: build
+  script:
+  - nix-shell -p nixpkgs-fmt --run "nixpkgs-fmt --check ."
+
 build burpsuite-pro:
   stage: build
   script:
