@@ -7,12 +7,25 @@ from flask import Flask, Response, jsonify, request, redirect
 from presidio_analyzer.analyzer_engine import AnalyzerEngine
 from presidio_analyzer.analyzer_request import AnalyzerRequest
 from presidio_analyzer.nlp_engine import SpacyNlpEngine
+from presidio_analyzer.predefined_recognizers import (
+    CreditCardRecognizer,
+    CryptoRecognizer,
+    DateRecognizer,
+    DomainRecognizer,
+    EmailRecognizer,
+    IbanRecognizer,
+    IpRecognizer,
+    MedicalLicenseRecognizer,
+    SpacyRecognizer,
+)
+from presidio_analyzer.recognizer_registry import RecognizerRegistry
 from presidio_anonymizer import AnonymizerEngine
 from presidio_anonymizer.deanonymize_engine import DeanonymizeEngine
 from presidio_anonymizer.entities import InvalidParamException
 from presidio_anonymizer.services.app_entities_convertor import AppEntitiesConvertor
 from werkzeug.exceptions import HTTPException
 from whitenoise import WhiteNoise
+from sample.recognizers import VINRecognizer, PLZRecognizer
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -22,12 +35,29 @@ class Server:
         self.logger = logging.getLogger("presidio")
         self.logger.setLevel(logging.DEBUG)
         self.app = Flask(__name__)
-        self.app.wsgi_app = WhiteNoise(self.app.wsgi_app, root="static/")
+        self.app.debug = os.environ.get("DEBUG") == "1"
+        self.app.wsgi_app = WhiteNoise(
+            self.app.wsgi_app, root="static/", autorefresh=self.app.debug
+        )
+        registry = RecognizerRegistry(
+            recognizers=[
+                CreditCardRecognizer(supported_language="de"),
+                CryptoRecognizer(supported_language="de"),
+                DateRecognizer(supported_language="de"),
+                DomainRecognizer(supported_language="de"),
+                EmailRecognizer(supported_language="de"),
+                IbanRecognizer(supported_language="de"),
+                IpRecognizer(supported_language="de"),
+                MedicalLicenseRecognizer(supported_language="de"),
+                SpacyRecognizer(supported_language="de"),
+                VINRecognizer(supported_language="de"),
+                PLZRecognizer(supported_language="de"),
+            ]
+        )
         self.engine = AnalyzerEngine(
-            supported_languages=["en", "de"],
-            nlp_engine=SpacyNlpEngine(
-                models={"en": "en_core_web_lg", "de": "de_core_news_md"}
-            ),
+            supported_languages=["de"],
+            nlp_engine=SpacyNlpEngine(models={"de": "de_core_news_md"}),
+            registry=registry,
         )
         self.anonymizer = AnonymizerEngine()
         self.deanonymize = DeanonymizeEngine()

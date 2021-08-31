@@ -17,7 +17,7 @@
   mkfs.ext4 -F /dev/sysVG/var
   mkfs.ext4 -F /dev/sda1
   mkswap /dev/sysVG/swap
-  mount /dev/vg/root /mnt/
+  mount /dev/sysVG/root /mnt/
   mkdir /mnt/{boot,nix,var}
   mount /dev/sda1 /mnt/boot
   mount /dev/sysVG/nix /mnt/nix
@@ -87,16 +87,19 @@
   networking = {
     useNetworkd = true;
     useDHCP = false;
-    interfaces.ens3 = {
-      useDHCP = true;
-    };
   };
 
-  # prevents creation of the following route (`ip -6 route`):
-  # default dev lo proto static metric 1024 pref medium
-  systemd.network.networks."40-ens3".routes = [
-    { routeConfig = { Gateway = "fe80::1"; }; }
-  ];
+  systemd.network.networks."40-en" = {
+    matchConfig.Name = "en*";
+    networkConfig = {
+      DHCP = "yes";
+      IPv6PrivacyExtensions = "kernel";
+    };
+
+    # prevents creation of the following route (`ip -6 route`):
+    # default dev lo proto static metric 1024 pref medium
+    routes = [{ routeConfig = { Gateway = "fe80::1"; }; }];
+  };
 
   time.timeZone = "Europe/Berlin";
 

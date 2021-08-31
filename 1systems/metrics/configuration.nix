@@ -4,7 +4,7 @@
 
   1. Format disk according to 2configs/hetzner-vm.nix
   2. Spawn Shell using `nix-shell -p nixFlakes gitMinimal`
-  3. Run `nixos-install --flake git+https://git.fraam.de/fraam/frix#anon-demo --no-root-passwd --no-channel-copy`
+  3. Run `nixos-install --flake git+https://git.fraam.de/fraam/frix#metrics --no-root-passwd --no-channel-copy`
   4. Reboot
 
 */
@@ -19,18 +19,18 @@ in
     [
       ../../default.nix
       ../../2configs/hetzner-vm.nix
-      ./presidio-demo.nix
     ];
 
-  networking.hostName = "anon-demo";
+  networking.hostName = "metrics";
 
   systemd.network.networks."40-en".networkConfig = {
-    Address = "2a01:4f8:1c1c:e884::1/64";
+    Address = "2a01:4f9:c011:9cb::1/64";
   };
 
   users.users.root.openssh.authorizedKeys.keys = [
     sshkeys.enno_yubi41
     sshkeys.enno_yubi49
+    sshkeys.liam_arch
   ];
 
   system.stateVersion = "21.05";
