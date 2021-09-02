@@ -22,6 +22,7 @@ in
     ];
 
   networking.hostName = "telefonbuch";
+  networking.firewall.enable = false;
 
   systemd.network.networks."40-en".networkConfig = {
     Address = "2a01:4f8:c0c:1992::1/64";
@@ -33,4 +34,27 @@ in
   ];
 
   system.stateVersion = "21.05";
+
+  services.nginx = {
+    enable = true;
+    virtualHosts."49.12.201.141" = {
+      root = ./script;
+      locations."~ \.php$".extraConfig = ''
+        fastcgi_pass  unix:${config.services.phpfpm.pools.telefonbuch.socket};
+      '';
+    };
+  };
+
+  services.phpfpm.pools.telefonbuch = {
+    user = config.services.nginx.user;
+    settings = {
+      pm = "dynamic";
+      "listen.owner" = config.services.nginx.user;
+      "pm.max_children" = 5;
+      "pm.start_servers" = 2;
+      "pm.min_spare_servers" = 1;
+      "pm.max_spare_servers" = 3;
+      "pm.max_requests" = 500;
+    };
+  };
 }
