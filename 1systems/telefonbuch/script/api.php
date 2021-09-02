@@ -12,7 +12,7 @@
  
  
 		if ($number === false)
-			echo 'The numberapi could not be found.';
+			echo 'The number could not be found.';
 		else
 			$array = [$name => $number];
 			$b = json_encode($array);
