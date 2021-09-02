@@ -7,7 +7,8 @@ image: nixpkgs/nix-flakes:latest
 check syntax:
   stage: build
   script:
-  - nix-shell -p nixpkgs-fmt --run "nixpkgs-fmt --check ."
+  - nix build .#nixpkgs-fmt
+  - ./result/bin/nixpkgs-fmt --check .
 
 build burpsuite-pro:
   stage: build
