@@ -91,5 +91,6 @@ self: pkgs_master: super: {
 
   # pull in recent versions from >21.05
   exploitdb = pkgs_master.exploitdb;
+  fluent-bit = pkgs_master.fluent-bit;
   foot = pkgs_master.foot;
 }
