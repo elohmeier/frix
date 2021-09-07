@@ -35,4 +35,6 @@
     source-code-pro
     win10fonts
   ];
+
+  programs.ssh.startAgent = true;
 }
