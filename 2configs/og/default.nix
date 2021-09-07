@@ -12,6 +12,7 @@
     ./packages.nix
     ./shell.nix
     ./users.nix
+    ./virtualisation.nix
   ];
 
   nix.package = pkgs.nixFlakes;
@@ -50,19 +51,6 @@
       "2.de.pool.ntp.org"
       "3.de.pool.ntp.org"
     ];
-  };
-
-  virtualisation = {
-    docker = {
-      enable = true;
-      enableOnBoot = false; # will be socket-activated
-    };
-    libvirtd = {
-      enable = true;
-      qemuPackage = pkgs.qemu_kvm;
-      qemuRunAsRoot = false;
-    };
-    spiceUSBRedirection.enable = true;
   };
 
   # This value determines the NixOS release from which the default

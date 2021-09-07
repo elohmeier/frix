@@ -15,14 +15,14 @@ in
     extraGroups = [ "libvirtd" "docker" "wheel" "networkmanager" "video" ]; # Enable ‘sudo’ for the user.
   };
 
-  # home-manager.users.ozzy = { ... }: {
-  #   home.stateVersion = "21.05";
-  #   home.packages = hackertools.infosec;
+  home-manager.users.ozzy = { ... }: {
+    home.stateVersion = "21.05";
+    home.packages = hackertools.infosec;
 
-  #   programs.git = {
-  #     enable = true;
-  #     userEmail = "oscar.georgy@fraam.de";
-  #     userName = "Oscar Georgy";
-  #   };
-  # };
+    programs.git = {
+      enable = true;
+      userEmail = "oscar.georgy@fraam.de";
+      userName = "Oscar Georgy";
+    };
+  };
 }

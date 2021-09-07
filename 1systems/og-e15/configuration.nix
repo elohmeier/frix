@@ -36,5 +36,8 @@ in
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  networking.hostName = "og-e15";
+  networking = {
+    hostName = "og-e15";
+    nat.externalInterface = "wlan0";
+  };
 }

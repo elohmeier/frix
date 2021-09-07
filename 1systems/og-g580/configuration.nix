@@ -36,5 +36,8 @@ in
 
   services.xserver.videoDrivers = [ "modesetting" ];
 
-  networking.hostName = "og-g580";
+  networking = {
+    hostName = "og-g580";
+    nat.externalInterface = "wlan0";
+  };
 }
