@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  hackertools = import ../../2configs/hackertools.nix { inherit pkgs; };
+  hackertools = import ../hackertools.nix { inherit pkgs; };
 in
 {
   # Define a user account. Don't forget to set a password with ‘passwd’.

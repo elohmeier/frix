@@ -21,6 +21,7 @@ self: pkgs_master: super: {
         libraries = [ self.python2Packages.pyasn1 ];
         flakeIgnore = [ "E501" "W503" ]; # line length (black)
       } ../4scripts/kirbi2hashcat.py);
+  ligolo-ng = self.callPackage ./ligolo-ng { };
   polenum =
     (self.writers.writePython3Bin "polenum.py"
       {
@@ -31,6 +32,7 @@ self: pkgs_master: super: {
 
   frixPython3 = self.python3.override {
     packageOverrides = self: super: {
+      nosqlmap = self.callPackage ../5pkgs/nosqlmap { };
       presidio-analyzer = self.callPackage ../5pkgs/presidio/analyzer.nix { };
       presidio-anonymizer = self.callPackage ../5pkgs/presidio/anonymizer.nix { };
       presidio-sample = self.callPackage ../5pkgs/presidio-sample { };
@@ -93,4 +95,20 @@ self: pkgs_master: super: {
   exploitdb = pkgs_master.exploitdb;
   fluent-bit = pkgs_master.fluent-bit;
   foot = pkgs_master.foot;
+
+  # fluent-bit config generation example
+  fluent-config = self.writeText "fluent.conf" (self.lib.generators.toINI
+    {
+      mkKeyValue = k: v: self.lib.generators.mkKeyValueDefault { } "=" "  ${k}" v;
+    }
+    {
+      section_a = {
+        foo = "bar";
+      };
+
+      section_b = {
+        host = "127.0.0.1";
+        port = 12345;
+      };
+    });
 }

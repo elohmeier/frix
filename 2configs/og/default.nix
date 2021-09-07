@@ -1,20 +1,18 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  imports =
-    [
-      ./desktop.nix
-      ./hardware-configuration.nix
-      ./networking.nix
-      ./packages.nix
-      ./shell.nix
-      ./users.nix
+  imports = [
+    ../../default.nix
+    ../printers/hl5380dn.nix
 
-      ../../default.nix
-
-      ../../2configs/default.nix
-      ../../2configs/printers/hl5380dn.nix
-    ];
+    ./bluetooth.nix
+    ./desktop.nix
+    ./laptop.nix
+    ./networking.nix
+    ./packages.nix
+    ./shell.nix
+    ./users.nix
+  ];
 
   nix.package = pkgs.nixFlakes;
   nix.extraOptions = ''
