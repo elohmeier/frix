@@ -52,6 +52,8 @@
       "3.de.pool.ntp.org"
     ];
   };
+  
+  programs.command-not-found.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
