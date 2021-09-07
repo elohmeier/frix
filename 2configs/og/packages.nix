@@ -62,6 +62,8 @@
     hunspellDicts.en-us-large
     tdesktop
     quota
+    dsvpn
+    iftop
   ];
 
   system.fsPackages = [ pkgs.ntfs3g ];
