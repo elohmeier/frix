@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   # Enable the X11 windowing system.
@@ -24,4 +24,15 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
+
+  fonts.fonts = with pkgs; [
+    cozette
+    iosevka
+    nerdfonts
+    proggyfonts
+    roboto
+    roboto-slab
+    source-code-pro
+    win10fonts
+  ];
 }

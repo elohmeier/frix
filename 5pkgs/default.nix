@@ -29,6 +29,7 @@ self: pkgs_master: super: {
         flakeIgnore = [ "E501" "W503" ]; # line length (black)
       } ../4scripts/polenum.py);
   snmpcheck = self.callPackage ./snmpcheck { };
+  win10fonts = self.callPackage ./win10fonts { };
 
   frixPython3 = self.python3.override {
     packageOverrides = self: super: {
