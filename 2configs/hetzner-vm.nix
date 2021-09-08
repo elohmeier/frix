@@ -3,7 +3,7 @@
   Default config for hetzner cloud virtual machines.
   --------------------------------------------------
 
-  Format the disk when installing using:
+  Prepare the disk when installing using:
 
   sgdisk -og -a1 -n1:2048:+200M -t1:8300 -n3:-1M:0 -t3:EF02 -n2:0:0 -t2:8300 /dev/sda
   pvcreate /dev/sda2
