@@ -1,4 +1,4 @@
-# !/usr/bin/env python
+#!/usr/bin/env python
 
 # ColdFusion 8.x "Pass the Hash" vulnerability.
 # Steve Coward (steve@sugarstack.io)

@@ -1,5 +1,5 @@
-# !/usr/bin/env nix-shell
-# !nix-shell -i python3 -p python3Packages.impacket
+#!/usr/bin/env nix-shell
+#!nix-shell -i python3 -p python3Packages.impacket
 
 """
 Uses Core's Impacket Library to get the password policy from a windows machine
