@@ -116,6 +116,13 @@
             ];
           };
 
+          matrix = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = defaultModules ++ [
+              ./1systems/matrix/configuration.nix
+            ];
+          };
+
           telefonbuch = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = defaultModules ++ [

@@ -34,7 +34,7 @@
 {
   imports = [
     ./hetzner-vm.nix
-    ./hetzner-vm-luks.nix
+    ./luks-ssh-unlock.nix
   ];
 
   boot.initrd.luks.devices.sda2_crypt = {
