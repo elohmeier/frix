@@ -66,6 +66,7 @@
       device = "/dev/sysVG/var";
       fsType = "ext4";
       options = [ "nodev" "nosuid" "noexec" ];
+      neededForBoot = true; # needed to set user passwords from /var/src/secrets
     };
 
   fileSystems."/boot" =
@@ -120,4 +121,5 @@
   };
 
   users.mutableUsers = false;
+  users.users.root.passwordFile = "/var/src/secrets/root.passwd";
 }

@@ -41,4 +41,6 @@
     device = "/dev/sda2";
     preLVM = true;
   };
+
+  boot.kernelParams = [ "ip=dhcp" ];
 }

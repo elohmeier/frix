@@ -16,6 +16,11 @@ in
     Address = "2a01:4f8:c0c:1992::1/64";
   };
 
+  boot.initrd.network.ssh.authorizedKeys = [
+    sshkeys.enno_yubi41
+    sshkeys.enno_yubi49
+  ];
+
   users.users.root.openssh.authorizedKeys.keys = [
     sshkeys.enno_yubi41
     sshkeys.enno_yubi49
