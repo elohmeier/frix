@@ -1,20 +1,19 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  imports =
-    [
-      ./desktop.nix
-      ./hardware-configuration.nix
-      ./networking.nix
-      ./packages.nix
-      ./shell.nix
-      ./users.nix
+  imports = [
+    ../../default.nix
+    ../printers/hl5380dn.nix
 
-      ../../default.nix
-
-      ../../2configs/default.nix
-      ../../2configs/printers/hl5380dn.nix
-    ];
+    ./bluetooth.nix
+    ./desktop.nix
+    ./laptop.nix
+    ./networking.nix
+    ./packages.nix
+    ./shell.nix
+    ./users.nix
+    ./virtualisation.nix
+  ];
 
   nix.package = pkgs.nixFlakes;
   nix.extraOptions = ''
@@ -54,18 +53,7 @@
     ];
   };
 
-  virtualisation = {
-    docker = {
-      enable = true;
-      enableOnBoot = false; # will be socket-activated
-    };
-    libvirtd = {
-      enable = true;
-      qemuPackage = pkgs.qemu_kvm;
-      qemuRunAsRoot = false;
-    };
-    spiceUSBRedirection.enable = true;
-  };
+  programs.command-not-found.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

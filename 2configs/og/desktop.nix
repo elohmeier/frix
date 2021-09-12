@@ -1,9 +1,8 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "amdgpu" ];
   services.xserver.layout = "de";
 
   # Enable the Plasma 5 Desktop Environment.
@@ -25,4 +24,17 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
+
+  fonts.fonts = with pkgs; [
+    cozette
+    iosevka
+    nerdfonts
+    proggyfonts
+    roboto
+    roboto-slab
+    source-code-pro
+    win10fonts
+  ];
+
+  programs.ssh.startAgent = true;
 }

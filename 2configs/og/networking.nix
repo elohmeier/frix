@@ -2,7 +2,6 @@
 {
   # Configure networking
   networking = {
-    hostName = "og";
     useNetworkd = true;
     useDHCP = false;
     networkmanager = {

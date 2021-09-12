@@ -64,15 +64,37 @@
             ];
           };
 
-          # check config using `nix eval .#nixosConfigurations.og.config.system.build.toplevel.drvPath`
-          # build using `nix build .#nixosConfigurations.og.config.system.build.toplevel`
-          # switch to config using `nixos-rebuild --flake .#og switch`
-          # fresh install using `nixos-install --flake git+https://git.fraam.de/fraam/frix#og`
-          og = nixpkgs.lib.nixosSystem {
+          # check config using `nix eval .#nixosConfigurations.og-e15.config.system.build.toplevel.drvPath`
+          # build using `nix build .#nixosConfigurations.og-e15.config.system.build.toplevel`
+          # switch to config using `nixos-rebuild --flake .#og-e15 switch`
+          # fresh install using `nixos-install --flake git+https://git.fraam.de/fraam/frix#og-e15`
+          og-e15 = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = defaultModules ++ [
               home-manager.nixosModule
-              ./1systems/og/configuration.nix
+              ./1systems/og-e15/configuration.nix
+              ./2configs/og/home-manager.nix
+            ];
+          };
+
+          # check config using `nix eval .#nixosConfigurations.og-g580.config.system.build.toplevel.drvPath`
+          # build using `nix build .#nixosConfigurations.og-g580.config.system.build.toplevel`
+          # switch to config using `nixos-rebuild --flake .#og-g580 switch`
+          og-g580 = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = defaultModules ++ [
+              home-manager.nixosModule
+              ./1systems/og-g580/configuration.nix
+              ./2configs/og/home-manager.nix
+            ];
+          };
+
+          # fresh install using `nixos-install --flake git+https://git.fraam.de/fraam/frix#og-g580-install`
+          og-g580-install = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = defaultModules ++ [
+              home-manager.nixosModule
+              ./1systems/og-g580/configuration.nix
             ];
           };
 
@@ -91,6 +113,13 @@
             system = "x86_64-linux";
             modules = defaultModules ++ [
               ./1systems/metrics/configuration.nix
+            ];
+          };
+
+          matrix = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = defaultModules ++ [
+              ./1systems/matrix/configuration.nix
             ];
           };
 
