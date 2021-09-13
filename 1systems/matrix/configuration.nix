@@ -8,6 +8,10 @@ in
     [
       ../../default.nix
       ../../2configs/hetzner-vm-luks.nix
+
+      ./element.nix
+      ./synapse.nix
+      ./traefik.nix
     ];
 
   networking.hostName = "matrix";

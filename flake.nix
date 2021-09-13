@@ -116,6 +116,7 @@
             ];
           };
 
+          # fresh install using `nixos-install --flake git+https://git.fraam.de/fraam/frix#matrix --no-root-passwd --no-channel-copy`
           matrix = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = defaultModules ++ [
