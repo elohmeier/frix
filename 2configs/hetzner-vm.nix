@@ -31,6 +31,9 @@
   imports =
     [
       (modulesPath + "/profiles/qemu-guest.nix")
+
+      ./admintools.nix
+      ./fish.nix
     ];
 
   boot.tmpOnTmpfs = true;
@@ -88,6 +91,7 @@
   networking = {
     useNetworkd = true;
     useDHCP = false;
+    firewall.logRefusedConnections = false;
   };
 
   systemd.network.networks."40-en" = {
@@ -122,4 +126,13 @@
 
   users.mutableUsers = false;
   users.users.root.passwordFile = "/var/src/secrets/root.passwd";
+
+  # save space
+  environment.noXlibs = true;
+  documentation.enable = false;
+  documentation.nixos.enable = false;
+  environment.defaultPackages = [
+    pkgs.rsync # required for frix-copy-secrets
+  ];
+  services.udisks2.enable = false;
 }
