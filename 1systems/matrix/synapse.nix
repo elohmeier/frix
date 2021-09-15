@@ -7,10 +7,13 @@ in
 {
   services.matrix-synapse = {
     enable = true;
+
     server_name = serverName;
     public_baseurl = "https://${fqdn}/";
+
     database_type = "psycopg2";
     database_args.dbname = "synapse";
+
     listeners = [
       {
         port = config.frix.ports.matrix-synapse;
@@ -26,6 +29,7 @@ in
         ];
       }
     ];
+
     extraConfig = ''
       enable_set_displayname: false
       enable_set_avatar_url: false
@@ -59,9 +63,21 @@ in
             interval: 1d
     '';
 
+    turn_uris = [
+      "turn:turn.fraam.de:3478?transport=udp"
+      "turn:turn.fraam.de:3478?transport=tcp"
+    ];
+    turn_user_lifetime = "1h";
+
     extraConfigFiles = [
       config.frix.secrets."synapse-oidc.yml".path
+      config.frix.secrets."synapse-coturn.yml".path
     ];
+  };
+
+  frix.secrets."synapse-coturn.yml" = {
+    dependants = [ "matrix-synapse.service" ];
+    owner = "matrix-synapse";
   };
 
   frix.secrets."synapse-oidc.yml" = {

@@ -142,7 +142,7 @@
           map
             (
               domain: {
-                certFile = "/var/lib/acme/${domain}/cert.pem";
+                certFile = "/var/lib/acme/${domain}/fullchain.pem";
                 keyFile = "/var/lib/acme/${domain}/key.pem";
                 stores = [ "default" ];
               }

@@ -10,7 +10,7 @@ in
       ../../2configs/hetzner-vm-luks.nix
 
       ./acme.nix
-      #./coturn.nix
+      ./coturn.nix
       ./nginx.nix
       ./ports.nix
       ./synapse.nix

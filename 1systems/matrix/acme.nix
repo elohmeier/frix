@@ -3,7 +3,6 @@
 let
   webroot = "/var/lib/acme/acme-challenge";
   group = "certs";
-  postRun = "systemctl restart traefik.service";
 in
 {
   security.acme = {
@@ -11,13 +10,16 @@ in
     acceptTerms = true;
     certs = {
       "chat.fraam.de" = {
-        inherit webroot group postRun;
+        inherit webroot group;
+        postRun = "systemctl restart traefik.service";
       };
       "matrix.fraam.de" = {
-        inherit webroot group postRun;
+        inherit webroot group;
+        postRun = "systemctl restart traefik.service";
       };
       "turn.fraam.de" = {
-        inherit webroot group postRun;
+        inherit webroot group;
+        postRun = "systemctl restart coturn.service";
       };
     };
   };
