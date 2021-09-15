@@ -16,6 +16,7 @@ in
   boot.kernelModules = [ "kvm-amd" ];
   nix.maxJobs = 8;
   hardware.cpu.amd.updateMicrocode = true;
+  virtualisation.docker.enable = true;
 
   fileSystems."/boot" =
     {
