@@ -10,6 +10,8 @@
     realm = "turn.fraam.de";
     cert = "/var/lib/acme/turn.fraam.de/fullchain.pem";
     pkey = "/var/lib/acme/turn.fraam.de/key.pem";
+    listening-ips = [ "49.12.201.141" "2a01:4f8:c0c:1992::1" ];
+    relay-ips = [ "49.12.201.141" "2a01:4f8:c0c:1992::1" ];
     extraConfig = ''
       no-multicast-peers
     '';

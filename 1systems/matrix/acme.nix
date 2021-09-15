@@ -24,7 +24,9 @@ in
     };
   };
 
-  users.groups."${group}".members = [ config.services.nginx.user ];
-
-  systemd.services.traefik.serviceConfig.SupplementaryGroups = group;
+  users.groups."${group}".members = [
+    config.services.nginx.user
+    "traefik"
+    "turnserver"
+  ];
 }
