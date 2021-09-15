@@ -1,13 +1,33 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   services.nginx = {
     enable = true;
+    commonHttpConfig = ''
+      charset UTF-8;
+      types_hash_max_size 4096;
+      server_names_hash_bucket_size 128;
+      port_in_redirect off;
+    '';
+
     virtualHosts = {
-      "fraam-intweb" = {
+      "acme" = {
+        listen = [
+          {
+            addr = "127.0.0.1";
+            port = config.frix.ports.nginx-acme;
+          }
+        ];
+
+        locations."/.well-known/acme-challenge" = {
+          root = "/var/lib/acme/acme-challenge";
+        };
+      };
+
+      "element-web" = {
         listen = [{
           addr = "127.0.0.1";
-          port = 4711;
+          port = config.frix.ports.element-web;
         }];
 
         root = pkgs.element-web.override {

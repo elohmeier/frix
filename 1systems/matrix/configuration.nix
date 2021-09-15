@@ -9,7 +9,10 @@ in
       ../../default.nix
       ../../2configs/hetzner-vm-luks.nix
 
-      ./element.nix
+      ./acme.nix
+      #./coturn.nix
+      ./nginx.nix
+      ./ports.nix
       ./synapse.nix
       ./traefik.nix
     ];

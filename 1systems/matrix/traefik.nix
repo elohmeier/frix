@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  networking.firewall.interfaces.ens3.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.interfaces.ens3.allowedTCPPorts = [ 80 443 8448 ];
 
   services.traefik = {
     enable = true;
@@ -31,12 +31,6 @@
       };
 
       log.level = "WARN";
-
-      certificatesResolvers.letsencrypt.acme = {
-        email = "enno.richter+acme@fraam.de";
-        storage = "/var/lib/traefik/acme.json";
-        httpChallenge.entryPoint = "www-http";
-      };
     };
 
     dynamicConfigOptions = {
@@ -63,65 +57,97 @@
             entryPoints = [ "www-http" ];
             middlewares = [ "security-headers" "https-redirect" ];
             rule = "Host(`chat.fraam.de`)";
-            service = "element";
+            service = "element-web";
           };
 
           chat-tls = {
             entryPoints = [ "www-https" ];
             middlewares = [ "security-headers" ];
             rule = "Host(`chat.fraam.de`)";
-            service = "element";
-            tls.certResolver = "letsencrypt";
+            service = "element-web";
+            tls = { };
           };
 
           matrix-plain = {
             entryPoints = [ "www-http" ];
             middlewares = [ "security-headers" "https-redirect" ];
             rule = "Host(`matrix.fraam.de`)";
-            service = "synapse";
+            service = "matrix-synapse";
           };
 
           matrix-tls = {
             entryPoints = [ "www-https" "matrix-federation" ];
             middlewares = [ "security-headers" ];
             rule = "Host(`matrix.fraam.de`)";
-            service = "synapse";
-            tls.certResolver = "letsencrypt";
+            service = "matrix-synapse";
+            tls = { };
+          };
+
+          acme = {
+            entryPoints = [ "www-http" ];
+            rule = "PathPrefix(`/.well-known/acme-challenge`)";
+            priority = 9999;
+            service = "nginx-acme";
           };
         };
 
         services = {
-          element = {
+
+          nginx-acme = {
             loadBalancer = {
               passHostHeader = true;
               servers = [
-                { url = "http://127.0.0.1:4711"; }
+                { url = "http://127.0.0.1:${toString config.frix.ports.nginx-acme}"; }
               ];
             };
           };
 
-          synapse = {
+          element-web = {
             loadBalancer = {
               passHostHeader = true;
               servers = [
-                { url = "http://127.0.0.1:8008"; }
+                { url = "http://127.0.0.1:${toString config.frix.ports.element-web}"; }
+              ];
+            };
+          };
+
+          matrix-synapse = {
+            loadBalancer = {
+              passHostHeader = true;
+              servers = [
+                { url = "http://127.0.0.1:${toString config.frix.ports.matrix-synapse}"; }
               ];
             };
           };
         };
       };
 
-      tls.options.default = {
-        cipherSuites = [
-          "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
-          "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
-          "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
-          "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
-          "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305"
-          "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305"
-        ];
-        minVersion = "VersionTLS12";
-        sniStrict = true;
+      tls = {
+        options.default = {
+          cipherSuites = [
+            "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
+            "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+            "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
+            "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+            "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305"
+            "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305"
+          ];
+          minVersion = "VersionTLS12";
+          sniStrict = true;
+        };
+
+        stores.default = { };
+
+        certificates =
+          map
+            (
+              domain: {
+                certFile = "/var/lib/acme/${domain}/cert.pem";
+                keyFile = "/var/lib/acme/${domain}/key.pem";
+                stores = [ "default" ];
+              }
+            )
+            [ "chat.fraam.de" "matrix.fraam.de" "turn.fraam.de" ];
       };
     };
 

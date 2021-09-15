@@ -13,7 +13,7 @@ in
     database_args.dbname = "synapse";
     listeners = [
       {
-        port = 8008;
+        port = config.frix.ports.matrix-synapse;
         bind_address = "127.0.0.1";
         type = "http";
         tls = false;
