@@ -64,6 +64,7 @@
     quota
     dsvpn
     iftop
+    element-desktop
   ];
 
   system.fsPackages = [ pkgs.ntfs3g ];
