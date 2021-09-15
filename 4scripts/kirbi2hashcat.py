@@ -1,5 +1,5 @@
-# !/usr/bin/env nix-shell
-# !nix-shell -i python2 -p python2Packages.pyasn1
+#!/usr/bin/env nix-shell
+#!nix-shell -i python2 -p python2Packages.pyasn1
 
 # Based on the Kerberoast script from Tim Medin to extract the Kerberos tickets
 # from a kirbi file (https://github.com/nidem/kerberoast).

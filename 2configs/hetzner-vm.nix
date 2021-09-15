@@ -3,7 +3,7 @@
   Default config for hetzner cloud virtual machines.
   --------------------------------------------------
 
-  Format the disk when installing using:
+  Prepare the disk when installing using:
 
   sgdisk -og -a1 -n1:2048:+200M -t1:8300 -n3:-1M:0 -t3:EF02 -n2:0:0 -t2:8300 /dev/sda
   pvcreate /dev/sda2
@@ -31,6 +31,9 @@
   imports =
     [
       (modulesPath + "/profiles/qemu-guest.nix")
+
+      ./admintools.nix
+      ./fish.nix
     ];
 
   boot.tmpOnTmpfs = true;
@@ -66,6 +69,7 @@
       device = "/dev/sysVG/var";
       fsType = "ext4";
       options = [ "nodev" "nosuid" "noexec" ];
+      neededForBoot = true; # needed to set user passwords from /var/src/secrets
     };
 
   fileSystems."/boot" =
@@ -87,6 +91,7 @@
   networking = {
     useNetworkd = true;
     useDHCP = false;
+    firewall.logRefusedConnections = false;
   };
 
   systemd.network.networks."40-en" = {
@@ -120,4 +125,14 @@
   };
 
   users.mutableUsers = false;
+  users.users.root.passwordFile = "/var/src/secrets/root.passwd";
+
+  # save space
+  environment.noXlibs = true;
+  documentation.enable = false;
+  documentation.nixos.enable = false;
+  environment.defaultPackages = [
+    pkgs.rsync # required for frix-copy-secrets
+  ];
+  services.udisks2.enable = false;
 }

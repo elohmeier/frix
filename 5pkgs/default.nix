@@ -7,28 +7,36 @@ self: pkgs_master: super: {
     (self.writers.writePython2Bin "cf-passthehash"
       {
         libraries = with self.python2Packages; [ requests click ];
-        flakeIgnore = [ "E501" "W503" ]; # line length (black)
+        flakeIgnore = [ "E265" "E501" "W503" ];
       } ../4scripts/cf-passthehash.py);
   davtest = self.callPackage ./davtest { };
+  frix-copy-secrets = (self.writers.writePython3Bin "frix-copy-secrets"
+    {
+      flakeIgnore = [ "E265" "E501" ];
+      libraries = [ self.python3Packages.python-gnupg ];
+    } ../4scripts/frix-copy-secrets.py);
+  frix-gen-secrets = self.callPackage ./frix-gen-secrets { };
   hash-identifier = self.callPackage ./hash-identifier { };
+  hashPassword = self.callPackage ./hashPassword { };
   httpserve = (self.writers.writePython3Bin "httpserve"
     {
-      flakeIgnore = [ "E501" ]; # line length (black)
+      flakeIgnore = [ "E265" "E501" ];
     } ../4scripts/httpserve.py);
   kirbi2hashcat =
     (self.writers.writePython2Bin "kirbi2hashcat"
       {
         libraries = [ self.python2Packages.pyasn1 ];
-        flakeIgnore = [ "E501" "W503" ]; # line length (black)
+        flakeIgnore = [ "E265" "E501" "W503" ];
       } ../4scripts/kirbi2hashcat.py);
   ligolo-ng = self.callPackage ./ligolo-ng { };
   polenum =
     (self.writers.writePython3Bin "polenum.py"
       {
         libraries = [ self.python3Packages.impacket ];
-        flakeIgnore = [ "E501" "W503" ]; # line length (black)
+        flakeIgnore = [ "E265" "E501" "W503" ];
       } ../4scripts/polenum.py);
   snmpcheck = self.callPackage ./snmpcheck { };
+  syncthing-device-id = self.callPackage ./syncthing-device-id { };
   win10fonts = self.callPackage ./win10fonts { };
 
   frixPython3 = self.python3.override {
