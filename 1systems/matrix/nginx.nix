@@ -38,6 +38,7 @@
             };
             sso_immediate_redirect = true;
             defaultCountryCode = "DE";
+            default_federate = false;
             brand = "fraam chat";
             roomDirectory.servers = [ ];
           };
