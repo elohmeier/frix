@@ -104,6 +104,8 @@ self: pkgs_master: super: {
   exploitdb = pkgs_master.exploitdb;
   fluent-bit = pkgs_master.fluent-bit;
   foot = pkgs_master.foot;
+  nmap = pkgs_master.nmap;
+  sshuttle = pkgs_master.sshuttle;
 
   # fluent-bit config generation example
   fluent-config = self.writeText "fluent.conf" (self.lib.generators.toINI

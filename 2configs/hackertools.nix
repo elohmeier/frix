@@ -9,6 +9,7 @@ rec {
     burpsuite-pro
     cewl
     cifs-utils
+    creddump
     crowbar
     davtest
     dig
@@ -35,6 +36,7 @@ rec {
     proxychains
     pwndbg
     samba
+    socat
     ripgrep
     ripgrep-all
     rlwrap
