@@ -65,6 +65,7 @@
     dsvpn
     iftop
     element-desktop
+    python39Packages.mautrix
   ];
 
   system.fsPackages = [ pkgs.ntfs3g ];
