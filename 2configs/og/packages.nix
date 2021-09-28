@@ -67,6 +67,7 @@
     element-desktop
     poetry
     chromium
+    mysql-workbench
   ];
 
   system.fsPackages = [ pkgs.ntfs3g ];
