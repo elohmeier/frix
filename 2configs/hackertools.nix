@@ -24,6 +24,7 @@ rec {
     kirbi2hashcat
     john
     lftp
+    ligolo-ng
     metasploit
     masscan
     nbtscanner
