@@ -67,6 +67,7 @@
     poetry
     chromium
     mysql-workbench
+    discord
   ];
 
   system.fsPackages = [ pkgs.ntfs3g ];
