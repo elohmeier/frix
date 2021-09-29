@@ -20,7 +20,6 @@
     jetbrains.idea-community
     libsForQt5.ark
     teams
-    discord
     tree
     ffmpeg
     youtube-dl
