@@ -68,6 +68,7 @@
     chromium
     mysql-workbench
     discord
+    discord-ptb
   ];
 
   system.fsPackages = [ pkgs.ntfs3g ];
