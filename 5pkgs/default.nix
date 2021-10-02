@@ -108,6 +108,7 @@ self: pkgs_master: super: {
   exploitdb = pkgs_master.exploitdb;
   fluent-bit = pkgs_master.fluent-bit;
   foot = pkgs_master.foot;
+  metasploit = pkgs_master.metasploit;
   nmap = pkgs_master.nmap;
   sshuttle = pkgs_master.sshuttle;
 
