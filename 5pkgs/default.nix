@@ -29,6 +29,10 @@ self: pkgs_master: super: {
         flakeIgnore = [ "E265" "E501" "W503" ];
       } ../4scripts/kirbi2hashcat.py);
   ligolo-ng = self.callPackage ./ligolo-ng { };
+  nasm-shell =
+    (self.writers.writeDashBin "nasm-shell"
+      ''export PATH=$PATH:${self.nasm}/bin
+        ${self.python3}/bin/python3 ${../4scripts/nasm-shell.py}'');
   polenum =
     (self.writers.writePython3Bin "polenum.py"
       {
