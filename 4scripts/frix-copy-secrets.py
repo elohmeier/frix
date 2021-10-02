@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i python3 -p python3Packages.python-gnupg
+#!nix-shell -i python3 -p python3Packages.python-gnupg -p rsync
 
 import argparse
 import gnupg
@@ -16,9 +16,11 @@ logger = logging.getLogger("frix-copy-secrets")
 def populate_tmp_dir(tmp_dir: str, src_path: Path):
     gpg = gnupg.GPG()
 
-    for gpg_file in src_path.glob("*.gpg"):
-        tmp_file = Path(tmp_dir) / gpg_file.stem
+    for gpg_file in src_path.glob("**/*.gpg"):
+        rel_path = gpg_file.parent.relative_to(src_path)
+        tmp_file = Path(tmp_dir) / rel_path / gpg_file.stem
         with gpg_file.open("rb") as f_src:
+            tmp_file.parent.mkdir(parents=True, exist_ok=True)
             gpg.decrypt_file(f_src, output=tmp_file)
 
 

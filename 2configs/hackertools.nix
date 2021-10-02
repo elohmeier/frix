@@ -9,6 +9,7 @@ rec {
     burpsuite-pro
     cewl
     cifs-utils
+    creddump
     crowbar
     davtest
     dig
@@ -23,6 +24,7 @@ rec {
     kirbi2hashcat
     john
     lftp
+    ligolo-ng
     metasploit
     masscan
     nbtscanner
@@ -35,6 +37,7 @@ rec {
     proxychains
     pwndbg
     samba
+    socat
     ripgrep
     ripgrep-all
     rlwrap

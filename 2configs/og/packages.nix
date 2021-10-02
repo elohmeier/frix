@@ -20,7 +20,6 @@
     jetbrains.idea-community
     libsForQt5.ark
     teams
-    discord
     tree
     ffmpeg
     youtube-dl
@@ -62,6 +61,14 @@
     hunspellDicts.en-us-large
     tdesktop
     quota
+    dsvpn
+    iftop
+    element-desktop
+    poetry
+    chromium
+    mysql-workbench
+    discord
+    discord-ptb
   ];
 
   system.fsPackages = [ pkgs.ntfs3g ];
