@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  networking.firewall.interfaces.enp1s0.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.interfaces.enp1s0.allowedTCPPorts = [ 80 443 8734 ];
 
   services.traefik = {
     enable = true;
@@ -22,6 +22,7 @@
       entryPoints = {
         www-http.address = ":80";
         www-https.address = ":443";
+        loki-https.address = ":8734";
       };
 
       global = {
@@ -49,21 +50,34 @@
             customFrameOptionsValue = "sameorigin";
             referrerPolicy = "strict-origin";
           };
+
+          metrics-auth.basicAuth = {
+            usersFile = config.frix.secrets."metrics-auth.htpasswd".path;
+            realm = "metrics";
+          };
         };
 
         routers = {
-          metrics-http = {
+          http-plain = {
             entryPoints = [ "www-http" ];
             middlewares = [ "security-headers" "https-redirect" ];
             rule = "Host(`metrics.fraam.de`)";
             service = "grafana";
           };
 
-          metrics-https = {
+          https-tls = {
             entryPoints = [ "www-https" ];
             middlewares = [ "security-headers" ];
             rule = "Host(`metrics.fraam.de`)";
             service = "grafana";
+            tls = { };
+          };
+
+          loki-tls = {
+            entryPoints = [ "loki-https" ];
+            middlewares = [ "metrics-auth" ];
+            rule = "Host(`metrics.fraam.de`)";
+            service = "loki";
             tls = { };
           };
 
@@ -91,6 +105,15 @@
               passHostHeader = true;
               servers = [
                 { url = "http://127.0.0.1:${toString config.frix.ports.grafana}"; }
+              ];
+            };
+          };
+
+          loki = {
+            loadBalancer = {
+              passHostHeader = true;
+              servers = [
+                { url = "http://127.0.0.1:${toString config.frix.ports.loki}"; }
               ];
             };
           };
@@ -142,4 +165,11 @@
       endscript
     }
   '';
+
+  frix.secrets."metrics-auth.htpasswd" = {
+    dependants = [ "traefik.service" ];
+    owner = "traefik";
+  };
+
+  systemd.services.traefik.serviceConfig.SupplementaryGroups = "keys";
 }
