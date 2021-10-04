@@ -22,6 +22,7 @@ in
 
       ./acme.nix
       ./grafana.nix
+      ./loki.nix
       ./nginx.nix
       ./ports.nix
       ./prometheus.nix

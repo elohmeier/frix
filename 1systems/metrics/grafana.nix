@@ -33,6 +33,11 @@
           url = "http://localhost:${toString config.frix.ports.prometheus}";
           isDefault = true;
         }
+        {
+          name = "Loki";
+          type = "loki";
+          url = "http://localhost:${toString config.frix.ports.loki}";
+        }
       ];
     };
 

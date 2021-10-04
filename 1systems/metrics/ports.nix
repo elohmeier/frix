@@ -10,8 +10,9 @@ with lib;
 
   config.frix.ports = {
     grafana = 10001;
-    nginx-acme = 10002;
-    prometheus = 10003;
+    loki = 10002;
+    nginx-acme = 10003;
     node-exporter = 10004;
+    prometheus = 10005;
   };
 }
