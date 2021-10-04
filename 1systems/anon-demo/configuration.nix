@@ -19,6 +19,8 @@ in
     [
       ../../default.nix
       ../../2configs/hetzner-vm.nix
+
+      ./fluent-bit.nix
       ./presidio-demo.nix
     ];
 
