@@ -68,6 +68,7 @@
     chromium
     mysql-workbench
     discord
+    teams
   ];
 
   system.fsPackages = [ pkgs.ntfs3g ];
