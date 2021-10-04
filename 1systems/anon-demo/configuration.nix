@@ -28,9 +28,10 @@ in
     Address = "2a01:4f8:1c1c:e884::1/64";
   };
 
-  users.users.root.openssh.authorizedKeys.keys = [
-    sshkeys.enno_yubi41
-    sshkeys.enno_yubi49
+  users.users.root.openssh.authorizedKeys.keys = with sshkeys; [
+    enno_yubi41
+    enno_yubi49
+    liam
   ];
 
   system.stateVersion = "21.05";
