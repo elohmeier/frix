@@ -24,6 +24,18 @@
       };
     };
 
+    provision = {
+      enable = true;
+      datasources = [
+        {
+          name = "Prometheus";
+          type = "prometheus";
+          url = "http://localhost:${toString config.frix.ports.prometheus}";
+          isDefault = true;
+        }
+      ];
+    };
+
     analytics.reporting.enable = false;
   };
 

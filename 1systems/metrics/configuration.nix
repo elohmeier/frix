@@ -24,6 +24,7 @@ in
       ./grafana.nix
       ./nginx.nix
       ./ports.nix
+      ./prometheus.nix
       ./traefik.nix
     ];
 
