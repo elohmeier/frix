@@ -7,6 +7,7 @@
 
     ./bluetooth.nix
     ./desktop.nix
+    ./lampp.nix
     ./laptop.nix
     ./networking.nix
     ./packages.nix
