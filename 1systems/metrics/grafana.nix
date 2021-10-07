@@ -41,6 +41,8 @@
       ];
     };
 
+    declarativePlugins = with pkgs.grafanaPlugins; [ grafana-worldmap-panel ];
+
     analytics.reporting.enable = false;
   };
 
