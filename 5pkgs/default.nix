@@ -43,6 +43,9 @@ self: pkgs_master: super: {
   snmpcheck = self.callPackage ./snmpcheck { };
   syncthing-device-id = self.callPackage ./syncthing-device-id { };
   win10fonts = self.callPackage ./win10fonts { };
+  wordlists-dirbuster = self.callPackage ./wordlists/dirbuster { };
+  wordlists-nmap = self.callPackage ./wordlists/nmap { };
+  wordlists-seclists = self.callPackage ./wordlists/seclists { };
 
   frixPython3 = self.python3.override {
     packageOverrides = self: super: {
