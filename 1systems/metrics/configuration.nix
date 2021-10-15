@@ -12,13 +12,21 @@
 { config, pkgs, ... }:
 
 let
-  sshkeys = import ../../2configs/sshkeys.nix;
+  sshkeys = with import ../../2configs/sshkeys.nix; [ enno_yubi41 enno_yubi49 liam ];
 in
 {
   imports =
     [
       ../../default.nix
       ../../2configs/hetzner-vm.nix
+
+      ./acme.nix
+      ./grafana.nix
+      ./loki.nix
+      ./nginx.nix
+      ./ports.nix
+      ./prometheus.nix
+      ./traefik.nix
     ];
 
   networking.hostName = "metrics";
@@ -27,11 +35,7 @@ in
     Address = "2a01:4f9:c011:9cb::1/64";
   };
 
-  users.users.root.openssh.authorizedKeys.keys = [
-    sshkeys.enno_yubi41
-    sshkeys.enno_yubi49
-    sshkeys.liam_arch
-  ];
+  users.users.root.openssh.authorizedKeys.keys = sshkeys;
 
   system.stateVersion = "21.05";
 }

@@ -27,6 +27,7 @@ rec {
     ligolo-ng
     metasploit
     masscan
+    nasm-shell
     nbtscanner
     net-snmp
     nfs-utils

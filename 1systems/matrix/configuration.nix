@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  sshkeys = import ../../2configs/sshkeys.nix;
+  sshkeys = with import ../../2configs/sshkeys.nix; [ enno_yubi41 enno_yubi49 ];
 in
 {
   imports =
@@ -23,15 +23,8 @@ in
     Address = "2a01:4f8:c0c:1992::1/64";
   };
 
-  boot.initrd.network.ssh.authorizedKeys = [
-    sshkeys.enno_yubi41
-    sshkeys.enno_yubi49
-  ];
-
-  users.users.root.openssh.authorizedKeys.keys = [
-    sshkeys.enno_yubi41
-    sshkeys.enno_yubi49
-  ];
+  boot.initrd.network.ssh.authorizedKeys = sshkeys;
+  users.users.root.openssh.authorizedKeys.keys = sshkeys;
 
   system.stateVersion = "21.05";
 }

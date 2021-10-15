@@ -48,8 +48,6 @@
       [ "ata_piix" "uhci_hcd" "virtio_net" "virtio_pci" "sd_mod" "sr_mod" ];
   };
 
-  nix.maxJobs = lib.mkDefault 4;
-
   fileSystems."/" =
     {
       device = "/dev/sysVG/root";
@@ -83,10 +81,17 @@
     { device = "/dev/sysVG/swap"; }
   ];
 
-  nix.package = pkgs.nixFlakes;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
+  nix = {
+    gc = {
+      automatic = lib.mkDefault true;
+      options = "-d";
+    };
+    maxJobs = lib.mkDefault 4;
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
 
   networking = {
     useNetworkd = true;

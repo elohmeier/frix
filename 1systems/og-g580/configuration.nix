@@ -7,7 +7,7 @@ in
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
-      ../../2configs/og      
+      ../../2configs/og
       ../../2configs/kiosk.nix
     ];
 

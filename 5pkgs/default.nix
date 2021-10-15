@@ -29,6 +29,11 @@ self: pkgs_master: super: {
         flakeIgnore = [ "E265" "E501" "W503" ];
       } ../4scripts/kirbi2hashcat.py);
   ligolo-ng = self.callPackage ./ligolo-ng { };
+  nasm-shell =
+    (self.writers.writeDashBin "nasm-shell"
+      ''export PATH=$PATH:${self.nasm}/bin
+        ${self.python3}/bin/python3 ${../4scripts/nasm-shell.py}'');
+  phpmyadmin = self.callPackage ./phpmyadmin { };
   polenum =
     (self.writers.writePython3Bin "polenum.py"
       {
@@ -38,6 +43,9 @@ self: pkgs_master: super: {
   snmpcheck = self.callPackage ./snmpcheck { };
   syncthing-device-id = self.callPackage ./syncthing-device-id { };
   win10fonts = self.callPackage ./win10fonts { };
+  wordlists-dirbuster = self.callPackage ./wordlists/dirbuster { };
+  wordlists-nmap = self.callPackage ./wordlists/nmap { };
+  wordlists-seclists = self.callPackage ./wordlists/seclists { };
 
   frixPython3 = self.python3.override {
     packageOverrides = self: super: {
@@ -104,6 +112,7 @@ self: pkgs_master: super: {
   exploitdb = pkgs_master.exploitdb;
   fluent-bit = pkgs_master.fluent-bit;
   foot = pkgs_master.foot;
+  metasploit = pkgs_master.metasploit;
   nmap = pkgs_master.nmap;
   sshuttle = pkgs_master.sshuttle;
 
