@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   # List packages installed in system profile. To search, run:
@@ -69,9 +69,17 @@
     mysql-workbench
     discord
     teams
+    wordlists-seclists
   ];
 
   system.fsPackages = [ pkgs.ntfs3g ];
 
   programs.steam.enable = true;
+
+  environment.pathsToLink = [ "/share/SecLists" ];
+  
+  system.activationScripts.initialize-SecLists = lib.stringAfter [ "users" "groups" ] ''
+    rm -rf /home/ozzy/SecLists
+    ln -sf ${pkgs.wordlists-seclists}/share/SecLists /home/ozzy/SecLists
+  '';
 }

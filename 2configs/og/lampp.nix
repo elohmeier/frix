@@ -32,6 +32,7 @@ in
     mkdir -p "${documentRoot}"
     chown -R "${mainUser}:${config.services.httpd.group}" "${documentRoot}"
     chmod -R u+rwX,go+rX,go-w "${documentRoot}"
+    rm -rf /var/www/phpmyadmin
     ln -sf ${pkgs.phpmyadmin} /var/www/phpmyadmin
   '';
 }
