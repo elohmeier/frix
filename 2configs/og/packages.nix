@@ -70,6 +70,8 @@
     discord
     teams
     wordlists-seclists
+    dbeaver
+    sqlfluff
   ];
 
   system.fsPackages = [ pkgs.ntfs3g ];
