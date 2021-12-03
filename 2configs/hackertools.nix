@@ -48,6 +48,9 @@ rec {
     sshuttle
     thc-hydra
     wireshark-qt
+    wordlists-dirbuster
+    wordlists-nmap
+    wordlists-seclists
     wpscan
     zig
   ];

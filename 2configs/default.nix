@@ -24,4 +24,13 @@
   };
 
   environment.systemPackages = with pkgs;[ foot.terminfo ];
+
+  nix = {
+    binaryCaches = [
+      "https://fraam.cachix.org"
+    ];
+    binaryCachePublicKeys = [
+      "fraam.cachix.org-1:jli8HeFa594XmjkCbP7ZgDPaWI8kvdXloTJIIfaxJLw="
+    ];
+  };
 }

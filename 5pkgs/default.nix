@@ -115,6 +115,7 @@ self: pkgs_master: super: {
   metasploit = pkgs_master.metasploit;
   nmap = pkgs_master.nmap;
   sshuttle = pkgs_master.sshuttle;
+  sqlfluff = pkgs_master.sqlfluff;
 
   # fluent-bit config generation example
   fluent-config = self.writeText "fluent.conf" (self.lib.generators.toINI
