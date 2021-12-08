@@ -111,7 +111,7 @@ in
     jetbrains.idea-community
     libsForQt5.ark
     #already fixed
-    #tor-browser-bundle-bin
+    tor-browser-bundle-bin
     teams
     discord
     tree
@@ -124,6 +124,22 @@ in
     sqsh
     thc-hydra
     vokoscreen
+    libreoffice
+    kate
+    libsForQt5.okular
+    teamspeak_client
+    nix-tree
+    htop
+    neochat
+    steam
+    pciutils
+    spotify
+    gimp
+    pdfsam-basic
+    kdenlive
+    cgminer
+    mycrypto
+    smartmontools
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
