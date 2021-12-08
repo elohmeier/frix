@@ -56,7 +56,7 @@ self: pkgs_master: super: {
     };
   };
 
-  frixPython2 = self.python2.override {
+  frixPython2 = pkgs_master.python2.override {
     packageOverrides = pyself: pysuper: rec {
       certifi = pysuper.buildPythonPackage rec {
         pname = "certifi";
@@ -71,7 +71,7 @@ self: pkgs_master: super: {
     };
   };
 
-  frixPython3Env = pkgs_master.python3.withPackages (
+  frixPython3Env = self.python3.withPackages (
     pythonPackages: with pythonPackages; [
       authlib
       beautifulsoup4
@@ -101,21 +101,23 @@ self: pkgs_master: super: {
     ]
   );
 
-
   frixPython2Env = self.frixPython2.withPackages (pythonPackages: with pythonPackages; [
     impacket
     pycrypto
     requests
   ]);
 
-  # pull in recent versions from >21.05
-  exploitdb = pkgs_master.exploitdb;
-  fluent-bit = pkgs_master.fluent-bit;
-  foot = pkgs_master.foot;
-  metasploit = pkgs_master.metasploit;
-  nmap = pkgs_master.nmap;
-  sshuttle = pkgs_master.sshuttle;
-  sqlfluff = pkgs_master.sqlfluff;
+  # TODO: waits for https://github.com/NixOS/nixpkgs/pull/149606
+  tor-browser-bundle-bin = super.tor-browser-bundle-bin.overrideAttrs (old: rec {
+    version = "11.0.1";
+    src = self.fetchurl {
+      urls = [
+        "https://dist.torproject.org/torbrowser/${version}/tor-browser-linux64-${version}_en-US.tar.xz"
+        "https://tor.eff.org/dist/torbrowser/${version}/tor-browser-linux64-${version}_en-US.tar.xz"
+      ];
+      sha256 = "1cx58zbc8af5b7rz0yzi7mm78c7zr48jcj1ka07qpcwjr268588k";
+    };
+  });
 
   # fluent-bit config generation example
   fluent-config = self.writeText "fluent.conf" (self.lib.generators.toINI

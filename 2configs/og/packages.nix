@@ -43,9 +43,7 @@
     virtviewer
     virtmanager
     wineWowPackages.stable # 32-bit & 64-bit
-    (winetricks.override {
-      wine = wineWowPackages.stable;
-    })
+    winetricks
     mpv
     obs-studio
     libreoffice-fresh
