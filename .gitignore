@@ -3,4 +3,4 @@ result-*
 .vscode/
 .idea/
 *.pyc
-
+*.qcow2
