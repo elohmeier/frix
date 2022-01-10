@@ -41,6 +41,7 @@
             default_federate = false;
             brand = "fraam chat";
             roomDirectory.servers = [ ];
+            permalinkPrefix = "https://chat.fraam.de";
           };
         };
 

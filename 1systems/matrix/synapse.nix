@@ -55,7 +55,7 @@ in
         enabled: true
         default_policy:
           min_lifetime: 1d
-          max_lifetime: 30d
+          max_lifetime: 120d
         purge_jobs:
           - longest_max_lifetime: 3d
             interval: 1d
