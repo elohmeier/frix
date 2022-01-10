@@ -56,21 +56,6 @@ self: pkgs_master: super: {
     };
   };
 
-  frixPython2 = pkgs_master.python2.override {
-    packageOverrides = pyself: pysuper: rec {
-      certifi = pysuper.buildPythonPackage rec {
-        pname = "certifi";
-        version = "2020.04.05.1"; # last version with python2 support
-        src = self.fetchFromGitHub {
-          owner = pname;
-          repo = "python-certifi";
-          rev = version;
-          sha256 = "sha256-scdb86Bg5tTUDwm5OZ8HXar7VCNlbPMtt4ZzGu/2O4w=";
-        };
-      };
-    };
-  };
-
   frixPython3Env = self.python3.withPackages (
     pythonPackages: with pythonPackages; [
       authlib
@@ -101,23 +86,13 @@ self: pkgs_master: super: {
     ]
   );
 
-  frixPython2Env = self.frixPython2.withPackages (pythonPackages: with pythonPackages; [
+  frixPython2Env = self.python2.withPackages (pythonPackages: with pythonPackages; [
     impacket
     pycrypto
     requests
   ]);
 
-  # TODO: waits for https://github.com/NixOS/nixpkgs/pull/149606
-  tor-browser-bundle-bin = super.tor-browser-bundle-bin.overrideAttrs (old: rec {
-    version = "11.0.1";
-    src = self.fetchurl {
-      urls = [
-        "https://dist.torproject.org/torbrowser/${version}/tor-browser-linux64-${version}_en-US.tar.xz"
-        "https://tor.eff.org/dist/torbrowser/${version}/tor-browser-linux64-${version}_en-US.tar.xz"
-      ];
-      sha256 = "1cx58zbc8af5b7rz0yzi7mm78c7zr48jcj1ka07qpcwjr268588k";
-    };
-  });
+
 
   # fluent-bit config generation example
   fluent-config = self.writeText "fluent.conf" (self.lib.generators.toINI
