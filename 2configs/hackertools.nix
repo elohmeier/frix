@@ -32,6 +32,7 @@ rec {
     net-snmp
     nfs-utils
     nikto
+    nuclei
     openvpn
     polenum
     postgresql # for msfdb
