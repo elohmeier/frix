@@ -11,6 +11,7 @@ writeShellScriptBin "run-kali-vm" ''
   fi
 
   qemu-system-x86_64 \
+    -nodefaults \
     -enable-kvm \
     -cpu host -smp 12 \
     -drive file=kali-vm.qcow2,if=virtio \
