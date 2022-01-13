@@ -21,7 +21,7 @@ in
     home.stateVersion = "21.05";
     home.packages = with pkgs; [
       hello
-    ]++ hackertools.infosec;
+    ] ++ hackertools.infosec;
   };
 
   boot.tmpOnTmpfs = true;
