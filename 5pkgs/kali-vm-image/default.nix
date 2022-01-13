@@ -18,4 +18,6 @@ stdenv.mkDerivation rec {
     mkdir -p $out
     ${qemu-utils}/bin/qemu-img convert -f vmdk -O qcow2 "Kali-Linux-${version}-vmware-amd64.vmwarevm/Kali-Linux-${version}-vmware-amd64.vmdk" $out/kali-vm-image.qcow2
   '';
+
+  preferLocalBuild = true;
 }

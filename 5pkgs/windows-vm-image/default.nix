@@ -18,4 +18,6 @@ stdenv.mkDerivation rec {
     mkdir $out
     ${qemu-utils}/bin/qemu-img convert -f vpc -O qcow2 "${version}.vhd" $out/windows-vm-image.qcow2
   '';
+
+  preferLocalBuild = true;
 }
