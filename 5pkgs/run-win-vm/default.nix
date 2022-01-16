@@ -14,10 +14,10 @@ writeShellScriptBin "run-win-vm" ''
     -enable-kvm \
     -cpu host -smp 12 \
     -drive file=win-vm.qcow2,if=ide \
-    -net nic -net user,hostname=winvm \
+    -net nic -net user,hostname=win-vm \
     -m 4G \
     -monitor stdio \
-    -name winvm \
+    -name win-vm \
     -device usb-ehci,id=ehci \
     -device usb-tablet,bus=ehci.0
 ''

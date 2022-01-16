@@ -22,6 +22,7 @@ self: pkgs_master: super: {
     {
       flakeIgnore = [ "E265" "E501" ];
     } ../4scripts/httpserve.py);
+  kali-vm-image = self.callPackage ./kali-vm-image { };
   kirbi2hashcat =
     (self.writers.writePython2Bin "kirbi2hashcat"
       {
@@ -40,6 +41,7 @@ self: pkgs_master: super: {
         libraries = [ self.python3Packages.impacket ];
         flakeIgnore = [ "E265" "E501" "W503" ];
       } ../4scripts/polenum.py);
+  run-kali-vm = self.callPackage ./run-kali-vm { };
   run-win-vm = self.callPackage ./run-win-vm { };
   snmpcheck = self.callPackage ./snmpcheck { };
   syncthing-device-id = self.callPackage ./syncthing-device-id { };
