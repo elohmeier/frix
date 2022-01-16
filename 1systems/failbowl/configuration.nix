@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, modulesPath, ... }:
 
 let
   hackertools = import ../../2configs/hackertools.nix { inherit pkgs; };
@@ -15,8 +15,9 @@ in
       ../../default.nix
       #../../2configs/hackertools.nix
       ../../2configs/nvidia-headless.nix
+      # Include brother scanner support
+      (modulesPath + "/services/hardware/sane_extra_backends/brscan4.nix")
     ];
-
   home-manager.users.simon = { ... }: {
     home.stateVersion = "21.05";
     home.packages = with pkgs; [
@@ -82,10 +83,18 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
+  # Enable scanner support
+  hardware.sane = {
+    enable = true;
+    brscan4 = {
+        enable = true;
+    };
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.simon = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "scanner" "lp" ]; # Enable ‘sudo’ and scanning for the user.
   };
 
   # List packages installed in system profile. To search, run:
@@ -110,7 +119,6 @@ in
     git
     jetbrains.idea-community
     libsForQt5.ark
-    #already fixed
     tor-browser-bundle-bin
     teams
     discord
@@ -137,12 +145,17 @@ in
     gimp
     pdfsam-basic
     kdenlive
-    cgminer
-    mycrypto
     smartmontools
     playonlinux
     imagemagick
     inkscape
+    google-chrome
+    evince
+    vnstat
+    teams
+    brlaser
+    skanlite
+    gscan2pdf
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
