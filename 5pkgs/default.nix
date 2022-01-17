@@ -95,22 +95,4 @@ self: pkgs_master: super: {
     pycrypto
     requests
   ]);
-
-
-
-  # fluent-bit config generation example
-  fluent-config = self.writeText "fluent.conf" (self.lib.generators.toINI
-    {
-      mkKeyValue = k: v: self.lib.generators.mkKeyValueDefault { } "=" "  ${k}" v;
-    }
-    {
-      section_a = {
-        foo = "bar";
-      };
-
-      section_b = {
-        host = "127.0.0.1";
-        port = 12345;
-      };
-    });
 }
