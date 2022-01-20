@@ -40,6 +40,17 @@
           ];
         in
         {
+          # check config using `nix eval .#nixosConfigurations.as.config.system.build.toplevel.drvPath`
+          # build using `nix build .#nixosConfigurations.as.config.system.build.toplevel`
+          # switch to config using `nixos-rebuild --flake .#as switch`
+          # fresh install using `nixos-install --flake git+https://git.fraam.de/fraam/frix#as`
+          as = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = defaultModules ++ [
+              home-manager.nixosModule
+              ./1systems/as/configuration.nix
+            ];
+          };
 
           # build using `nix build .#nixosConfigurations.failbowl.config.system.build.toplevel`
           # switch to config using `nixos-rebuild --flake .#failbowl switch`
