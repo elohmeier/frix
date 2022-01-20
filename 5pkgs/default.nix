@@ -3,6 +3,7 @@
 self: pkgs_master: super: {
   burpsuite-pro = self.callPackage ./burpsuite-pro { };
   cewl = self.callPackage ./cewl { };
+  cstrike = self.callPackage ./cstrike { };
   cf-passthehash =
     (self.writers.writePython2Bin "cf-passthehash"
       {
