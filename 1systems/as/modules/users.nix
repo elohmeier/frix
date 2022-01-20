@@ -6,7 +6,7 @@
     isNormalUser = true;
     home = "/home/ad";
     createHome = true;
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
     uid = 1000;
     description = "ad";
     extraGroups = [
@@ -17,4 +17,19 @@
       "video"
     ];
   };
+
+  home-manager.users.ad = { config, lib, pkgs, nixosConfig, ... }:
+    {
+      home.stateVersion = "21.11";
+      home.packages = with pkgs; hackertools ++ [
+        frixPython2Env
+        frixPython3Env
+      ];
+
+      programs.git = {
+        enable = true;
+        userEmail = "adrian.steins@fraam.de";
+        userName = "Adrian Steins";
+      };
+    };
 }

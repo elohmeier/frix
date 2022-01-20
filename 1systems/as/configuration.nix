@@ -5,7 +5,10 @@
     ./modules/filesystems.nix
     ./modules/hardware.nix
     ./modules/networking.nix
+    ./modules/packages.nix
     ./modules/users.nix
+    ./modules/shell.nix
+    ./modules/virtualisation.nix
   ];
 
 
@@ -33,4 +36,21 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.11"; # Did you read the comment?
+
+  services.xserver.desktopManager.plasma5.enable = lib.mkDefault true;
+  services.xserver.enable = lib.mkDefault true;
+  services.xserver.layout = "de";
+  services.xserver.displayManager.sddm.enable = lib.mkDefault true;
+
+  specialisation.sway.configuration = {
+    services.xserver.desktopManager.plasma5.enable = false;
+    services.xserver.enable = false;
+    services.xserver.displayManager.sddm.enable = false;
+
+    programs.sway.enable = true;
+  };
+
+  #  programs.zsh.enable = true;
+  #  programs.zsh.ohMyZsh.enable = true;
+
 }
