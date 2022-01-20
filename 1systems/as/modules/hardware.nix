@@ -9,6 +9,10 @@
   boot.initrd.kernelModules = [ "amdgpu" "dm-snapshot" ];
   boot.kernelModules = [ "kvm-amd" ];
   nix.maxJobs = 8;
+
+  boot.extraModulePackages = [ config.boot.kernelPackages.rtw89 ];
+  hardware.firmware = with pkgs; [ rtw89-firmware ];
+
   hardware.cpu.amd.updateMicrocode = true;
 
   hardware.opengl = {

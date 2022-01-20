@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  disk = "/dev/disk/by-id/nvme-TODO";
+  disk = "/dev/disk/by-id/nvme-SAMSUNG_MZALQ512HBLU-00BL1_S65CNE0R511927";
 in
 {
   boot.loader.systemd-boot.enable = true;
