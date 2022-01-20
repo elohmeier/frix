@@ -64,7 +64,7 @@
     element-desktop
     poetry
     chromium
-    mysql-workbench
+    # mysql-workbench
     discord
     teams
     wordlists-seclists

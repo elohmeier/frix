@@ -95,4 +95,57 @@ self: pkgs_master: super: {
     pycrypto
     requests
   ]);
+
+  # https://www.youtube.com/watch?v=WiMwVlpD-GU
+  hackertools = with self; [
+    amass
+    burpsuite-pro
+    cewl
+    cifs-utils
+    creddump
+    crowbar
+    davtest
+    dig
+    enum4linux
+    exploitdb
+    freerdp
+    ghidra-bin
+    gobuster
+    hash-identifier
+    hashcat
+    httpserve
+    kirbi2hashcat
+    john
+    lftp
+    ligolo-ng
+    metasploit
+    masscan
+    nasm-shell
+    nbtscanner
+    net-snmp
+    nfs-utils
+    nikto
+    nuclei
+    openvpn
+    polenum
+    postgresql # for msfdb
+    proxychains
+    pwndbg
+    samba
+    socat
+    ripgrep
+    ripgrep-all
+    rlwrap
+    snmpcheck
+    sqlmap
+    sqsh
+    sshuttle
+    thc-hydra
+    wireshark-qt
+    wordlists-dirbuster
+    wordlists-nmap
+    wordlists-seclists
+    wpscan
+    zig
+  ];
 }

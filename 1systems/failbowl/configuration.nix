@@ -4,25 +4,22 @@
 
 { config, pkgs, modulesPath, ... }:
 
-let
-  hackertools = import ../../2configs/hackertools.nix { inherit pkgs; };
-in
 {
   imports =
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../default.nix
-      #../../2configs/hackertools.nix
       ../../2configs/nvidia-headless.nix
       # Include brother scanner support
       (modulesPath + "/services/hardware/sane_extra_backends/brscan4.nix")
     ];
   home-manager.users.simon = { ... }: {
     home.stateVersion = "21.05";
-    home.packages = with pkgs; [
-      hello
-    ] ++ hackertools.infosec;
+    home.packages = with pkgs; hackertools ++ [
+      frixPython2Env
+      frixPython3Env
+    ];
   };
 
   boot.tmpOnTmpfs = true;
@@ -87,7 +84,7 @@ in
   hardware.sane = {
     enable = true;
     brscan4 = {
-        enable = true;
+      enable = true;
     };
   };
 

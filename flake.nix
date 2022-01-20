@@ -28,6 +28,7 @@
                 pkgs_master = import nixpkgs-master { system = pkgs.system; };
               in
               {
+                home-manager.useGlobalPkgs = true;
                 nix.nixPath = [
                   "home-manager=${home-manager}"
                   "nixpkgs=${nixpkgs}"
