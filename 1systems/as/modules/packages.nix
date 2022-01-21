@@ -14,7 +14,7 @@
     nmap
     wget
     btop
-
+    file
     run-kali-vm
     run-win-vm
   ];
