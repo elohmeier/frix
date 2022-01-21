@@ -9,7 +9,7 @@
     staticConfigOptions = {
       accessLog = {
         bufferingSize = 100;
-        filePath = "/var/lib/traefik/access.log.json";
+        filePath = "/var/log/traefik/access.log.json";
         format = "json";
         fields = {
           defaultMode = "keep";
