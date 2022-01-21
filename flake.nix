@@ -151,11 +151,13 @@
               #"${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
               "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-plasma5.nix"
               ./.
-              {
+              ({ config, ... }: {
                 console.keyMap = "de-latin1";
                 services.xserver.layout = "de";
                 i18n.defaultLocale = "de_DE.UTF-8";
                 time.timeZone = "Europe/Berlin";
+                hardware.enableAllFirmware = true;
+                boot.extraModulePackages = [ config.boot.kernelPackages.rtw89 ]; # ThinkPad E14
                 networking = {
                   useNetworkd = true;
                   useDHCP = false;
@@ -182,7 +184,7 @@
                       };
                   in
                   [ pkgs.vivaldi ];
-              }
+              })
             ];
           };
         };
