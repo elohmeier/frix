@@ -50,6 +50,22 @@
     programs.sway.enable = true;
   };
 
+  # Enable sound.
+  sound.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    jack.enable = true;
+    pulse.enable = true;
+    media-session = {
+      enable = true;
+    };
+  };
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  services.xserver.libinput.enable = true;
+
   #  programs.zsh.enable = true;
   #  programs.zsh.ohMyZsh.enable = true;
 
