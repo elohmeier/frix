@@ -16,9 +16,9 @@ let
   };
 
   modified-kali-vm-image = runCommand "kali-mod.qcow2"
-  {
-    nativeBuildInputs = [ libguestfs-with-appliance ];
-  } ''
+    {
+      nativeBuildInputs = [ libguestfs-with-appliance ];
+    } ''
 
     echo "generating kali-mod.qcow2 overlay image"
     ${qemu_kvm}/bin/qemu-img create \
