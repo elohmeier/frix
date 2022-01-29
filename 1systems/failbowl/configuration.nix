@@ -59,7 +59,20 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "intel" ];
+  services.xserver.videoDrivers = [ "intel-media-driver" ];
+
+  hardware.opengl = {
+      extraPackages = with pkgs; [
+        intel-media-driver
+        vaapiIntel
+        vaapi-intel-hybrid
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+      extraPackages32 = with pkgs; [
+        driversi686Linux.vaapiIntel
+      ];
+    };
 
   # Enable the Plasma 5 Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
@@ -144,7 +157,7 @@
     kdenlive
     smartmontools
     playonlinux
-    imagemagick
+    #imagemagick
     inkscape
     google-chrome
     evince
@@ -152,7 +165,7 @@
     teams
     brlaser
     skanlite
-    gscan2pdf
+    #gscan2pdf
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -180,7 +193,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05"; # Did you read the comment?
+  system.stateVersion = "21.11"; # Did you read the comment?
 
 }
 
