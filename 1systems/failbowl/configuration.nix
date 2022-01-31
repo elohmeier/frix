@@ -10,7 +10,6 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../default.nix
-      ../../2configs/nvidia-headless.nix
       # Include brother scanner support
       (modulesPath + "/services/hardware/sane_extra_backends/brscan4.nix")
     ];
@@ -20,6 +19,11 @@
       frixPython2Env
       frixPython3Env
     ];
+  };
+
+  frix.nvidia = {
+    headless.enable = true;  # configure nvidia drivers e.g. for hashcat
+    # vfio.enable = true;  # block nvidia drivers to be able to pci-forward gpu
   };
 
   boot.tmpOnTmpfs = true;
