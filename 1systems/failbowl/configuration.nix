@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, modulesPath, ... }:
+{ config, lib, pkgs, modulesPath, ... }:
 
 {
   imports =
@@ -21,9 +21,15 @@
     ];
   };
 
-  frix.nvidia = {
-    headless.enable = true;  # configure nvidia drivers e.g. for hashcat
-    # vfio.enable = true;  # block nvidia drivers to be able to pci-forward gpu
+  # block nvidia drivers to be able to pci-forward gpu
+  frix.nvidia.vfio.enable = lib.mkDefault true;
+
+  specialisation = {
+    # configure nvidia drivers e.g. for hashcat
+    nvidia-headless.configuration = {
+      frix.nvidia.headless.enable = true;
+      frix.nvidia.vfio.enable = false;
+    };
   };
 
   boot.tmpOnTmpfs = true;
@@ -66,17 +72,17 @@
   services.xserver.videoDrivers = [ "intel-media-driver" ];
 
   hardware.opengl = {
-      extraPackages = with pkgs; [
-        intel-media-driver
-        vaapiIntel
-        vaapi-intel-hybrid
-        vaapiVdpau
-        libvdpau-va-gl
-      ];
-      extraPackages32 = with pkgs; [
-        driversi686Linux.vaapiIntel
-      ];
-    };
+    extraPackages = with pkgs; [
+      intel-media-driver
+      vaapiIntel
+      vaapi-intel-hybrid
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+    extraPackages32 = with pkgs; [
+      driversi686Linux.vaapiIntel
+    ];
+  };
 
   # Enable the Plasma 5 Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
