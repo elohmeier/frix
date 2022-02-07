@@ -28,9 +28,7 @@
                 pkgs_master = import nixpkgs-master { system = pkgs.system; };
               in
               {
-                home-manager.useGlobalPkgs = true;
                 nix.nixPath = [
-                  "home-manager=${home-manager}"
                   "nixpkgs=${nixpkgs}"
                 ];
                 nixpkgs.config = {
@@ -39,6 +37,10 @@
                 };
               })
           ];
+          desktopModules = defaultModules ++ [{
+            home-manager.useGlobalPkgs = true;
+            nix.nixPath = [ "home-manager=${home-manager}" ];
+          }];
         in
         {
           # check config using `nix eval .#nixosConfigurations.as.config.system.build.toplevel.drvPath`
@@ -47,7 +49,7 @@
           # fresh install using `nixos-install --flake git+https://git.fraam.de/fraam/frix#as`
           as = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            modules = defaultModules ++ [
+            modules = desktopModules ++ [
               home-manager.nixosModule
               ./1systems/as/configuration.nix
             ];
@@ -57,7 +59,7 @@
           # switch to config using `nixos-rebuild --flake .#failbowl switch`
           failbowl = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            modules = defaultModules ++ [
+            modules = desktopModules ++ [
               home-manager.nixosModule
               ./1systems/failbowl/configuration.nix
               "${nixos-hardware}/dell/xps/15-7590/default.nix"
@@ -70,7 +72,7 @@
           # fresh install using `nixos-install --flake git+https://git.fraam.de/fraam/frix#lk`
           lk = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            modules = defaultModules ++ [
+            modules = desktopModules ++ [
               home-manager.nixosModule
               ./1systems/lk/configuration.nix
             ];
@@ -82,7 +84,7 @@
           # fresh install using `nixos-install --flake git+https://git.fraam.de/fraam/frix#og-e15`
           og-e15 = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            modules = defaultModules ++ [
+            modules = desktopModules ++ [
               home-manager.nixosModule
               ./1systems/og-e15/configuration.nix
               ./2configs/og/home-manager.nix
@@ -94,7 +96,7 @@
           # switch to config using `nixos-rebuild --flake .#og-g580 switch`
           og-g580 = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            modules = defaultModules ++ [
+            modules = desktopModules ++ [
               home-manager.nixosModule
               ./1systems/og-g580/configuration.nix
               ./2configs/og/home-manager.nix
@@ -104,7 +106,7 @@
           # fresh install using `nixos-install --flake git+https://git.fraam.de/fraam/frix#og-g580-install`
           og-g580-install = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            modules = defaultModules ++ [
+            modules = desktopModules ++ [
               home-manager.nixosModule
               ./1systems/og-g580/configuration.nix
             ];
