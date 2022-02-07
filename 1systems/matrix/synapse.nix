@@ -5,6 +5,8 @@ let
   fqdn = "matrix.fraam.de";
 in
 {
+  environment.systemPackages = with pkgs;[ matrix-synapse ];
+
   services.matrix-synapse = {
     enable = true;
 
@@ -45,11 +47,16 @@ in
         smtp_host: smtp-relay.gmail.com
         smtp_port: 587
         enable_tls: true
-        notif_from: "Your Friendly %(app)s homeserver <matrix@fraam.de>"
+        notif_from: "fraam chat <matrix@fraam.de>"
         client_base_url: "https://chat.fraam.de/"
+        app_name: fraam chat
+        enable_notifs: true
       
       password_config:
-        enabled: false
+        enabled: true
+        policy:
+          enabled: true
+          minimum_length: 12
 
       retention:
         enabled: true
@@ -61,6 +68,10 @@ in
             interval: 1d
           - shortest_max_lifetime: 3d
             interval: 1d
+      
+      federation_domain_whitelist:
+        - ${serverName}
+        - nerdworks.de
     '';
 
     turn_uris = [

@@ -35,7 +35,7 @@
               base_url = "https://matrix.fraam.de";
               server_name = "fraam.de";
             };
-            sso_immediate_redirect = true;
+            # sso_immediate_redirect = true;
             defaultCountryCode = "DE";
             default_federate = false;
             brand = "fraam chat";
