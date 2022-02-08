@@ -45,7 +45,7 @@
             STSPreload = true;
             STSSeconds = 315360000;
             browserXSSFilter = true;
-            contentSecurityPolicy = ''"frame-ancestors 'self' https://*.fraam.de"'';
+            contentSecurityPolicy = "frame-ancestors 'self' https://*.fraam.de";
             contentTypeNosniff = true;
             customFrameOptionsValue = "sameorigin";
             referrerPolicy = "strict-origin";
