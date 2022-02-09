@@ -132,11 +132,12 @@ self: pkgs_master: super: {
     postgresql # for msfdb
     proxychains
     pwndbg
-    samba
-    socat
     ripgrep
     ripgrep-all
     rlwrap
+    rustscan
+    samba
+    socat
     snmpcheck
     sqlmap
     sqsh
