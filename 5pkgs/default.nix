@@ -110,7 +110,6 @@ self: pkgs_master: super: {
     enum4linux
     exploitdb
     freerdp
-    ghidra-bin
     gobuster
     hash-identifier
     hashcat
@@ -149,5 +148,7 @@ self: pkgs_master: super: {
     wordlists-seclists
     wpscan
     zig
+  ] ++ self.lib.optionals (self.stdenv.hostPlatform.system != "aarch64-linux") [
+    ghidra-bin
   ];
 }
