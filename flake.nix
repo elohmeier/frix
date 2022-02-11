@@ -29,7 +29,6 @@
               in
               {
                 nix.nixPath = [
-                  "home-manager=${home-manager}"
                   "nixpkgs=${nixpkgs}"
                 ];
                 nixpkgs.config = {
@@ -38,14 +37,29 @@
                 };
               })
           ];
+          desktopModules = defaultModules ++ [{
+            home-manager.useGlobalPkgs = true;
+            nix.nixPath = [ "home-manager=${home-manager}" ];
+          }];
         in
         {
+          # check config using `nix eval .#nixosConfigurations.as.config.system.build.toplevel.drvPath`
+          # build using `nix build .#nixosConfigurations.as.config.system.build.toplevel`
+          # switch to config using `nixos-rebuild --flake .#as switch`
+          # fresh install using `nixos-install --flake git+https://git.fraam.de/fraam/frix#as`
+          as = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = desktopModules ++ [
+              home-manager.nixosModule
+              ./1systems/as/configuration.nix
+            ];
+          };
 
           # build using `nix build .#nixosConfigurations.failbowl.config.system.build.toplevel`
           # switch to config using `nixos-rebuild --flake .#failbowl switch`
           failbowl = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            modules = defaultModules ++ [
+            modules = desktopModules ++ [
               home-manager.nixosModule
               ./1systems/failbowl/configuration.nix
               "${nixos-hardware}/dell/xps/15-7590/default.nix"
@@ -58,7 +72,7 @@
           # fresh install using `nixos-install --flake git+https://git.fraam.de/fraam/frix#lk`
           lk = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            modules = defaultModules ++ [
+            modules = desktopModules ++ [
               home-manager.nixosModule
               ./1systems/lk/configuration.nix
             ];
@@ -70,7 +84,7 @@
           # fresh install using `nixos-install --flake git+https://git.fraam.de/fraam/frix#og-e15`
           og-e15 = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            modules = defaultModules ++ [
+            modules = desktopModules ++ [
               home-manager.nixosModule
               ./1systems/og-e15/configuration.nix
               ./2configs/og/home-manager.nix
@@ -82,7 +96,7 @@
           # switch to config using `nixos-rebuild --flake .#og-g580 switch`
           og-g580 = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            modules = defaultModules ++ [
+            modules = desktopModules ++ [
               home-manager.nixosModule
               ./1systems/og-g580/configuration.nix
               ./2configs/og/home-manager.nix
@@ -92,7 +106,7 @@
           # fresh install using `nixos-install --flake git+https://git.fraam.de/fraam/frix#og-g580-install`
           og-g580-install = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            modules = defaultModules ++ [
+            modules = desktopModules ++ [
               home-manager.nixosModule
               ./1systems/og-g580/configuration.nix
             ];
@@ -139,11 +153,13 @@
               #"${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
               "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-plasma5.nix"
               ./.
-              {
+              ({ config, ... }: {
                 console.keyMap = "de-latin1";
                 services.xserver.layout = "de";
                 i18n.defaultLocale = "de_DE.UTF-8";
                 time.timeZone = "Europe/Berlin";
+                hardware.enableAllFirmware = true;
+                boot.extraModulePackages = [ config.boot.kernelPackages.rtw89 ]; # ThinkPad E14
                 networking = {
                   useNetworkd = true;
                   useDHCP = false;
@@ -170,7 +186,7 @@
                       };
                   in
                   [ pkgs.vivaldi ];
-              }
+              })
             ];
           };
         };

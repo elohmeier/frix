@@ -2,26 +2,34 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, modulesPath, ... }:
 
-let
-  hackertools = import ../../2configs/hackertools.nix { inherit pkgs; };
-in
 {
   imports =
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../default.nix
-      #../../2configs/hackertools.nix
-      ../../2configs/nvidia-headless.nix
+      # Include brother scanner support
+      (modulesPath + "/services/hardware/sane_extra_backends/brscan4.nix")
     ];
-
   home-manager.users.simon = { ... }: {
     home.stateVersion = "21.05";
-    home.packages = with pkgs; [
-      hello
-    ] ++ hackertools.infosec;
+    home.packages = with pkgs; hackertools ++ [
+      frixPython2Env
+      frixPython3Env
+    ];
+  };
+
+  # block nvidia drivers to be able to pci-forward gpu
+  frix.nvidia.vfio.enable = lib.mkDefault true;
+
+  specialisation = {
+    # configure nvidia drivers e.g. for hashcat
+    nvidia-headless.configuration = {
+      frix.nvidia.headless.enable = true;
+      frix.nvidia.vfio.enable = false;
+    };
   };
 
   boot.tmpOnTmpfs = true;
@@ -61,7 +69,20 @@ in
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "intel" ];
+  services.xserver.videoDrivers = [ "intel-media-driver" ];
+
+  hardware.opengl = {
+    extraPackages = with pkgs; [
+      intel-media-driver
+      vaapiIntel
+      vaapi-intel-hybrid
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+    extraPackages32 = with pkgs; [
+      driversi686Linux.vaapiIntel
+    ];
+  };
 
   # Enable the Plasma 5 Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
@@ -82,10 +103,18 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
+  # Enable scanner support
+  hardware.sane = {
+    enable = true;
+    brscan4 = {
+      enable = true;
+    };
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.simon = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "scanner" "lp" ]; # Enable ‘sudo’ and scanning for the user.
   };
 
   # List packages installed in system profile. To search, run:
@@ -110,7 +139,6 @@ in
     git
     jetbrains.idea-community
     libsForQt5.ark
-    #already fixed
     tor-browser-bundle-bin
     teams
     discord
@@ -137,9 +165,17 @@ in
     gimp
     pdfsam-basic
     kdenlive
-    cgminer
-    mycrypto
     smartmontools
+    playonlinux
+    #imagemagick
+    inkscape
+    google-chrome
+    evince
+    vnstat
+    teams
+    brlaser
+    skanlite
+    #gscan2pdf
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -167,7 +203,7 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05"; # Did you read the comment?
+  system.stateVersion = "21.11"; # Did you read the comment?
 
 }
 

@@ -5,7 +5,6 @@
     enable = true;
     commonHttpConfig = ''
       charset UTF-8;
-      types_hash_max_size 4096;
       server_names_hash_bucket_size 128;
       port_in_redirect off;
     '';
@@ -36,11 +35,12 @@
               base_url = "https://matrix.fraam.de";
               server_name = "fraam.de";
             };
-            sso_immediate_redirect = true;
+            # sso_immediate_redirect = true;
             defaultCountryCode = "DE";
             default_federate = false;
             brand = "fraam chat";
             roomDirectory.servers = [ ];
+            permalinkPrefix = "https://chat.fraam.de";
           };
         };
 

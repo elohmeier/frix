@@ -1,12 +1,12 @@
 { pkgs, ... }:
 
-let
-  hackertools = import ../hackertools.nix { inherit pkgs; };
-in
 {
   home-manager.users.ozzy = { ... }: {
     home.stateVersion = "21.05";
-    home.packages = hackertools.infosec;
+    home.packages = with pkgs; hackertools ++ [
+      frixPython2Env
+      frixPython3Env
+    ];
 
     programs.git = {
       enable = true;

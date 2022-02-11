@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  frix.coturn = {
+  services.coturn = {
     enable = true;
     no-cli = true;
     no-tcp-relay = true;
@@ -25,7 +25,7 @@
   users.groups.keys.members = [ "turnserver" ];
 
   networking.firewall.interfaces.ens3 =
-    with config.frix.coturn;
+    with config.services.coturn;
     {
       allowedTCPPorts = [ listening-port alt-listening-port ];
       allowedUDPPorts = [ listening-port alt-listening-port ];

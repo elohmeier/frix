@@ -3,6 +3,7 @@
 self: pkgs_master: super: {
   burpsuite-pro = self.callPackage ./burpsuite-pro { };
   cewl = self.callPackage ./cewl { };
+  cstrike = self.callPackage ./cstrike { };
   cf-passthehash =
     (self.writers.writePython2Bin "cf-passthehash"
       {
@@ -22,6 +23,7 @@ self: pkgs_master: super: {
     {
       flakeIgnore = [ "E265" "E501" ];
     } ../4scripts/httpserve.py);
+  kali-vm-image = self.callPackage ./kali-vm-image { };
   kirbi2hashcat =
     (self.writers.writePython2Bin "kirbi2hashcat"
       {
@@ -40,9 +42,12 @@ self: pkgs_master: super: {
         libraries = [ self.python3Packages.impacket ];
         flakeIgnore = [ "E265" "E501" "W503" ];
       } ../4scripts/polenum.py);
+  run-kali-vm = self.callPackage ./run-kali-vm { };
+  run-win-vm = self.callPackage ./run-win-vm { };
   snmpcheck = self.callPackage ./snmpcheck { };
   syncthing-device-id = self.callPackage ./syncthing-device-id { };
   win10fonts = self.callPackage ./win10fonts { };
+  windows-vm-image = self.callPackage ./windows-vm-image { };
   wordlists-dirbuster = self.callPackage ./wordlists/dirbuster { };
   wordlists-nmap = self.callPackage ./wordlists/nmap { };
   wordlists-seclists = self.callPackage ./wordlists/seclists { };
@@ -53,21 +58,6 @@ self: pkgs_master: super: {
       presidio-analyzer = self.callPackage ../5pkgs/presidio/analyzer.nix { };
       presidio-anonymizer = self.callPackage ../5pkgs/presidio/anonymizer.nix { };
       presidio-sample = self.callPackage ../5pkgs/presidio-sample { };
-    };
-  };
-
-  frixPython2 = pkgs_master.python2.override {
-    packageOverrides = pyself: pysuper: rec {
-      certifi = pysuper.buildPythonPackage rec {
-        pname = "certifi";
-        version = "2020.04.05.1"; # last version with python2 support
-        src = self.fetchFromGitHub {
-          owner = pname;
-          repo = "python-certifi";
-          rev = version;
-          sha256 = "sha256-scdb86Bg5tTUDwm5OZ8HXar7VCNlbPMtt4ZzGu/2O4w=";
-        };
-      };
     };
   };
 
@@ -101,37 +91,64 @@ self: pkgs_master: super: {
     ]
   );
 
-  frixPython2Env = self.frixPython2.withPackages (pythonPackages: with pythonPackages; [
+  frixPython2Env = self.python2.withPackages (pythonPackages: with pythonPackages; [
     impacket
     pycrypto
     requests
   ]);
 
-  # TODO: waits for https://github.com/NixOS/nixpkgs/pull/149606
-  tor-browser-bundle-bin = super.tor-browser-bundle-bin.overrideAttrs (old: rec {
-    version = "11.0.1";
-    src = self.fetchurl {
-      urls = [
-        "https://dist.torproject.org/torbrowser/${version}/tor-browser-linux64-${version}_en-US.tar.xz"
-        "https://tor.eff.org/dist/torbrowser/${version}/tor-browser-linux64-${version}_en-US.tar.xz"
-      ];
-      sha256 = "1cx58zbc8af5b7rz0yzi7mm78c7zr48jcj1ka07qpcwjr268588k";
-    };
-  });
-
-  # fluent-bit config generation example
-  fluent-config = self.writeText "fluent.conf" (self.lib.generators.toINI
-    {
-      mkKeyValue = k: v: self.lib.generators.mkKeyValueDefault { } "=" "  ${k}" v;
-    }
-    {
-      section_a = {
-        foo = "bar";
-      };
-
-      section_b = {
-        host = "127.0.0.1";
-        port = 12345;
-      };
-    });
+  # https://www.youtube.com/watch?v=WiMwVlpD-GU
+  hackertools = with self; [
+    amass
+    burpsuite-pro
+    cewl
+    cifs-utils
+    creddump
+    crowbar
+    davtest
+    dig
+    enum4linux
+    exploitdb
+    freerdp
+    gobuster
+    hash-identifier
+    hashcat
+    httpserve
+    kirbi2hashcat
+    john
+    lftp
+    ligolo-ng
+    metasploit
+    masscan
+    nasm-shell
+    nbtscanner
+    net-snmp
+    nfs-utils
+    nikto
+    nuclei
+    openvpn
+    polenum
+    postgresql # for msfdb
+    proxychains
+    pwndbg
+    ripgrep
+    ripgrep-all
+    rlwrap
+    rustscan
+    samba
+    socat
+    snmpcheck
+    sqlmap
+    sqsh
+    sshuttle
+    thc-hydra
+    wireshark-qt
+    wordlists-dirbuster
+    wordlists-nmap
+    wordlists-seclists
+    wpscan
+    zig
+  ] ++ self.lib.optionals (self.stdenv.hostPlatform.system != "aarch64-linux") [
+    ghidra-bin
+  ];
 }

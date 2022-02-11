@@ -64,7 +64,7 @@
     element-desktop
     poetry
     chromium
-    #mysql-workbench # requires broken py2 package 
+    # mysql-workbench # requires broken py2 package 
     discord
     teams
     wordlists-seclists

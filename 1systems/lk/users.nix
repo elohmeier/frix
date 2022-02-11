@@ -1,8 +1,5 @@
 { pkgs, ... }:
 
-let
-  hackertools = import ../../2configs/hackertools.nix { inherit pkgs; };
-in
 {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.user = {
@@ -17,8 +14,10 @@ in
 
   home-manager.users.user = { ... }: {
     home.stateVersion = "21.05";
-    home.packages = hackertools.infosec;
-
+    home.packages = with pkgs; hackertools ++ [
+      frixPython2Env
+      frixPython3Env
+    ];
     programs.git = {
       enable = true;
       userEmail = "liam.koehn@fraam.de";

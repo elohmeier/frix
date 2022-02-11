@@ -1,7 +1,7 @@
 {
   imports = [
-    ./coturn.nix
     ./logrotate.nix
+    ./nvidia.nix
     ./secrets.nix
   ];
 }
