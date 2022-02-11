@@ -37,4 +37,7 @@
   ];
 
   programs.ssh.startAgent = true;
+
+  # fraam office
+  services.xserver.videoDrivers = [ "displaylink" ];
 }
