@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # Enable the X11 windowing system.
@@ -8,6 +8,7 @@
   # Enable the Plasma 5 Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.windowManager.i3.enable = true;
 
   # Enable sound.
   sound.enable = true;
@@ -46,4 +47,5 @@
 
   # fraam office
   services.xserver.videoDrivers = [ "displaylink" ];
+  boot.kernelParams = [ "evdi.disable_texture_import=1" ];
 }

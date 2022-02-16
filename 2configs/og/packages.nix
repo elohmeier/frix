@@ -4,38 +4,38 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim
-    wget
-    firefox
-    rsync
-    nmap
-    tree
+    vim #Text editor
+    wget #retrieve files via HTTP FTP
+    firefox #Browser
+    rsync #syncronisation von daten
+    nmap # Portscanner- scannen auswerten von Hosts ( networkmapper )
+    tree 
     nixpkgs-fmt
-    keepassxc
-    signal-desktop
-    tdesktop
-    redshift
-    flameshot
-    git
+    keepassxc # free passwort manager
+    signal-desktop #Messenger
+    tdesktop # messenger Telegram
+    redshift 
+    flameshot # bildschirm aufnahme programm für Linux
+    git # git halt
     jetbrains.idea-community
     libsForQt5.ark
-    teams
+    teams #Appoinment and message administration tool
     tree
-    ffmpeg
-    youtube-dl
-    vlc
-    kdenlive
-    freetts
+    ffmpeg # Video and picture alter program
+    youtube-dl # lets you download yt vidoes
+    vlc #mediaplayer
+    kdenlive #video schnitt software
+    freetts 
     jetbrains.datagrip
-    sqsh
-    thc-hydra
-    samba
-    vscodium
+    sqsh #Sql shell for linux
+    thc-hydra #bruteforce  
+    samba 
+    vscodium # fürs coden
     fishPlugins.fzf-fish
     fishPlugins.done
-    fzf
-    zoxide
-    fd
+    fzf #fuzzy suche
+    zoxide 
+    fd 
     bat
     ncdu
     freerdp
@@ -70,6 +70,7 @@
     wordlists-seclists
     dbeaver
     sqlfluff
+    xournalpp # pdf editor
   ];
 
   system.fsPackages = [ pkgs.ntfs3g ];

@@ -13,5 +13,9 @@
       userEmail = "oscar.georgy@fraam.de";
       userName = "Oscar Georgy";
     };
+
+    xsession.windowManager.i3 = {
+      enable = true;
+    };
   };
 }

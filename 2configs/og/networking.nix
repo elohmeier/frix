@@ -10,7 +10,7 @@
       wifi = {
         backend = "iwd";
         macAddress = "random";
-        powersave = true;
+        powersave = false;
       };
     };
     wireless.iwd.enable = true;
