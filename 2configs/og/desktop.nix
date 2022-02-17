@@ -22,6 +22,12 @@
     };
   };
 
+  # required for screensharing in wayland
+  xdg.portal = {
+    enable = true;
+    gtkUsePortal = true;
+  };
+
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
