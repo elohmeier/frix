@@ -9,12 +9,12 @@
     firefox #Browser
     rsync #syncronisation von daten
     nmap # Portscanner- scannen auswerten von Hosts ( networkmapper )
-    tree 
+    tree
     nixpkgs-fmt
     keepassxc # free passwort manager
     signal-desktop #Messenger
     tdesktop # messenger Telegram
-    redshift 
+    redshift
     flameshot # bildschirm aufnahme programm für Linux
     git # git halt
     jetbrains.idea-community
@@ -25,17 +25,17 @@
     youtube-dl # lets you download yt vidoes
     vlc #mediaplayer
     kdenlive #video schnitt software
-    freetts 
+    freetts
     jetbrains.datagrip
     sqsh #Sql shell for linux
     thc-hydra #bruteforce  
-    samba 
+    samba
     vscodium # fürs coden
     fishPlugins.fzf-fish
     fishPlugins.done
     fzf #fuzzy suche
-    zoxide 
-    fd 
+    zoxide
+    fd
     bat
     ncdu
     freerdp
