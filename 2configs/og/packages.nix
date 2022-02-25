@@ -81,6 +81,6 @@
 
   system.activationScripts.initialize-SecLists = lib.stringAfter [ "users" "groups" ] ''
     rm -rf /home/ozzy/SecLists
-    ln -sf ${pkgs.wordlists-seclists}/share/SecLists /home/ozzy/SecLists
+    ln -sf ${pkgs.wordlists-seclists}/share/wordlists/SecLists /home/ozzy/SecLists
   '';
 }
