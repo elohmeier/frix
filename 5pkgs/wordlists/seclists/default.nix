@@ -20,10 +20,10 @@ stdenvNoCC.mkDerivation rec {
   '';
 
   installPhase = ''
-    mkdir -p $out/share/SecLists
+    mkdir -p $out/share/wordlists/SecLists
     cp -R Discovery Fuzzing IOCs Miscellaneous Passwords Pattern-Matching Payloads Usernames Web-Shells \
-      $out/share/SecLists
-    find $out/share/SecLists -name "*.md" -delete
+      $out/share/wordlists/SecLists
+    find $out/share/wordlists/SecLists -name "*.md" -delete
   '';
 
   meta = with lib; {

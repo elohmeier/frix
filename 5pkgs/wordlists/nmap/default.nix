@@ -19,7 +19,7 @@ stdenvNoCC.mkDerivation {
   dontUnpack = true;
 
   installPhase = ''
-    install -m 444 -D $src $out/share/nmap.lst
+    install -m 444 -D $src $out/share/wordlists/nmap.lst
   '';
 
   meta = with lib; {

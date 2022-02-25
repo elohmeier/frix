@@ -11,8 +11,8 @@ fetchzip rec {
   sha256 = "nByEKfhJ5TsZjvL4dTcgrSw0kUUPPVQNJOywdlZwiTo=";
 
   postFetch = ''
-    mkdir -p $out/share/dirbuster
-    unzip -j $downloadedFile ${name}/directory-list-\*.txt -d $out/share/dirbuster
+    mkdir -p $out/share/wordlists/dirbuster
+    unzip -j $downloadedFile ${name}/directory-list-\*.txt -d $out/share/wordlists/dirbuster
   '';
 
   meta = with lib; {
