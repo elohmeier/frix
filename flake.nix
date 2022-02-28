@@ -145,6 +145,14 @@
             ];
           };
 
+          wv = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = desktopModules ++ [
+              home-manager.nixosModule
+              ./1systems/wv/configuration.nix
+            ];
+          };
+
           # generate iso using `nix build .#nixosConfigurations.iso.config.system.build.isoImage`
           # test build using `nix build .#nixosConfigurations.iso.config.system.build.toplevel`
           iso = nixpkgs.lib.nixosSystem {
