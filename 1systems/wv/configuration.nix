@@ -26,4 +26,14 @@
   };
 
   system.stateVersion = "21.11";
+
+  boot.loader = {
+    systemd-boot.enable = false;
+    efi.canTouchEfiVariables = false;
+    grub = {
+      enable = true;
+      version = 2;
+      device = "/dev/sda";
+    };
+  };
 }

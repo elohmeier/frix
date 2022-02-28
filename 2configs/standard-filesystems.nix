@@ -19,7 +19,7 @@
 
     "/boot" =
       {
-        device = lib.mkDefault "/dev/disk/by-label/EFI";
+        device = lib.mkDefault "/dev/disk/by-label/boot";
         fsType = "vfat";
       };
 

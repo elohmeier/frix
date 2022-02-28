@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 
-{  
+{
   users.users.mainUser = {
     isNormalUser = true;
     createHome = true;
