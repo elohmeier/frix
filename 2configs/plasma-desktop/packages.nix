@@ -10,7 +10,6 @@
     bat
     element-desktop
     fd
-    firefox
     flameshot
     freerdp
     git

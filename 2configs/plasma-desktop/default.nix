@@ -7,6 +7,7 @@
     ../printers/hl5380dn.nix
 
     ./hardware.nix
+    ./home-manager.nix
     ./networking.nix
     ./packages.nix
     ./shell.nix
