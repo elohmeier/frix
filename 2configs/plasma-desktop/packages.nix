@@ -2,6 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
+    ark
     aspell
     aspellDicts.de
     aspellDicts.en
@@ -20,6 +21,7 @@
     inkscape
     libreoffice-fresh
     ncdu
+    nixpkgs-fmt
     xournalpp
   ];
 
