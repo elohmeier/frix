@@ -10,6 +10,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    frixPython3Env
     vscode
   ];
 
@@ -46,10 +47,16 @@
         enable = true;
         version = 2;
         device = "/dev/nvme0n1";
+        extraEntries = ''
+          menuentry "Windows 10" {
+            chainloader (hd0,1)+1
+          }
+        '';
       };
     };
   };
   fileSystems."/boot".device = "/dev/nvme0n1p3";
 
   hardware.firmware = with pkgs; [ firmwareLinuxNonfree ];
+  services.xserver.videoDrivers = [ "displaylink" ]; # fraam office
 }
