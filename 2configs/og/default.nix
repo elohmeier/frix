@@ -18,7 +18,10 @@
     description = "Oscar Georgy";
   };
 
-  services.xserver.windowManager.i3.enable = true;
+  services.xserver = {
+    windowManager.i3.enable = true;
+    videoDrivers = [ "displaylink" ]; # fraam office
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

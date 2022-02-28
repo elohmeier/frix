@@ -8,6 +8,7 @@
     aspellDicts.en-computers
     aspellDicts.en-science
     bat
+    element-desktop
     fd
     firefox
     flameshot

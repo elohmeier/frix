@@ -38,7 +38,6 @@
     quota
     dsvpn
     iftop
-    element-desktop
     poetry
     chromium
     # mysql-workbench # requires broken py2 package 
