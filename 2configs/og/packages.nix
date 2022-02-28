@@ -6,7 +6,6 @@
   environment.systemPackages = with pkgs; [
     vim #Text editor
     wget #retrieve files via HTTP FTP
-    firefox #Browser
     rsync #syncronisation von daten
     nmap # Portscanner- scannen auswerten von Hosts ( networkmapper )
     tree
@@ -15,12 +14,9 @@
     signal-desktop #Messenger
     tdesktop # messenger Telegram
     redshift
-    flameshot # bildschirm aufnahme programm für Linux
-    git # git halt
     jetbrains.idea-community
     libsForQt5.ark
     teams #Appoinment and message administration tool
-    tree
     ffmpeg # Video and picture alter program
     youtube-dl # lets you download yt vidoes
     vlc #mediaplayer
@@ -31,14 +27,6 @@
     thc-hydra #bruteforce  
     samba
     vscodium # fürs coden
-    fishPlugins.fzf-fish
-    fishPlugins.done
-    fzf #fuzzy suche
-    zoxide
-    fd
-    bat
-    ncdu
-    freerdp
     sqlitebrowser
     virtviewer
     virtmanager
@@ -46,17 +34,6 @@
     winetricks
     mpv
     obs-studio
-    libreoffice-fresh
-    inkscape
-    gimp
-    aspell
-    aspellDicts.de
-    aspellDicts.en
-    aspellDicts.en-computers
-    aspellDicts.en-science
-    hunspellDicts.de-de
-    hunspellDicts.en-gb-large
-    hunspellDicts.en-us-large
     tdesktop
     quota
     dsvpn
@@ -70,10 +47,7 @@
     wordlists-seclists
     dbeaver
     sqlfluff
-    xournalpp # pdf editor
   ];
-
-  system.fsPackages = [ pkgs.ntfs3g ];
 
   programs.steam.enable = true;
 

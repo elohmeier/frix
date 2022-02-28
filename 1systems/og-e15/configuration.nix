@@ -17,11 +17,7 @@ in
   nix.maxJobs = 8;
   hardware.cpu.amd.updateMicrocode = true;
 
-  fileSystems."/boot" =
-    {
-      device = "${disk}-part1";
-      fsType = "vfat";
-    };
+  fileSystems."/boot".device = "${disk}-part1";
 
   hardware.opengl = {
     extraPackages = with pkgs; [

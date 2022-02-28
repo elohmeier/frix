@@ -5,7 +5,6 @@ let
   virshNatIf = "virsh-nat";
 in
 {
-
   virtualisation = {
     docker = {
       enable = true;

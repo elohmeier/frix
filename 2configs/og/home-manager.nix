@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home-manager.users.ozzy = { ... }: {
+  home-manager.users.mainUser = { ... }: {
     home.stateVersion = "21.05";
     home.packages = with pkgs; hackertools ++ [
       frixPython2Env
