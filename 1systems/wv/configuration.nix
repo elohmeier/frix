@@ -36,4 +36,6 @@
       device = "/dev/sda";
     };
   };
+
+  hardware.firmware = with pkgs; [ firmwareLinuxNonfree ];
 }
