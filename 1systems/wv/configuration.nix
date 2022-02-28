@@ -27,15 +27,19 @@
 
   system.stateVersion = "21.11";
 
-  boot.loader = {
-    systemd-boot.enable = false;
-    efi.canTouchEfiVariables = false;
-    grub = {
-      enable = true;
-      version = 2;
-      device = "/dev/nvme0n1";
+  boot = {
+    initrd.luks.devices.crypto.device = "/dev/nvme0n1p4";
+    loader = {
+      systemd-boot.enable = false;
+      efi.canTouchEfiVariables = false;
+      grub = {
+        enable = true;
+        version = 2;
+        device = "/dev/nvme0n1";
+      };
     };
   };
+  fileSystems."/boot".device = "/dev/nvme0n1p3";
 
   hardware.firmware = with pkgs; [ firmwareLinuxNonfree ];
 }
