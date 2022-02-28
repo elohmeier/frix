@@ -5,13 +5,13 @@
 
 stdenvNoCC.mkDerivation rec {
   pname = "SecLists";
-  version = "unstable-2021-08-28";
+  version = "unstable-2022-02-02";
 
   src = fetchFromGitHub {
     owner = "danielmiessler";
     repo = pname;
-    rev = "cb81804316c634728bbddb857ce7dfa5016e01b1";
-    sha256 = "sha256-QBlZlS8JJI6pIdIaD1I+7gMuPPfEybxybj2HrnQM7co=";
+    rev = "168584fdc61b44080342291611238585648f08a8";
+    sha256 = "sha256-zorSUK89LClclqwLpdg+4SJaB/ioXy1PiW6UBWZwNm4=";
   };
 
   buildPhase = ''
@@ -29,6 +29,5 @@ stdenvNoCC.mkDerivation rec {
   meta = with lib; {
     homepage = "https://github.com/danielmiessler/SecLists";
     license = licenses.mit;
-    maintainers = with maintainers; [ pamplemousse ];
   };
 }
