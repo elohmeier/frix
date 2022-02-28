@@ -9,6 +9,10 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  environment.systemPackages = with pkgs; [
+    vscode
+  ];
+
   nix.maxJobs = 4;
 
   users.users.mainUser = {
