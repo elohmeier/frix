@@ -11,6 +11,12 @@ self: pkgs_master: super: {
         flakeIgnore = [ "E265" "E501" "W503" ];
       } ../4scripts/cf-passthehash.py);
   davtest = self.callPackage ./davtest { };
+  faraday-cli = super.faraday-cli.overrideAttrs (old: {
+    propagatedBuildInputs = old.propagatedBuildInputs ++ [
+      super.python3.pkgs.packaging
+    ];
+  });
+
   frix-copy-secrets = (self.writers.writePython3Bin "frix-copy-secrets"
     {
       flakeIgnore = [ "E265" "E501" ];
@@ -109,6 +115,7 @@ self: pkgs_master: super: {
     dig
     enum4linux
     exploitdb
+    faraday-cli
     freerdp
     gobuster
     hash-identifier
