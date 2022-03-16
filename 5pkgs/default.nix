@@ -54,7 +54,6 @@ self: pkgs_master: super: {
   syncthing-device-id = self.callPackage ./syncthing-device-id { };
   win10fonts = self.callPackage ./win10fonts { };
   windows-vm-image = self.callPackage ./windows-vm-image { };
-  wordlists-dirbuster = self.callPackage ./wordlists/dirbuster { };
   wordlists-nmap = self.callPackage ./wordlists/nmap { };
   wordlists-seclists = self.callPackage ./wordlists/seclists { };
 
@@ -150,7 +149,6 @@ self: pkgs_master: super: {
     sshuttle
     thc-hydra
     wireshark-qt
-    wordlists-dirbuster
     wordlists-nmap
     wordlists-seclists
     wpscan
