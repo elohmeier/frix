@@ -37,6 +37,7 @@ self: pkgs_master: super: {
         flakeIgnore = [ "E265" "E501" "W503" ];
       } ../4scripts/kirbi2hashcat.py);
   ligolo-ng = self.callPackage ./ligolo-ng { };
+  maubot = self.callPackage ./maubot { };
   nasm-shell =
     (self.writers.writeDashBin "nasm-shell"
       ''export PATH=$PATH:${self.nasm}/bin
