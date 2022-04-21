@@ -33,18 +33,38 @@
     wineWowPackages.stable # 32-bit & 64-bit
     winetricks
     mpv
+<<<<<<< HEAD
     obs-studio
     tdesktop
     quota
     dsvpn
     iftop
+=======
+    obs-studio #Aufnahme anwedung
+    libreoffice-fresh
+    inkscape #Pseudo Photoshop
+    gimp #Bildbearbeitungs anwendung
+    aspell
+    aspellDicts.de
+    aspellDicts.en
+    aspellDicts.en-computers
+    aspellDicts.en-science
+    hunspellDicts.de-de
+    hunspellDicts.en-gb-large
+    hunspellDicts.en-us-large
+    tdesktop #Telegram messenger
+    quota
+    dsvpn
+    iftop
+    element-desktop #Element Messenger
+>>>>>>> 920d6c6 (Kommentare)
     poetry
-    chromium
+    chromium #Chrom für Nix 
     # mysql-workbench # requires broken py2 package 
-    discord
-    teams
+    discord #Discord halt
+    teams #teams halt
     wordlists-seclists
-    dbeaver
+    dbeaver # Datenbank programm
     sqlfluff
   ];
 
