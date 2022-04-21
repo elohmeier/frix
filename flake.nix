@@ -161,7 +161,7 @@
               #"${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
               "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-plasma5.nix"
               ./.
-              ({ config, ... }: {
+              ({ config, pkgs, ... }: {
                 console.keyMap = "de-latin1";
                 services.xserver.layout = "de";
                 i18n.defaultLocale = "de_DE.UTF-8";
@@ -184,16 +184,18 @@
                 #   Passphrase=
                 #   EOF
                 # '';
-                environment.systemPackages =
-                  let
-                    pkgs = import
-                      nixpkgs
-                      {
-                        config.allowUnfree = true;
-                        system = "x86_64-linux";
-                      };
-                  in
-                  [ pkgs.vivaldi ];
+
+                # TODO:
+                # gitMinimal
+                # nixFlakes
+                # btop
+
+                nix = {
+                  package = pkgs.nixFlakes;
+                  extraOptions = "experimental-features = nix-command flakes";
+                };
+
+                environment.systemPackages = with pkgs; [ firefox btop gitMinimal ];
               })
             ];
           };
