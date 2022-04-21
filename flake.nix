@@ -25,7 +25,10 @@
           defaultModules = [
             ({ pkgs, ... }:
               let
-                pkgs_master = import nixpkgs-master { system = pkgs.system; };
+                pkgs_master = import nixpkgs-master {
+                  system = pkgs.system;
+                  config.allowUnfree = true;
+                };
               in
               {
                 nix.nixPath = [
