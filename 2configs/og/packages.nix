@@ -32,13 +32,6 @@
     wineWowPackages.stable # 32-bit & 64-bit
     winetricks
     mpv
-<<<<<<< HEAD
-    obs-studio
-    tdesktop
-    quota
-    dsvpn
-    iftop
-=======
     obs-studio #Aufnahme anwedung
     libreoffice-fresh
     inkscape #Pseudo Photoshop
@@ -56,7 +49,6 @@
     dsvpn
     iftop
     element-desktop #Element Messenger
->>>>>>> 920d6c6 (Kommentare)
     poetry
     chromium #Chrom für Nix 
     # mysql-workbench # requires broken py2 package 
