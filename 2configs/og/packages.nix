@@ -26,7 +26,7 @@
     sqsh #Sql shell for linux
     thc-hydra #bruteforce  
     samba
-    vscodium # fürs coden
+    vscode # fürs coden
     sqlitebrowser
     virtviewer
     virtmanager
