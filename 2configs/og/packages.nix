@@ -26,7 +26,6 @@
     sqsh #Sql shell for linux
     thc-hydra #bruteforce  
     samba
-    vscode # fürs coden
     sqlitebrowser
     virtviewer
     virtmanager
@@ -66,6 +65,18 @@
     wordlists-seclists
     dbeaver # Datenbank programm
     sqlfluff
+    (vscode-with-extensions.override {
+      vscodeExtensions = with vscode-extensions; [
+        eamodio.gitlens
+        editorconfig.editorconfig
+        esbenp.prettier-vscode
+        jkillian.custom-local-formatters
+        jnoortheen.nix-ide
+        ms-python.python
+        ms-toolsai.jupyter
+        ms-vsliveshare.vsliveshare
+      ];
+    })
   ];
 
   programs.steam.enable = true;

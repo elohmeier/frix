@@ -58,6 +58,10 @@ self: pkgs_master: super: {
   wordlists-nmap = self.callPackage ./wordlists/nmap { };
   wordlists-seclists = self.callPackage ./wordlists/seclists { };
 
+  vscode-with-extensions = pkgs_master.vscode-with-extensions;
+  vscode = pkgs_master.vscode;
+  vscode-extensions = pkgs_master.vscode-extensions;
+
   frixPython3 = self.python3.override {
     packageOverrides = self: super: {
       nosqlmap = self.callPackage ../5pkgs/nosqlmap { };
