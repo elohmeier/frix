@@ -62,6 +62,7 @@
         eamodio.gitlens
         editorconfig.editorconfig
         esbenp.prettier-vscode
+        hashicorp.terraform
         jkillian.custom-local-formatters
         jnoortheen.nix-ide
         ms-python.python
