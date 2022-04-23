@@ -29,4 +29,16 @@ in
   users.users.root.openssh.authorizedKeys.keys = sshkeys;
 
   system.stateVersion = "21.05";
+
+  fileSystems = {
+    "/var/lib/matrix-synapse/media" = {
+      device = "/dev/sysVG/synapse-media";
+      fsType = "ext4";
+    };
+
+    "/var/lib/postgresql" = {
+      device = "/dev/sysVG/postgres";
+      fsType = "ext4";
+    };
+  };
 }
