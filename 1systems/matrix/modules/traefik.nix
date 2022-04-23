@@ -153,6 +153,8 @@
 
   };
 
+  systemd.services.traefik.serviceConfig.LogsDirectory = "traefik";
+
   frix.logrotate.config = ''
     /var/log/traefik/*.log.json {
       daily
