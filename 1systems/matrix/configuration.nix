@@ -13,6 +13,7 @@ in
       ./coturn.nix
       ./nginx.nix
       ./ports.nix
+      ./postgresql.nix
       ./synapse.nix
       ./traefik.nix
     ];
