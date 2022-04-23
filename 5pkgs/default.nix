@@ -2,6 +2,10 @@
 
 self: pkgs_master: super: {
   burpsuite-pro = self.callPackage ./burpsuite-pro { };
+
+  # TODO: remove for 22.05
+  btop = pkgs_master.btop.override { inherit (self) stdenv; };
+
   cewl = self.callPackage ./cewl { };
   cstrike = self.callPackage ./cstrike { };
   cf-passthehash =
