@@ -33,4 +33,6 @@
       "fraam.cachix.org-1:jli8HeFa594XmjkCbP7ZgDPaWI8kvdXloTJIIfaxJLw="
     ];
   };
+
+  security.polkit.enable = lib.mkDefault false;
 }
