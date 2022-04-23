@@ -10,6 +10,7 @@ in
       ../../2configs/hetzner-vm-luks.nix
 
       ./modules/acme.nix
+      ./modules/backup.nix
       ./modules/coturn.nix
       ./modules/nginx.nix
       ./modules/ports.nix
