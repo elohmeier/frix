@@ -9,13 +9,13 @@ in
       ../../default.nix
       ../../2configs/hetzner-vm-luks.nix
 
-      ./acme.nix
-      ./coturn.nix
-      ./nginx.nix
-      ./ports.nix
-      ./postgresql.nix
-      ./synapse.nix
-      ./traefik.nix
+      ./modules/acme.nix
+      ./modules/coturn.nix
+      ./modules/nginx.nix
+      ./modules/ports.nix
+      ./modules/postgresql.nix
+      ./modules/synapse.nix
+      ./modules/traefik.nix
     ];
 
   networking.hostName = "matrix";
