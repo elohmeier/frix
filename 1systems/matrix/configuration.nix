@@ -11,6 +11,7 @@ in
 
       ./modules/acme.nix
       ./modules/backup.nix
+      ./modules/botamusique.nix
       ./modules/coturn.nix
       ./modules/nginx.nix
       ./modules/ports.nix
