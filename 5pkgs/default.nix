@@ -27,6 +27,7 @@ self: pkgs_master: super: {
       libraries = [ self.python3Packages.python-gnupg ];
     } ../4scripts/frix-copy-secrets.py);
   frix-gen-secrets = self.callPackage ./frix-gen-secrets { };
+  gomumblesoundboard = self.callPackage ./gomumblesoundboard { };
   hash-identifier = self.callPackage ./hash-identifier { };
   hashPassword = self.callPackage ./hashPassword { };
   httpserve = (self.writers.writePython3Bin "httpserve"
@@ -46,6 +47,16 @@ self: pkgs_master: super: {
     (self.writers.writeDashBin "nasm-shell"
       ''export PATH=$PATH:${self.nasm}/bin
         ${self.python3}/bin/python3 ${../4scripts/nasm-shell.py}'');
+  nippel = self.fetchzip {
+    url = "https://www.nerdworks.de/dl/nippel.tgz";
+    sha256 = "sha256-StNVBmcfzNIIdCNqAH4bcOE4O7VtGRQaE65ARXZ5AB4=";
+  };
+  mumble-nippelboard = self.writeShellScriptBin "mumble-nippelboard" ''
+    USERNAME="''${1?provide username}"
+    PASSWORD="''${2?provide password}"
+    cd ${self.gomumblesoundboard}
+    ${self.gomumblesoundboard}/bin/gomumblesoundboard -server voice.fraam.de:64738 -username "$USERNAME" -password "$PASSWORD" -channel Hacken ${self.nippel}/*.mp3
+  '';
   phpmyadmin = self.callPackage ./phpmyadmin { };
   polenum =
     (self.writers.writePython3Bin "polenum.py"
