@@ -5,6 +5,7 @@ let
     server.host = "voice.fraam.de";
     bot.username = "Partiboi69";
     bot.comment = "Music bot";
+    bot.max_track_duration = "360";
     bot.volume = "0.5";
     webinterface.enabled = "False";
     # http://www.wefunkradio.com/play/shoutcast.pls
