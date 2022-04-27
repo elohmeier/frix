@@ -57,6 +57,7 @@
     wordlists-seclists
     dbeaver # Datenbank programm
     sqlfluff
+    logseq
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
         eamodio.gitlens

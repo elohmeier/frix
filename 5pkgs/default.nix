@@ -176,4 +176,6 @@ self: pkgs_master: super: {
   ] ++ self.lib.optionals (self.stdenv.hostPlatform.system != "aarch64-linux") [
     ghidra-bin
   ];
+
+  logseq = pkgs_master.logseq;
 }
