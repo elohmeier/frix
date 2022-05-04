@@ -7,6 +7,7 @@ let
     bot.comment = "Music bot";
     bot.max_track_duration = "360";
     bot.volume = "0.5";
+    bot.bandwidth = "192000";
     webinterface.enabled = "False";
     # http://www.wefunkradio.com/play/shoutcast.pls
     radio.wefunk = "https://s-14.wefunkradio.com:8443/wefunk64.mp3";
