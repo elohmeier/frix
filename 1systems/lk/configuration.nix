@@ -39,6 +39,13 @@
   security.polkit.enable = true;
 
   services.upower.enable = true;
+  #services.redis.enable = true;
+  #services.postgresql.enable = true;
+  programs.wireshark.enable = true;
+  
+  #services.xrdp.enable = true;
+  #services.xrdp.defaultWindowManager = "plasmashell";
+  #networking.firewall.allowedTCPPorts = [ 3389 ];
 
   services.timesyncd = {
     enable = true;

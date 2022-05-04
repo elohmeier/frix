@@ -9,7 +9,7 @@
     shell = pkgs.fish;
     uid = 1000;
     description = "";
-    extraGroups = [ "libvirtd" "docker" "wheel" "networkmanager" "video" ];
+    extraGroups = [ "libvirtd" "docker" "wheel" "networkmanager" "video" "wireshark" ];
   };
 
   home-manager.users.user = { ... }: {

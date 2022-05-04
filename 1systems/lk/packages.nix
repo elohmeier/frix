@@ -38,6 +38,7 @@
     zoxide
     fd
     bat
+    wireshark
     ncdu
     freerdp
     sqlitebrowser
@@ -61,6 +62,12 @@
     tdesktop
     quota
     foot
+    faraday-cli
+    naabu
+    amass
+    nuclei
+    httpx
+    postgresql
   ];
 
   system.fsPackages = [ pkgs.ntfs3g ];
