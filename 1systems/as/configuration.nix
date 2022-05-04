@@ -3,7 +3,7 @@
 {
   imports = [
     ./modules/filesystems.nix
-    ./modules/hardware.nix
+    ../../2configs/hardware/thinkpad-e14-amd.nix
     ./modules/networking.nix
     ./modules/packages.nix
     ./modules/users.nix
