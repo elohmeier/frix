@@ -183,7 +183,6 @@
                 #   mkdir -p /var/lib/iwd
                 #   cat >/var/lib/iwd/fraam.psk <<EOF
                 #   [Security]
-                #   PreSharedKey=
                 #   Passphrase=
                 #   EOF
                 # '';
