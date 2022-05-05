@@ -13,6 +13,7 @@ in
       ./modules/backup.nix
       ./modules/botamusique.nix
       ./modules/coturn.nix
+      ./modules/go-neb.nix
       ./modules/nginx.nix
       ./modules/ports.nix
       ./modules/postgresql.nix

@@ -11,6 +11,7 @@ with lib;
   config.frix.ports = {
     coturn = 10001;
     element-web = 10002;
+    go-neb = 10005;
     matrix-synapse = 10003;
     nginx-acme = 10004;
   };

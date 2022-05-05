@@ -178,4 +178,6 @@ self: pkgs_master: super: {
   ];
 
   logseq = pkgs_master.logseq;
+
+  go-neb = self.callPackage ./go-neb-custom { };
 }
