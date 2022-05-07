@@ -175,7 +175,8 @@
     teams
     brlaser
     skanlite
-    #gscan2pdf
+    gscan2pdf
+    mumble
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
