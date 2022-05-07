@@ -3,14 +3,12 @@
 {
   environment.systemPackages = with pkgs; [
     bat
-    bottom
+    btop
     fd
-    mc
     ncdu
     neovim
     (nnn.override { withNerdIcons = true; })
     ripgrep
-    tree
   ];
 
   programs.fish.shellAliases = {

@@ -6,10 +6,12 @@
     useBabelfish = true;
 
     shellAliases = {
-      l = "ls -alh --color";
-      la = "ls -alh --color";
-      ll = "ls -l --color";
-      ls = "ls --color";
+      l = "exa -al";
+      la = "exa -al";
+      lg = "exa -al --git";
+      ll = "exa -l";
+      ls = "exa";
+      tree = "exa --tree";
     };
 
     shellAbbrs = {
@@ -44,7 +46,12 @@
     '';
   };
 
-  environment.systemPackages = [ pkgs.zoxide ];
+  environment.systemPackages = with pkgs; [
+    exa
+    fishPlugins.fzf-fish
+    fzf
+    zoxide
+  ];
 
   users.defaultUserShell = pkgs.fish;
 

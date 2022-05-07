@@ -26,6 +26,14 @@ let
       parser traefik
       match *
       key_name log
+    
+    [FILTER]
+      name geoip2
+      match *
+      database ${../../GeoLite2-City.mmdb}
+      lookup_key ClientHost
+      record country ClientHost %{country.names.en}
+      record isocode ClientHost %{country.iso_code}
 
     [OUTPUT]
       name loki

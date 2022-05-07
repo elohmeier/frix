@@ -68,7 +68,7 @@
             "${modifier}+Return" = "exec ${pkgs.foot}/bin/foot";
             "${modifier}+Shift+q" = "kill";
             "${modifier}+d" = "exec ${pkgs.dmenu}/bin/dmenu_path | ${pkgs.dmenu}/bin/dmenu | ${pkgs.findutils}/bin/xargs swaymsg exec --";
-
+            "Print" = ''exec ${pkgs.grim}/bin/grim -t png -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -'';
             "${modifier}+h" = "focus left";
             "${modifier}+j" = "focus down";
             "${modifier}+k" = "focus up";

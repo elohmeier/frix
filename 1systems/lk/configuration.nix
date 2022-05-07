@@ -3,8 +3,8 @@
 {
   imports =
     [
+      ./bluetooth.nix
       ./desktop.nix
-      ./hardware-configuration.nix
       ./networking.nix
       ./packages.nix
       ./shell.nix
@@ -14,6 +14,9 @@
 
       ../../2configs/default.nix
       ../../2configs/printers/hl5380dn.nix
+
+      ../../2configs/standard-filesystems.nix
+      ../../2configs/hardware/thinkpad-e14-amd.nix
     ];
 
   nix.package = pkgs.nixFlakes;
@@ -39,6 +42,13 @@
   security.polkit.enable = true;
 
   services.upower.enable = true;
+  #services.redis.enable = true;
+  #services.postgresql.enable = true;
+  programs.wireshark.enable = true;
+
+  #services.xrdp.enable = true;
+  #services.xrdp.defaultWindowManager = "plasmashell";
+  #networking.firewall.allowedTCPPorts = [ 3389 ];
 
   services.timesyncd = {
     enable = true;
@@ -73,5 +83,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05"; # Did you read the comment?
+  system.stateVersion = "21.11"; # Did you read the comment?
 }

@@ -26,26 +26,51 @@
     sqsh #Sql shell for linux
     thc-hydra #bruteforce  
     samba
-    vscodium # fürs coden
     sqlitebrowser
     virtviewer
     virtmanager
     wineWowPackages.stable # 32-bit & 64-bit
     winetricks
     mpv
-    obs-studio
-    tdesktop
+    obs-studio #Aufnahme anwedung
+    libreoffice-fresh
+    inkscape #Pseudo Photoshop
+    gimp #Bildbearbeitungs anwendung
+    aspell
+    aspellDicts.de
+    aspellDicts.en
+    aspellDicts.en-computers
+    aspellDicts.en-science
+    hunspellDicts.de-de
+    hunspellDicts.en-gb-large
+    hunspellDicts.en-us-large
+    tdesktop #Telegram messenger
     quota
     dsvpn
     iftop
+    element-desktop #Element Messenger
     poetry
-    chromium
+    chromium #Chrom für Nix 
     # mysql-workbench # requires broken py2 package 
-    discord
-    teams
+    discord #Discord halt
+    teams #teams halt
     wordlists-seclists
-    dbeaver
+    dbeaver # Datenbank programm
     sqlfluff
+    logseq
+    (vscode-with-extensions.override {
+      vscodeExtensions = with vscode-extensions; [
+        eamodio.gitlens
+        editorconfig.editorconfig
+        esbenp.prettier-vscode
+        hashicorp.terraform
+        jkillian.custom-local-formatters
+        jnoortheen.nix-ide
+        ms-python.python
+        ms-toolsai.jupyter
+        ms-vsliveshare.vsliveshare
+      ];
+    })
   ];
 
   programs.steam.enable = true;

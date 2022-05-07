@@ -9,12 +9,16 @@ in
       ../../default.nix
       ../../2configs/hetzner-vm-luks.nix
 
-      ./acme.nix
-      ./coturn.nix
-      ./nginx.nix
-      ./ports.nix
-      ./synapse.nix
-      ./traefik.nix
+      ./modules/acme.nix
+      ./modules/backup.nix
+      ./modules/botamusique.nix
+      ./modules/coturn.nix
+      ./modules/go-neb.nix
+      ./modules/nginx.nix
+      ./modules/ports.nix
+      ./modules/postgresql.nix
+      ./modules/synapse.nix
+      ./modules/traefik.nix
     ];
 
   networking.hostName = "matrix";
@@ -27,4 +31,16 @@ in
   users.users.root.openssh.authorizedKeys.keys = sshkeys;
 
   system.stateVersion = "21.05";
+
+  fileSystems = {
+    "/var/lib/matrix-synapse/media" = {
+      device = "/dev/sysVG/synapse-media";
+      fsType = "ext4";
+    };
+
+    "/var/lib/postgresql" = {
+      device = "/dev/sysVG/postgres";
+      fsType = "ext4";
+    };
+  };
 }
