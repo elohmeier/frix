@@ -35,7 +35,7 @@
     keyMap = lib.mkDefault "de";
   };
 
-  security.polkit.enable = lib.mkDefault true;
+  security.polkit.enable = true;
   services.upower.enable = lib.mkDefault true;
 
   # Enable CUPS to print documents.
