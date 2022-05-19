@@ -16,5 +16,9 @@
     fsType = "ext4";
   };
 
+  swapDevices = [{
+    device = "/swapfile";
+  }];
+
   nix.maxJobs = 4;
 }
