@@ -3,8 +3,7 @@
 {
   home-manager.users.mainUser = { ... }: {
     home.stateVersion = "21.05";
-    home.packages = with pkgs; hackertools ++ [
-      frixPython2Env
+    home.packages = with pkgs; [
       frixPython3Env
     ];
 
