@@ -11,13 +11,18 @@
 
   boot.loader.grub.device = "/dev/sda";
 
-  fileSystems."/" = {
+  fileSystems."/boot" = {
     device = "/dev/sda1";
+    fsType = "vfat";
+  };
+
+  fileSystems."/" = {
+    device = "/dev/sda3";
     fsType = "ext4";
   };
 
   swapDevices = [{
-    device = "/swapfile";
+    device = "/dev/sda2";
   }];
 
   nix.maxJobs = 4;
