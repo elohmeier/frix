@@ -1,10 +1,13 @@
-{ config, lib, modulesPath, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
     ../../2configs/wv.nix
-    (modulesPath + "/virtualisation/hyperv-guest.nix")
   ];
+
+  virtualisation.hypervGuest = {
+    enable = true;
+  };
 
   boot.loader.grub.device = "/dev/sda";
 
