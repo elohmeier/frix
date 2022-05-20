@@ -2,13 +2,9 @@
 
 {
   fonts.fonts = with pkgs; [
-    cozette
-    iosevka
-    nerdfonts
-    proggyfonts
+    (nerdfonts.override { fonts = [ "SourceCodePro" ]; })
     roboto
     roboto-slab
-    source-code-pro
     win10fonts
   ];
 

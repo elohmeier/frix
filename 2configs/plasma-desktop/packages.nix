@@ -21,8 +21,11 @@
     inkscape
     libreoffice-fresh
     ncdu
+    nnn
     nixpkgs-fmt
+    ripgrep
     xournalpp
+    zathura
   ];
 
   system.fsPackages = [ pkgs.ntfs3g ];
