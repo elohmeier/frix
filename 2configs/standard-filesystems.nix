@@ -1,14 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  boot = {
-    tmpOnTmpfs = lib.mkDefault true;
-    initrd.luks.devices.crypto.device = lib.mkDefault "/dev/disk/by-partlabel/crypto";
-    loader = {
-      systemd-boot.enable = lib.mkDefault true;
-      efi.canTouchEfiVariables = lib.mkDefault true;
-    };
-  };
+  boot.tmpOnTmpfs = lib.mkDefault true;
 
   fileSystems = {
     "/" =

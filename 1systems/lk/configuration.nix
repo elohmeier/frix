@@ -15,6 +15,7 @@
       ../../2configs/default.nix
       ../../2configs/printers/hl5380dn.nix
 
+      ../../2configs/crypto-systemdboot.nix
       ../../2configs/standard-filesystems.nix
       ../../2configs/hardware/thinkpad-e14-amd.nix
     ];

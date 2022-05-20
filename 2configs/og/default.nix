@@ -3,6 +3,7 @@
 {
   imports = [
     ../plasma-desktop
+    ../crypto-systemdboot.nix
     ../standard-filesystems.nix
 
     ./lampp.nix

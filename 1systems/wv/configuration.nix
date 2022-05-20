@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../2configs/crypto-systemdboot.nix
     ../../2configs/standard-filesystems.nix
     ../../2configs/hardware/intel.nix
     ../../2configs/wv.nix
