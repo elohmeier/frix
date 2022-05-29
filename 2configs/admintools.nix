@@ -6,7 +6,7 @@
     btop
     fd
     ncdu
-    neovim
+    (neovim.override { withPython3 = false; })
     (nnn.override { withNerdIcons = true; })
     ripgrep
   ];
