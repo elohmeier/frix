@@ -43,4 +43,7 @@ in
       fsType = "ext4";
     };
   };
+
+  services.tailscale.enable = true;
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
 }

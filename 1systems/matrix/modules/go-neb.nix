@@ -4,8 +4,8 @@
   services.go-neb = {
     enable = true;
     secretFile = "/var/src/secrets/go-neb.env";
-    bindAddress = "127.0.0.1:${toString config.frix.ports.go-neb}";
-    baseUrl = "https://matrix.fraam.de:4050";
+    bindAddress = "0.0.0.0:${toString config.frix.ports.go-neb}";
+    baseUrl = "http://matrix.pug-coho.ts.net:4050";
 
     config = {
       clients = [{

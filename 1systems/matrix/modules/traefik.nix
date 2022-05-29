@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  networking.firewall.interfaces.ens3.allowedTCPPorts = [ 80 443 4050 8448 ];
+  networking.firewall.interfaces.ens3.allowedTCPPorts = [ 80 443 8448 ];
 
   services.traefik = {
     enable = true;
@@ -20,7 +20,6 @@
       };
 
       entryPoints = {
-        go-neb-https.address = ":4050";
         www-http.address = ":80";
         www-https.address = ":443";
         matrix-federation.address = ":8448";
@@ -69,14 +68,6 @@
             tls = { };
           };
 
-          go-neb-tls = {
-            entryPoints = [ "go-neb-https" ];
-            middlewares = [ "security-headers" ];
-            rule = "Host(`matrix.fraam.de`)";
-            service = "go-neb";
-            tls = { };
-          };
-
           matrix-plain = {
             entryPoints = [ "www-http" ];
             middlewares = [ "security-headers" "https-redirect" ];
@@ -116,15 +107,6 @@
               passHostHeader = true;
               servers = [
                 { url = "http://127.0.0.1:${toString config.frix.ports.element-web}"; }
-              ];
-            };
-          };
-
-          go-neb = {
-            loadBalancer = {
-              passHostHeader = true;
-              servers = [
-                { url = "http://127.0.0.1:${toString config.frix.ports.go-neb}"; }
               ];
             };
           };
