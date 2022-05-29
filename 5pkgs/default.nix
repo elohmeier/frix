@@ -137,6 +137,7 @@ self: pkgs_master: super: {
     faraday-cli
     freerdp
     gobuster
+    ffuf
     hash-identifier
     hashcat
     httpserve
@@ -180,4 +181,6 @@ self: pkgs_master: super: {
   logseq = pkgs_master.logseq;
 
   go-neb = self.callPackage ./go-neb-custom { };
+  botamusique = pkgs_master.botamusique;
+  tailscale = pkgs_master.tailscale;
 }
