@@ -214,6 +214,10 @@
           config.allowUnfree = true; inherit system;
           config.packageOverrides = import ./5pkgs packages pkgs_master;
         };
+        devShell = packages.mkShell {
+          buildInputs = with packages; [ hackertools ];
+          SECLISTS = "${packages.wordlists-seclists}/share/wordlists/SecLists";
+        };
       in
-      { inherit packages; });
+      { inherit packages devShell; });
 }

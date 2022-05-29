@@ -4,3 +4,4 @@ result-*
 .idea/
 *.pyc
 *.qcow2
+.direnv/
