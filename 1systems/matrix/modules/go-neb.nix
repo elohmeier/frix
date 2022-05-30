@@ -42,10 +42,7 @@
             rooms = {
               # Enno
               "!ITyZhYetpXJHZTcgtl:fraam.de" = {
-                text_template = "{{range .Alerts -}} [{{ .Status }}] {{index .Labels \"alertname\" }}: {{index .Annotations \"description\"}} {{ end -}}";
-                # html_template = ''
-		# TODO
-                # '';
+                text_template = "{{range .Alerts -}} [{{ .Status }}] {{index .Labels \"severity\"}} {{index .Labels \"alertname\" }}: {{index .Annotations \"description\"}} {{ index .Annotations \"summary\"}} {{ end -}}";
                 msg_type = "m.text";
               };
             };
