@@ -2,9 +2,9 @@
   description = "frix fraam nix configs";
 
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-21.11;
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-22.05;
     nixpkgs-master.url = github:NixOS/nixpkgs/master;
-    home-manager.url = github:nix-community/home-manager/release-21.11;
+    home-manager.url = github:nix-community/home-manager/release-22.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = github:NixOS/nixos-hardware/master;
     flake-utils.url = github:numtide/flake-utils;
@@ -46,18 +46,6 @@
           }];
         in
         {
-          # check config using `nix eval .#nixosConfigurations.as.config.system.build.toplevel.drvPath`
-          # build using `nix build .#nixosConfigurations.as.config.system.build.toplevel`
-          # switch to config using `nixos-rebuild --flake .#as switch`
-          # fresh install using `nixos-install --flake git+https://git.fraam.de/fraam/frix#as`
-          as = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = desktopModules ++ [
-              home-manager.nixosModule
-              ./1systems/as/configuration.nix
-            ];
-          };
-
           # build using `nix build .#nixosConfigurations.failbowl.config.system.build.toplevel`
           # switch to config using `nixos-rebuild --flake .#failbowl switch`
           failbowl = nixpkgs.lib.nixosSystem {

@@ -26,7 +26,6 @@ self: pkgs_master: super: {
       flakeIgnore = [ "E265" "E501" ];
       libraries = [ self.python3Packages.python-gnupg ];
     } ../4scripts/frix-copy-secrets.py);
-  frix-gen-secrets = self.callPackage ./frix-gen-secrets { };
   gomumblesoundboard = self.callPackage ./gomumblesoundboard { };
   hash-identifier = self.callPackage ./hash-identifier { };
   hashPassword = self.callPackage ./hashPassword { };
@@ -35,12 +34,6 @@ self: pkgs_master: super: {
       flakeIgnore = [ "E265" "E501" ];
     } ../4scripts/httpserve.py);
   kali-vm-image = self.callPackage ./kali-vm-image { };
-  kirbi2hashcat =
-    (self.writers.writePython2Bin "kirbi2hashcat"
-      {
-        libraries = [ self.python2Packages.pyasn1 ];
-        flakeIgnore = [ "E265" "E501" "W503" ];
-      } ../4scripts/kirbi2hashcat.py);
   ligolo-ng = self.callPackage ./ligolo-ng { };
   maubot = self.callPackage ./maubot { };
   nasm-shell =
@@ -67,7 +60,6 @@ self: pkgs_master: super: {
   run-kali-vm = self.callPackage ./run-kali-vm { };
   run-win-vm = self.callPackage ./run-win-vm { };
   snmpcheck = self.callPackage ./snmpcheck { };
-  syncthing-device-id = self.callPackage ./syncthing-device-id { };
   win10fonts = self.callPackage ./win10fonts { };
   windows-vm-image = self.callPackage ./windows-vm-image { };
   wordlists-nmap = self.callPackage ./wordlists/nmap { };
@@ -128,7 +120,6 @@ self: pkgs_master: super: {
     burpsuite-pro
     cewl
     cifs-utils
-    creddump
     crowbar
     davtest
     dig
@@ -141,7 +132,6 @@ self: pkgs_master: super: {
     hash-identifier
     hashcat
     httpserve
-    kirbi2hashcat
     john
     lftp
     ligolo-ng
