@@ -3,9 +3,6 @@
 self: pkgs_master: super: {
   burpsuite-pro = self.callPackage ./burpsuite-pro { };
 
-  # TODO: remove for 22.05
-  btop = pkgs_master.btop.override { inherit (self) stdenv; };
-
   cewl = self.callPackage ./cewl { };
   cstrike = self.callPackage ./cstrike { };
   cf-passthehash =
@@ -157,7 +154,9 @@ self: pkgs_master: super: {
     snmpcheck
     sqlmap
     sqsh
+    ssh-audit
     sshuttle
+    sslscan
     thc-hydra
     wireshark-qt
     wordlists-nmap
