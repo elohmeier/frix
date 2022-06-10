@@ -151,24 +151,19 @@
 
   };
 
-  frix.logrotate.config = ''
-    /var/log/traefik/*.log.json {
-      daily
-      rotate 7
-      missingok
-      notifempty
-      compress
-      dateext
-      dateformat .%Y-%m-%d
-      postrotate
-        systemctl kill -s USR1 traefik.service
-      endscript
-    }
-  '';
 
   frix.secrets."metrics-auth.htpasswd" = {
     dependants = [ "traefik.service" ];
     owner = "traefik";
+  services.logrotate.settings."/var/log/traefik/*.log.json" = {
+    daily = "";
+    rotate = 7;
+    missingok = "";
+    notifempty = "";
+    compress = "";
+    dateext = "";
+    dateformat = ".%Y-%m-%d";
+    postrotate = "systemctl kill -s USR1 traefik.service";
   };
 
   systemd.services.traefik.serviceConfig.SupplementaryGroups = "keys";
