@@ -129,7 +129,7 @@
     enable = true;
     permitRootLogin = "prohibit-password";
     passwordAuthentication = false;
-    challengeResponseAuthentication = false;
+    kbdInteractiveAuthentication = false;
   };
 
   users.mutableUsers = false;
