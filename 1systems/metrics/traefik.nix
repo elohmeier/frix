@@ -52,7 +52,7 @@
           };
 
           metrics-auth.basicAuth = {
-            usersFile = config.frix.secrets."metrics-auth.htpasswd".path;
+            usersFile = "/run/credentials/traefik.service/metrics-auth.htpasswd";
             realm = "metrics";
           };
         };
@@ -151,10 +151,6 @@
 
   };
 
-
-  frix.secrets."metrics-auth.htpasswd" = {
-    dependants = [ "traefik.service" ];
-    owner = "traefik";
   services.logrotate.settings."/var/log/traefik/*.log.json" = {
     daily = "";
     rotate = 7;
@@ -166,5 +162,5 @@
     postrotate = "systemctl kill -s USR1 traefik.service";
   };
 
-  systemd.services.traefik.serviceConfig.SupplementaryGroups = "keys";
+  systemd.services.traefik.serviceConfig.LoadCredential = "metrics-auth.htpasswd:/var/src/secrets/metrics-auth.htpasswd";
 }
