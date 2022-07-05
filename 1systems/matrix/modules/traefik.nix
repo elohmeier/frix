@@ -155,18 +155,14 @@
 
   systemd.services.traefik.serviceConfig.LogsDirectory = "traefik";
 
-  frix.logrotate.config = ''
-    /var/log/traefik/*.log.json {
-      daily
-      rotate 7
-      missingok
-      notifempty
-      compress
-      dateext
-      dateformat .%Y-%m-%d
-      postrotate
-        systemctl kill -s USR1 traefik.service
-      endscript
-    }
-  '';
+  services.logrotate.settings."/var/log/traefik/*.log.json" = {
+    daily = "";
+    rotate = 7;
+    missingok = "";
+    notifempty = "";
+    compress = "";
+    dateext = "";
+    dateformat = ".%Y-%m-%d";
+    postrotate = "systemctl kill -s USR1 traefik.service";
+  };
 }
