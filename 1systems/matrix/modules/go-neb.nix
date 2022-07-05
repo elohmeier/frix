@@ -21,6 +21,16 @@
           AcceptVerificationFromUsers = [ ":fraam.de" ];
         }
         {
+          UserID = "@mumble-bot:fraam.de";
+          AccessToken = "$MUMBLE_BOT_ACCESS_TOKEN";
+          DeviceID = "$MUMBLE_BOT_DEVICE_ID";
+          HomeserverURL = "https://matrix.fraam.de";
+          Sync = true;
+          AutoJoinRooms = true;
+          DisplayName = "mumble-bot";
+          AcceptVerificationFromUsers = [ ":fraam.de" ];
+        }
+        {
           UserID = "@pm-bot:fraam.de";
           AccessToken = "$PM_BOT_ACCESS_TOKEN";
           DeviceID = "$PM_BOT_DEVICE_ID";
@@ -73,6 +83,19 @@
               # gf
               "!ZwtLCTHgcKbhOpIxOz:fraam.de".Projects."6".Events = [ "task.move.column" "task.assignee_change" "task.create" "comment.create" ];
             };
+          };
+        }
+
+        {
+          ID = "mumble_service";
+          Type = "mumble";
+          UserID = "@mumble-bot:fraam.de";
+          Config = {
+            endpoint = "voice.fraam.de:64738";
+            username = "mumble-bot";
+            password = "$MUMBLE_PASSWORD";
+            room = "!GzWvCXLpwGiRRRMjhK:fraam.de";
+            ignoredUsers = [ "Partiboi69" ];
           };
         }
       ];
