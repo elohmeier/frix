@@ -28,9 +28,6 @@
     alsa.support32Bit = true;
     jack.enable = true;
     pulse.enable = true;
-    media-session = {
-      enable = true;
-    };
   };
 
   home-manager.users.user = { ... }: {

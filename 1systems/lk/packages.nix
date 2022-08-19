@@ -42,7 +42,7 @@
     ncdu
     freerdp
     sqlitebrowser
-    virtviewer
+    virt-viewer
     virtmanager
     wineWowPackages.stable # 32-bit & 64-bit
     winetricks
