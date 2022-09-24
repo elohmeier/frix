@@ -6,7 +6,7 @@ let
 in
 {
   security.acme = {
-    email = "enno.richter+acme@fraam.de";
+    defaults.email = "enno.richter+acme@fraam.de";
     acceptTerms = true;
     certs = {
       "chat.fraam.de" = {

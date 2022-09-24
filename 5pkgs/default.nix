@@ -18,11 +18,6 @@ self: pkgs_master: super: {
     ];
   });
 
-  frix-copy-secrets = (self.writers.writePython3Bin "frix-copy-secrets"
-    {
-      flakeIgnore = [ "E265" "E501" ];
-      libraries = [ self.python3Packages.python-gnupg ];
-    } ../4scripts/frix-copy-secrets.py);
   gomumblesoundboard = self.callPackage ./gomumblesoundboard { };
   hash-identifier = self.callPackage ./hash-identifier { };
   hashPassword = self.callPackage ./hashPassword { };

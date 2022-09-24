@@ -140,7 +140,7 @@
   documentation.enable = false;
   documentation.nixos.enable = false;
   environment.defaultPackages = [
-    pkgs.rsync # required for frix-copy-secrets
+    pkgs.rsync # required for copy-secrets
   ];
   services.udisks2.enable = false;
 }

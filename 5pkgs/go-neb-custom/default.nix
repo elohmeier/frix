@@ -2,12 +2,12 @@
 
 buildGoModule rec {
   pname = "go-neb";
-  version = "1.0.1";
+  version = "1.0.2";
   src = fetchFromGitHub {
     owner = "elohmeier";
     repo = "go-neb";
     rev = version;
-    sha256 = "sha256-9aDG/0GzIQX7gN7w92ol7WjFqye/Yu33lB663Cx0lb8=";
+    sha256 = "sha256-MIfsKv9VAbMRcGfMT+4Zh0ZOhNJoQ0tikd0PgnQedKs=";
   };
 
   subPackages = [ "." ];

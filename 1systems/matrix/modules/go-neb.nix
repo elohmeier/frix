@@ -94,7 +94,7 @@
             endpoint = "voice.fraam.de:64738";
             username = "mumble-bot";
             password = "$MUMBLE_PASSWORD";
-            room = "!GzWvCXLpwGiRRRMjhK:fraam.de";
+            room = "!FcNyIdgDbVvRUUlpzG:fraam.de";
             ignoredUsers = [ "Partiboi69" ];
           };
         }

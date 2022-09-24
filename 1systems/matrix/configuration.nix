@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  sshkeys = with import ../../2configs/sshkeys.nix; [ enno_yubi41 enno_yubi49 ];
+  sshkeys = with import ../../2configs/sshkeys.nix; [ enno_yubi41 enno_yubi49 enno_mb4 enno_mb4_nixos ];
 in
 {
   imports =
@@ -17,6 +17,7 @@ in
       ./modules/nginx.nix
       ./modules/ports.nix
       ./modules/postgresql.nix
+      ./modules/prometheus-exporters.nix
       ./modules/synapse.nix
       ./modules/traefik.nix
     ];
@@ -46,4 +47,14 @@ in
 
   services.tailscale.enable = true;
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
+  networking.firewall.checkReversePath = "loose";
+
+  # reduce size
+  documentation = {
+    enable = false;
+    man.enable = false;
+    info.enable = false;
+    doc.enable = false;
+    dev.enable = false;
+  };
 }

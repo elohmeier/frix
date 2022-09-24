@@ -2,13 +2,18 @@
 
 let
   settings = {
-    server.host = "voice.fraam.de";
-    bot.username = "Partiboi69";
-    bot.comment = "Music bot";
-    bot.max_track_duration = "360";
-    bot.volume = "0.5";
-    bot.bandwidth = "192000";
-    bot.stereo = "True";
+    server = {
+      channel = "Dancefloor";
+      host = "voice.fraam.de";
+    };
+    bot = {
+      bandwidth = "192000";
+      comment = "Music bot";
+      max_track_duration = "360";
+      stereo = "True";
+      username = "Partiboi69";
+      volume = "0.5";
+    };
     webinterface.enabled = "False";
     # http://www.wefunkradio.com/play/shoutcast.pls
     radio.wefunk = "https://s-14.wefunkradio.com:8443/wefunk64.mp3";
